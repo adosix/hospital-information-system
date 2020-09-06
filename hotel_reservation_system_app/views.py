@@ -1,13 +1,14 @@
 from django.shortcuts import render
+from .models import Post
 
 rooms = [
     {
-        'roomnumber' : '1',
+        'roomNumber' : '1',
         'sleeps' : '3',
         'price' : '52'
     },
         {
-        'roomnumber' : '2',
+        'roomNumber' : '2',
         'sleeps' : '1',
         'price' : '21'
     }
@@ -18,6 +19,6 @@ def home (request):
 
 def about (request):
     context = {
-        'rooms': rooms
+        'rooms': Post.objects.all()
     }
     return render(request, 'hotel_reservation_system/reservation.html', context)
