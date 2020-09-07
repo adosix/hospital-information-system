@@ -3,9 +3,12 @@
 {% block content %}
         <h1>Free rooms</h1>
         {% for room in rooms %}
-        <h2>Room number: {{ room.roomNumber }}</h2>
+        <h2>Room number: {{ room.id }}</h2>
         <h3>Sleeps: {{ room.sleeps }}</h3>
         <h3>Price: {{ room.price }}</h3>
+        <h3>wifi: {{ room.wifi }}</h3>
+        <h3>tv: {{ room.tv }}</h3>
+        <h3>parking slot: {{ room.price }}</h3>
         </br>
         {% endfor %}
 {% endblock content %}    

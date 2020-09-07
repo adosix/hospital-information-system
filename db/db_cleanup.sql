@@ -1,0 +1,2 @@
+
+DROP TABLE hotel_reservation_system_app_post;
