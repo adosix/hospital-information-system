@@ -1,14 +1,21 @@
 
 {% extends "hotel_reservation_system/default.html" %}
+
 {% block content %}
         <h1>Free rooms</h1>
         {% for room in rooms %}
-        <h2>Room number: {{ room.id }}</h2>
-        <h3>Sleeps: {{ room.sleeps }}</h3>
-        <h3>Price: {{ room.price }}</h3>
-        <h3>wifi: {{ room.wifi }}</h3>
-        <h3>tv: {{ room.tv }}</h3>
-        <h3>parking slot: {{ room.price }}</h3>
+        <div style="display: inline-flex;" class="container p-3 my-3 bg-dark text-white ">
+        <div >
+        <p>Room number: {{ room.id }}</p>
+        <p>Sleeps: {{ room.sleeps }}</p>
+        <p>Price: {{ room.price }}</p>
+        </div>
+        <div >
+        <p>wifi: {{ room.wifi }}</p>
+        <p>tv: {{ room.tv }}</h3>
+        <p>parking slot: {{ room.price }}</p>
+        </div>
+        </div>
         </br>
         {% endfor %}
 {% endblock content %}    

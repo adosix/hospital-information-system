@@ -7,6 +7,8 @@ class Post(models.Model):
     roomNumber = models.SlugField(unique=True, max_length=255)
     sleeps = models.TextField()
     price = models.TextField()
+    wifi = models.TextField()
+    tv = models.TextField()
 
 
     def get_absolute_url(self):
