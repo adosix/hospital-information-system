@@ -1,4 +1,10 @@
 {% extends "hotel_reservation_system/default.html" %}
 {% block content %}
     <h1>HOME </h1>
+    {% for guest in guests %}
+        <div style="display: inline-flex;" class="container p-3 my-3 bg-dark text-white ">
+        <p>Name: {{ guest.name }}</p>
+        </div>
+        </br>
+    {% endfor %}
 {% endblock content %}    

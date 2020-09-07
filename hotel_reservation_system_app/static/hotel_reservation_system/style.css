@@ -2,6 +2,10 @@ p {
     margin-right: 5em;
 }
 
+body {
+    background-color: #D7C5A0;
+}
+
 .container {
     padding-top: 5em;
 }

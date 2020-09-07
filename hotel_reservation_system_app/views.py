@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from .models import Post
+from .models import Guests
 
 def home (request):
-    return render(request, 'hotel_reservation_system/home.html')
+    context = {
+        'guests': Guests.objects.all
+    }
+    return render(request, 'hotel_reservation_system/home.html',context)
 
 def about (request):
     context = {
-        'rooms': Post.objects.all()
+        'rooms': Post.objects.all
     }
     return render(request, 'hotel_reservation_system/reservation.html', context)

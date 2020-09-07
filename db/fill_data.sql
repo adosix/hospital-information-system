@@ -46,3 +46,8 @@ INSERT INTO hotel_reservation_system_app_post
     VALUES(23,211, 2, 53, FALSE,FALSE,TRUE);
 INSERT INTO hotel_reservation_system_app_post
     VALUES(24,212, 2, 53, TRUE,TRUE,TRUE);
+
+
+
+INSERT INTO hotel_reservation_system_app_guests
+    VALUES(1,"Jozko");
