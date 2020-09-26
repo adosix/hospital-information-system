@@ -6,6 +6,11 @@ body {
     background-color: #D7C5A0;
 }
 
+h2 h3 {
+    color: #D7C5A0;
+    font-weight: bold;
+}
+
 .container {
     padding-top: 5em;
 }
