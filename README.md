@@ -1,1 +1,1 @@
-# Hotel-reservation-system
+# Hospital information system
