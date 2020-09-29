@@ -1,5 +1,5 @@
 
-CREATE TABLE hotel_reservation_system_app_post (
+CREATE TABLE hospital_information_system_app_post (
     id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     room_number  INT NOT NULL,
     sleeps      INT NOT NULL,
@@ -10,12 +10,12 @@ CREATE TABLE hotel_reservation_system_app_post (
 
 );
 
-CREATE TABLE hotel_reservation_system_app_guests (
+CREATE TABLE hospital_information_system_app_guests (
     id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     name        VARCHAR(40) NOT NULL
 
 );
 
-DESCRIBE hotel_reservation_system_app_post;
-SELECT * FROM hotel_reservation_system_app_post;
+DESCRIBE hospital_information_system_app_post;
+SELECT * FROM hospital_information_system_app_post;
 SHOW TABLES;

@@ -1,4 +1,4 @@
-"""hotel_reservation_system URL Configuration
+"""hospital_information_system URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hotel/', include('hotel_reservation_system_app.urls')),
-    path('', include('hotel_reservation_system_app.urls')),
+    path('hotel/', include('hospital_information_system_app.urls')),
+    path('', include('hospital_information_system_app.urls')),
 ]

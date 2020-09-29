@@ -1,4 +1,4 @@
 
-DROP TABLE hotel_reservation_system_app_post;
+DROP TABLE hospital_information_system_app_post;
 
-DROP TABLE hotel_reservation_system_app_guests;
+DROP TABLE hospital_information_system_app_guests;

@@ -6,10 +6,10 @@ def home (request):
     context = {
         'guests': Guests.objects.all
     }
-    return render(request, 'hotel_reservation_system/home.html',context)
+    return render(request, 'hospital_information_system/home.html',context)
 
 def about (request):
     context = {
         'rooms': Post.objects.all
     }
-    return render(request, 'hotel_reservation_system/reservation.html', context)
+    return render(request, 'hospital_information_system/reservation.html', context)
