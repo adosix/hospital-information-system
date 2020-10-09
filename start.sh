@@ -1,6 +1,6 @@
 #!/bin/bash
 #activate virtual environment
-source ../Environments/Djangoenv/bin/activate
+source ../Environments/hospital_env/bin/activate
 #check for changes and run server
 python3 manage.py makemigrations
 python3 manage.py migrate
