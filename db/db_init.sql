@@ -1,8 +1,8 @@
 /* Table creations */
 
 
-CREATE TABLE hospital_information_system_app_User(
-    User_ID INTEGER NOT NULL primary key,
+CREATE TABLE hospital_information_system_app_user(
+    id INTEGER NOT NULL primary key,
     First_name varchar(255) NOT NULL,
     Last_name varchar(255) NOT NULL,
     Password varchar(255) NOT NULL,
@@ -12,26 +12,26 @@ CREATE TABLE hospital_information_system_app_User(
     City varchar(255),
     Street varchar(255)
 );
- CREATE TABLE hospital_information_system_app_Insurance_worker(
-     Insurance_worker_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_User(User_ID)
+ CREATE TABLE hospital_information_system_app_insurance_worker(
+     Insurance_worker_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_user(id)
  );
- CREATE TABLE hospital_information_system_app_Patient(
-     Patient_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_User(User_ID)
+ CREATE TABLE hospital_information_system_app_patient(
+     Patient_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_user(id)
  );
- CREATE TABLE hospital_information_system_app_Doctor(
-     Doctor_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_User(User_ID)
+ CREATE TABLE hospital_information_system_app_doctor(
+     Doctor_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_user(id)
  );
- CREATE TABLE hospital_information_system_app_Admin(
-     Admin_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_User(User_ID)
+ CREATE TABLE hospital_information_system_app_admin(
+     Admin_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_user(id)
  );
- CREATE TABLE hospital_information_system_app_Compensated_operations(
+ CREATE TABLE hospital_information_system_app_compensated_operations(
     Operation varchar(255) NOT NULL primary key,
     Description varchar(1024),
     Creator INTEGER NOT NULL,
 
-    CONSTRAINT Insurance_worker FOREIGN KEY (Creator) REFERENCES hospital_information_system_app_Insurance_worker(Insurance_worker_ID)
+    CONSTRAINT Insurance_worker FOREIGN KEY (Creator) REFERENCES hospital_information_system_app_insurance_worker(Insurance_worker_ID)
  );
- CREATE TABLE hospital_information_system_app_Medical_problem(
+ CREATE TABLE hospital_information_system_app_medical_problem(
     Medical_problem_ID INTEGER NOT NULL primary key,
     Patient_ID INTEGER NOT NULL,
     Doctor_ID INTEGER NOT NULL,
@@ -39,11 +39,11 @@ CREATE TABLE hospital_information_system_app_User(
     Description varchar(1024)  NOT NULL,
     Status  varchar(255) NOT NULL,
 
-    CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_information_system_app_Doctor(Doctor_ID),
-    CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_information_system_app_Patient(Patient_ID)
+    CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_information_system_app_doctor(Doctor_ID),
+    CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_information_system_app_patient(Patient_ID)
  );
 
-  CREATE TABLE hospital_information_system_app_Ticket(
+  CREATE TABLE hospital_information_system_app_ticket(
     Ticket_ID INTEGER NOT NULL primary key,
     Medical_problem_ID INTEGER NOT NULL ,
     Doctor_ID INTEGER NOT NULL ,
@@ -51,8 +51,8 @@ CREATE TABLE hospital_information_system_app_User(
     Status  varchar(255) NOT NULL,
     Description varchar(1024),
 
-    CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_information_system_app_Doctor(Doctor_ID),
-    CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_information_system_app_Medical_problem(Medical_problem_ID)
+    CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_information_system_app_doctor(Doctor_ID),
+    CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_information_system_app_medical_problem(Medical_problem_ID)
  );
    CREATE TABLE hospital_information_system_app_Medical_record(
     Medical_record_ID INTEGER NOT NULL primary key,
@@ -61,10 +61,10 @@ CREATE TABLE hospital_information_system_app_User(
     Description  varchar(1024) NOT NULL,
     Images varchar(255),
 
-    CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_information_system_app_Ticket(Ticket_ID)
+    CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_information_system_app_ticket(Ticket_ID)
 
  );
  CREATE TABLE hospital_information_system_app_Compensation_request(
-    Ticket_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_Ticket(Ticket_ID),
+    Ticket_ID INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_information_system_app_ticket(Ticket_ID),
     Status varchar(255) NOT NULL
  );

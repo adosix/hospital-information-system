@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'hospital_information_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangouser',
-        'USER': 'password',
-        'PASSWORD': 'verysecure123',
+        'NAME': 'hospital_data',
+        'USER': 'djangouser',
+        'PASSWORD': 'password',
         'OPTIONS': {
         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }

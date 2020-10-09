@@ -3,27 +3,31 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-class Post(models.Model):
-    room_number = models.SlugField(unique=True, max_length=255)
-    sleeps = models.TextField()
-    price = models.TextField()
-    wifi = models.TextField()
-    tv = models.TextField()
+class User(models.Model):
+    id = models.SlugField(primary_key=True, unique=True, max_length=255)
+    First_name  = models.TextField()
+    Last_name   = models.TextField()
+    Password    = models.TextField()
+    Email       = models.TextField()
+    TelNum      = models.TextField()
+    State       = models.TextField()
+    City        = models.TextField()
+    Street      = models.TextField()
 
     def get_absolute_url(self):
-        return reverse('hotel_room_detail', args=[self.room_number])
+        return reverse('user_details', args=[self.id])
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+        super( User, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ['room_number']
+        ordering = ['id']
 
         def __unicode__(self):
-            return self.roomNumber
-
+            return self.id
+"""
 class Guests(models.Model):
     name = models.TextField()
 
@@ -40,3 +44,4 @@ class Guests(models.Model):
 
         def __unicode__(self):
             return self.name
+            """
