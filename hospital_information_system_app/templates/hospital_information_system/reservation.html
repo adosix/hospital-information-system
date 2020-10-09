@@ -1,18 +1,38 @@
-
 {% extends "hospital_information_system/default.html" %}
-
 {% block content %}
-        <h1>Free rooms</h1>
-        {% for u in User %}
-        <div style="display: inline-flex;" class="container p-3 my-3 bg-dark text-white ">
-        <div >
-        <p>id: {{ u.id }}</p>
-        <p>first: {{ u.First_name }}</p>
-        <p>last: {{ u.Last_name }}</p>
-        <p>pass: {{ u.Password }}</p>
-        <p>email: {{ u.Email }}</p>
-        <p>telnum: {{ u.TelNum }}</p>
-        <p>state: {{ u.State }}</p>
-        </div>
+<section id="section">
+  <!--for demo wrap-->
+  <h1><strong>Users</strong></h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>first:</th>
+          <th>last:</th>
+          <th>pass:</th>
+          <th>email:</th>
+          <th>telnum:</th>
+          <th>state:</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      {% for u in User %}
+        <tr>
+          <td>{{ u.First_name }}</td>
+          <td>{{ u.Last_name }}</td>
+          <td>{{ u.Password }}</td>
+          <td>{{ u.Email }}</td>
+          <td>{{ u.TelNum }}</td>
+          <td>{{ u.State }}</td>
+        </tr>
+
         {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
 {% endblock content %}    

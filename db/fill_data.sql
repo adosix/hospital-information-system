@@ -23,7 +23,7 @@ INSERT INTO hospital_information_system_app_user (First_name,Last_name,Password,
 INSERT INTO hospital_information_system_app_user (First_name,Last_name,Password,Email, State, City, Street)
     VALUES("Braňo","Dubec", "axinko", "hater85@gmail.sk","Slovakia", "Rajec","Smreková");
 INSERT INTO hospital_information_system_app_user (First_name,Last_name,Password,Email, State, City, Street)
-    VALUES("Boris","Štrbák", "tralala", "strbkogmail.sk","Slovakia", "Púchov","Smreková");  
+    VALUES("Boris","Štrbák", "tralala", "strbko@gmail.sk","Slovakia", "Púchov","Smreková");
 INSERT INTO hospital_information_system_app_insurance_worker
     VALUES("10000")
 INSERT INTO hospital_information_system_app_insurance_worker

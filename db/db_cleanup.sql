@@ -4,6 +4,8 @@
 use hospital_data;
 DROP TABLE IF EXISTS hospital_information_system_app_compensation_request;
 DROP TABLE IF EXISTS hospital_information_system_app_medical_record;
+ALTER TABLE hospital_information_system_app_Medical_record
+DROP CONSTRAINT Ticket;
 DROP TABLE IF EXISTS hospital_information_system_app_ticket;
 DROP TABLE IF EXISTS hospital_information_system_app_medical_problem;
 DROP TABLE IF EXISTS hospital_information_system_app_doctor;

@@ -3,6 +3,15 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
+class Register(models.Model):
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.username + ' ' + self.password
+
+
 class User(models.Model):
     id = models.SlugField(primary_key=True, unique=True, max_length=255)
     First_name  = models.TextField()
