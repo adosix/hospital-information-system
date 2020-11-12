@@ -1,7 +1,7 @@
 /* Table creations */
 use hospital_data;
 
-CREATE TABLE hospital_is_user(
+/*CREATE TABLE hospital_is_user(
     id INTEGER NOT NULL primary key AUTO_INCREMENT,
     First_name varchar(255) NOT NULL,
     Last_name varchar(255) NOT NULL,
@@ -12,23 +12,31 @@ CREATE TABLE hospital_is_user(
     City varchar(255),
     Street varchar(255)
 );
-ALTER TABLE hospital_is_user AUTO_INCREMENT=10000;
+ALTER TABLE hospital_is_user AUTO_INCREMENT=10000;*/
+CREATE TABLE users_profile (
+  id int NOT NULL AUTO_INCREMENT,
+  image varchar(100) NOT NULL DEFAULT "../media/default.jpg",
+  user_id int NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY user_id (user_id),
+  CONSTRAINT users_profile_user_id_2112e78d_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user (id)
+);
  CREATE TABLE hospital_is_insurance_worker(
-     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_user(id),
-     CONSTRAINT User FOREIGN KEY (id) REFERENCES hospital_is_user(id)
+     id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
+     CONSTRAINT usr0 FOREIGN KEY (id) REFERENCES auth_user(id)
 
  );
  CREATE TABLE hospital_is_patient(
-     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_user(id),
-     CONSTRAINT usr FOREIGN KEY (id) REFERENCES hospital_is_user(id)
+     id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
+     CONSTRAINT usr1 FOREIGN KEY (id) REFERENCES auth_user(id)
  );
  CREATE TABLE hospital_is_doctor(
-     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_user(id),
-     CONSTRAINT usr2 FOREIGN KEY (id) REFERENCES hospital_is_user(id)
+     id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
+     CONSTRAINT usr2 FOREIGN KEY (id) REFERENCES auth_user(id)
  );
  CREATE TABLE hospital_is_admin(
-     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_user(id),
-     CONSTRAINT usr3 FOREIGN KEY (id) REFERENCES hospital_is_user(id)
+     id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
+     CONSTRAINT usr3 FOREIGN KEY (id) REFERENCES auth_user(id)
  );
  CREATE TABLE hospital_is_compensated_operations(
     Operation varchar(255) NOT NULL primary key ,
@@ -73,12 +81,3 @@ ALTER TABLE hospital_is_user AUTO_INCREMENT=10000;
     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id),
     Status varchar(255) NOT NULL
  );
-  
-  CREATE TABLE hospital_is_post(
-    id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id),
-    title varchar(100) NOT NULL,
-    content varchar(100) NOT NULL,
-    date_posted varchar(100) NOT NULL,
-    author varchar(100) NOT NULL
- );
-

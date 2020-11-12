@@ -10,7 +10,7 @@ from .views import (
 from . import views
 
 urlpatterns = [
-    path('', Medical_problem_ListView.as_view(), name='hospital_is-home'),
+    path('', views.default, name='hospital_is-home'),
     path('user/<str:username>', User_Medical_problem_ListView.as_view(), name='user-posts'),
     path('post/<int:pk>/',Medical_problem_DetailView.as_view(), name='post-detail'),
     path('post/new/', Medical_problem_CreateView.as_view(), name='post-create'),

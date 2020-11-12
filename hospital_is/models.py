@@ -33,3 +33,41 @@ class Medical_problem(models.Model):
 
     def __unicode__(self):
         return self.id
+
+class auth_user(models.Model):
+    id = models.SlugField(primary_key=True, unique=True, max_length=255)
+    role = models.TextField()
+    
+    def get_absolute_url(self):
+        return reverse('auth_user', kwargs={'pk': self.pk})
+
+    class Meta:
+        ordering = ['id']
+
+    def __unicode__(self):
+        return self.id
+
+class Doctor(models.Model):
+    id = models.SlugField(primary_key=True, unique=True, max_length=255)
+    
+    def get_absolute_url(self):
+        return reverse('doctor', kwargs={'pk': self.pk})
+
+    class Meta:
+        ordering = ['id']
+
+    def __unicode__(self):
+        return self.id
+
+class Patient(models.Model):
+    id = models.SlugField(primary_key=True, unique=True, max_length=255)
+    
+    def get_absolute_url(self):
+        return reverse('doctor', kwargs={'pk': self.pk})
+
+    class Meta:
+        ordering = ['id']
+
+    def __unicode__(self):
+        return self.id
+

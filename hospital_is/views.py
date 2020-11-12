@@ -10,14 +10,25 @@ from django.views.generic import (
 )
 from .models import Post
 from .models import Medical_problem
+from .models import auth_user
+from .models import Doctor
 
 
-def home(request):
+def default(request):
     context = {
-        #'posts': Post.objects.all(),
-        'Medical_problem': Medical_problem.objects.all()
+        'Medical_problem': Medical_problem.objects.all(),
+        'doctor': Doctor.objects.all()
     }
     return render(request, 'hospital_is/home.html', context)
+
+def about(request):
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'doctor': Doctor.objects.all()
+    }
+    return render(request, 'hospital_is/about.html', context)
+
+
 
 class Medical_problem_ListView(ListView):
     model = Medical_problem
@@ -25,14 +36,20 @@ class Medical_problem_ListView(ListView):
     context_object_name = 'Medical_problem'
     ordering = ['-id']
     paginate_by = 20
-
-
-
+    
 class User_Medical_problem_ListView(ListView):
-    model = Medical_problem
+    #model = Medical_problem
     template_name = 'hospital_is/user_posts.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'Medical_problems'
-    paginate_by = 20
+    
+    #context_object_name = 'home_list' 
+    queryset = Medical_problem.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(User_Medical_problem_ListView, self).get_context_data(**kwargs)
+        context['Medical_problem'] = Medical_problem.objects.all(),
+        context['doctor'] = Doctor.objects.all()
+        return context
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -47,14 +64,15 @@ class Medical_problem_CreateView(LoginRequiredMixin, CreateView):
     model = Medical_problem
     fields = ['id','Patient_ID','Doctor_ID','Title', 'Description', 'Status']
 
+
+
     def form_valid(self, form):
         #form.instance.Doctor_ID = self.request.user
         return super().form_valid(form)
 
-
 class Medical_problem_UpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Medical_problem
-    fields = ['Title', 'Description', 'Status']
+    fields = ['Title', 'Description', 'Status', 'Patient_ID']
 
     def form_valid(self, form):
         form.instance.Doctor_ID = self.request.user
@@ -77,6 +95,3 @@ class Medical_problem_DeleteView(LoginRequiredMixin, UserPassesTestMixin, Delete
             return True
         return False
 
-
-def about(request):
-    return render(request, 'hospital_is/about.html', {'title': 'About'})

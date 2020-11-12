@@ -1,4 +1,5 @@
 {% load static %}
+{% load customtags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,11 @@
             </div>
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                {% if user.id|id_eq:doctor%}
+                  <a class="nav-item nav-link" href="{% url 'post-create' %}">Tickets</a>
+                  <a class="nav-item nav-link" href="{% url 'post-create' %}">Med problems</a>
+                  <a class="nav-item nav-link" href="{% url 'post-create' %}">Register medical problem</a>
+                {% endif %}
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
               {% else %}
@@ -60,11 +65,11 @@
         </div>
         <div class="col-md-4">
           <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
+            <h3>Medical problems</h3>
+            <p class='text-muted'>Clik to show details
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">My medical problems</li>
-                <li class="list-group-item list-group-item-light">pending examinations</li>
+                <li class="list-group-item list-group-item-light">chripka</li>
+                <li class="list-group-item list-group-item-light">a tak</li>
               </ul>
             </p>
           </div>
