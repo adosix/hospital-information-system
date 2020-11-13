@@ -1,0 +1,119 @@
+{% extends "hospital_is/base.html" %}
+{% block content %}
+{% load customtags %}
+ 
+{% if user.is_authenticated  %}
+{% if user|is_admin  %}
+<input type="text" id="search" class="textarea form-control" placeholder="search in table" >
+<table class="table table-striped table-bordered " style="width:100%">
+
+        <thead>
+          <tr>
+                <th>username</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>email</th>
+                <th>banned</th>
+                <th>role</th>
+          </tr>
+        </thead>
+          <tbody id="table" >
+              <tr style="display: none;">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <tr>
+          {% for u in AuthUser %}
+                <td>{{ u.username }}</td>
+                <td>{{ u.first_name }}</td>
+                <td>{{ u.last_name }}</td>
+                <td>{{ u.email }}</td>
+                {% if u.is_active %}
+                    <td>no</td>
+                {% else %}
+                    <td>yes</td>
+                {% endif %}
+                {% if u|is_insurance_w%}
+                    <td>insurance_w</td>
+                {% elif u|is_doctor%}
+                    <td>doctor</td>
+                {% elif u|is_admin%}
+                    <td>admin</td>
+                {% else %}
+                    <td>patient</td>
+                {% endif %}
+              </tr>
+          {% endfor %}
+          </tbody>
+      <tfoot>
+                <th>username</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>email</th>
+                <th>banned</th>
+                <th>role</th>
+        </tfoot>
+
+    </table>
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %} 
+       {% endif %}
+{% endif %}
+{% endif %}
+
+<script>
+var $rows = $('#table tr');
+  $('#search').keyup(function() {
+      
+      var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+          reg = RegExp(val, 'i'),
+          text;
+      
+      $rows.show().filter(function() {
+          text = $(this).text().replace(/\s+/g, ' ');
+          return !reg.test(text);
+      }).hide();
+  });
+
+//sroting 
+
+
+const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+// do the work...
+document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+    const table = th.closest('table');
+    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => table.appendChild(tr) );
+})));
+</script>
+
+
+{% endblock content %}
+
+
+
+

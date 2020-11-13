@@ -34,18 +34,25 @@ class Medical_problem(models.Model):
     def __unicode__(self):
         return self.id
 
-class auth_user(models.Model):
-    id = models.SlugField(primary_key=True, unique=True, max_length=255)
-    role = models.TextField()
-    
-    def get_absolute_url(self):
-        return reverse('auth_user', kwargs={'pk': self.pk})
+class AuthUser(models.Model):
+    id = models.IntegerField(primary_key=True)
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField()
+    is_superuser = models.BooleanField()
+    username = models.CharField(max_length=30, unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=75)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
 
     class Meta:
+        managed = False
+        db_table = 'auth_user'
         ordering = ['id']
 
-    def __unicode__(self):
-        return self.id
+
 
 class Doctor(models.Model):
     id = models.SlugField(primary_key=True, unique=True, max_length=255)

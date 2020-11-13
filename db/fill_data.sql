@@ -2,13 +2,13 @@ use hospital_data;
 
 
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-15 21:40:34.113892", "0", "haterko","Drancius","Pracovny","drz_p@centrum.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-15 21:40:34.113892", "1", "haterko","Drancius","Pracovny","drz_p@centrum.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-08-18 21:40:34.113892", "0", "pes123","Peter","Koronovy","safe@safenet.com","0","1","2020-10-18 21:40:34.113892");
-INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-05-15 21:40:34.113892", "0", "xmartinox","Martin","Kapirapy","unhackable@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-08-18 21:40:34.113892", "1", "pes123","Peter","Koronovy","safe@safenet.com","0","1","2020-10-18 21:40:34.113892");
 
 
+INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-05-15 21:40:34.113892", "0", "xmartinox","Martin","Kapirapy","unhackable@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0","adosi1" ,"Andrej","Jezik","paranoid@volimkotlebu.sk","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
@@ -22,9 +22,9 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
 
 
 INSERT INTO auth_user(password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "nemamkreativitu","Lucia","Pekna","lucinqa@gmail.sk","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "nemamkreativitu","Lucia","Pekna","lucinqa@gmail.sk","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "filldatasql","Brano","Dubec","hater85@gmail.sk","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "filldatasql","Brano","Dubec","hater85@gmail.sk","1","1","2020-10-18 21:40:34.113892");
 
 
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)

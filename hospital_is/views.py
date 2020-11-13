@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 from .models import Post
 from .models import Medical_problem
-from .models import auth_user
+from .models import AuthUser
 from .models import Doctor
 
 
@@ -28,7 +28,11 @@ def about(request):
     }
     return render(request, 'hospital_is/about.html', context)
 
-
+def users(request):
+    context = {
+        'AuthUser': AuthUser.objects.all()
+    }
+    return render(request, 'hospital_is/users.html', context)
 
 class Medical_problem_ListView(ListView):
     model = Medical_problem
@@ -38,18 +42,9 @@ class Medical_problem_ListView(ListView):
     paginate_by = 20
     
 class User_Medical_problem_ListView(ListView):
-    #model = Medical_problem
+    model = Medical_problem
     template_name = 'hospital_is/user_posts.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'Medical_problems'
-    
-    #context_object_name = 'home_list' 
-    queryset = Medical_problem.objects.all()
 
-    def get_context_data(self, **kwargs):
-        context = super(User_Medical_problem_ListView, self).get_context_data(**kwargs)
-        context['Medical_problem'] = Medical_problem.objects.all(),
-        context['doctor'] = Doctor.objects.all()
-        return context
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -59,12 +54,9 @@ class User_Medical_problem_ListView(ListView):
 class Medical_problem_DetailView(DetailView):
     model = Medical_problem
 
-
 class Medical_problem_CreateView(LoginRequiredMixin, CreateView):
     model = Medical_problem
     fields = ['id','Patient_ID','Doctor_ID','Title', 'Description', 'Status']
-
-
 
     def form_valid(self, form):
         #form.instance.Doctor_ID = self.request.user
