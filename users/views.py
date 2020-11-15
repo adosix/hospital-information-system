@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import AuthUser
 from .models import Profile
-
+from django.contrib.auth.hashers import make_password
 
 
 def edit_profile(request, username_to_find):
@@ -20,12 +20,10 @@ def edit_profile(request, username_to_find):
                                    instance=profile)
         if u_form.is_valid() and p_form.is_valid():
             messages.success(request, f'Your account has been updated!')
-            u_form.save()
-            p_form.save()
-            usr = get_object_or_404(AuthUser, username= username_to_find)
-            
-            usr.set_password(u_form.password)
+            usr = u_form.save()
+            usr.password = make_password(usr.password)
             usr.save()
+            p_form.save()
         else:
             messages.warning(request, f'Your account hasn\'t been updated!')
             usr = get_object_or_404(AuthUser, username= username_to_find)

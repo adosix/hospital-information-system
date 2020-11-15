@@ -5,6 +5,7 @@ from .models import Profile
 from django.forms import HiddenInput
 
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     
@@ -13,7 +14,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
     
 
-class UserUpdateForm(SetPasswordForm):
+class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(),
     password = forms.CharField(widget=forms.PasswordInput)
 
