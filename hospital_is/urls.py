@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    medical_problems_admin,
     Medical_problem_ListView,
     Medical_problem_DetailView,
     Medical_problem_CreateView,
@@ -15,6 +16,7 @@ urlpatterns = [
     path('post/<int:pk>/',Medical_problem_DetailView.as_view(), name='post-detail'),
     path('post/new/', Medical_problem_CreateView.as_view(), name='post-create'),
     path('users/', views.users, name='users'),
+    path('medical_problems_admin/', views.medical_problems_admin, name='medical_problems_admin'),
     path('post/<int:pk>/update/', Medical_problem_UpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', Medical_problem_DeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='hospital_is-about'),

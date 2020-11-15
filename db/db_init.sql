@@ -16,7 +16,8 @@ ALTER TABLE hospital_is_user AUTO_INCREMENT=10000;*/
 CREATE TABLE users_profile (
   id int NOT NULL AUTO_INCREMENT,
   image varchar(100) NOT NULL DEFAULT "../media/default.jpg",
-  user_id int NOT NULL,
+  user_id int ,
+  birth_date DATE,
   PRIMARY KEY (id),
   UNIQUE KEY user_id (user_id),
   CONSTRAINT users_profile_user_id_2112e78d_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user (id)
@@ -52,7 +53,8 @@ CREATE TABLE users_profile (
     Title varchar(255) NOT NULL,
     Description varchar(1024)  NOT NULL,
     Status  varchar(255) NOT NULL,
-
+    start_date DATE NOT NULL,
+    end_date DATE,
     CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id),
     CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_is_patient(id)
  );
@@ -63,7 +65,7 @@ CREATE TABLE users_profile (
     Operation  varchar(255) NOT NULL,
     Status  varchar(255) NOT NULL,
     Description varchar(1024),
-
+    create_date DATE NOT NULL,
     CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id),
     CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_is_medical_problem(id)
  );
@@ -73,7 +75,7 @@ CREATE TABLE users_profile (
     Title  varchar(255) NOT NULL,
     Description  varchar(1024) NOT NULL,
     Images varchar(255),
-
+    create_date DATE NOT NULL,
     CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_is_ticket(id)
 
  );

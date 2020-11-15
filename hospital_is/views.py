@@ -11,6 +11,7 @@ from django.views.generic import (
 from .models import Post
 from .models import Medical_problem
 from users.models import AuthUser
+from users.models import Profile
 from .models import Doctor
 
 
@@ -30,9 +31,19 @@ def about(request):
 
 def users(request):
     context = {
-        'AuthUser': AuthUser.objects.all()
+        'AuthUser': AuthUser.objects.all(),
+        'Profiles': Profile.objects.all()
     }
     return render(request, 'hospital_is/users.html', context)
+
+def medical_problems_admin(request):
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'Profiles': Profile.objects.all(),
+        'AuthUser': AuthUser.objects.all()
+    }
+
+    return render(request, 'hospital_is/medical_problems_admin.html', context)
 
 
 class Medical_problem_ListView(ListView):

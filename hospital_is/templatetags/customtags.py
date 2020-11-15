@@ -30,3 +30,9 @@ def is_user(user):
     if not user.is_staff and not user.is_superuser:
         return True
     return False
+
+@register.filter(name='get_username')
+def get_username(id, user):
+    for u in user:
+        if id == u.id:
+            return u.username

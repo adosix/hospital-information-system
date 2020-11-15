@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileRegisterForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import AuthUser
 from .models import Profile
 from django.contrib.auth.hashers import make_password
-
 
 def edit_profile(request, username_to_find):
 
@@ -43,15 +42,32 @@ def edit_profile(request, username_to_find):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+        u_form = UserRegisterForm(request.POST)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES)
+        if u_form.is_valid() and p_form.is_valid():
+            user = u_form.save()
+            created_row = get_object_or_404(Profile, user_id= user.id)
+            profile = p_form.save(commit = False)
+            created_row.birth_date = profile.birth_date
+            created_row.image = profile.image
+            created_row.save()
+
+
+            username = u_form.cleaned_data.get('username')
             messages.success(request, f'Account has been created')
             return redirect('login')
+        else:
+            messages.warning(request, f'Your account wasn\t created!')
     else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        u_form = UserRegisterForm()
+        p_form = ProfileRegisterForm()
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'users/register.html', context)
 
 
 @login_required

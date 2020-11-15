@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multiforloop',
     'hospital_is.apps.hospital_isConfig',
     'users.apps.UsersConfig',
     'crispy_forms',

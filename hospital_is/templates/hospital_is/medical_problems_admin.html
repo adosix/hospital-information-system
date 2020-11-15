@@ -1,0 +1,100 @@
+{% extends "hospital_is/base.html" %}
+{% block content %}
+{% load customtags %}
+ 
+{% if user.is_authenticated  %}
+{% if user|is_admin  %}
+ <table>
+ 
+<table id="table" class="table table-bordered " style="width:100%">
+
+        <thead>
+          <tr>
+                <th>patient</th>
+                <th>doctor</th>
+                <th>title</th>
+                <th>status</th>
+          </tr>          
+        </thead>
+          <tbody id="tablebody" >
+
+              
+          {% for m in Medical_problem %}
+                <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
+                <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
+                <td>{{ m.Title }}</td>
+                <td><a >more</a></td>
+        </td>
+              </tr>
+          {% endfor %}
+
+          </tbody>
+       <tfoot>
+        <th class="order">patient</th>
+        <th class="order">doctor</th>
+        <th class="order">title</th>
+        <th class="order" >status</th>
+      </foot>
+    </table>
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %} 
+       {% endif %}
+      
+{% endif %}
+{% endif %}
+
+<script>
+
+$(document).ready(function() { 
+  // Setup - add a text input to each footer cell 
+  $('#table thead th').each( 
+    function () { var title = $('#example thead th').eq( $(this).index() ).text();
+   $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
+   // DataTable 
+   var table = $('#table').DataTable(); 
+   // Apply the search 
+   table.columns().eq( 0 ).each( function ( colIdx ) 
+   { $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
+
+
+//sorting 
+
+
+const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+// do the work...
+document.querySelectorAll('tfoot th').forEach( th => th.addEventListener('click', (() => {
+    const table = th.closest('table');
+    Array.from(table.querySelectorAll('tr:nth'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => tablebody.appendChild(tr) );
+})));
+</script>
+
+
+{% endblock content %}
+
+
+
+

@@ -52,7 +52,7 @@
                   <a class="nav-item nav-link" href="{% url 'post-create' %}">Compensated operations</a>
                 {% elif user|is_admin%}
                   <a class="nav-item nav-link" href="{% url 'users' %}">Users</a>
-                  <a class="nav-item nav-link" href="{% url 'post-create' %}">Medical problems</a>
+                  <a class="nav-item nav-link" href="{% url 'medical_problems_admin' %}">Medical problems</a>
                   <a class="nav-item nav-link" href="{% url 'post-create' %}">Compensated operations</a>
                   <a class="nav-item nav-link" href="{% url 'register' %}">Register user</a>
                 {% endif %}
