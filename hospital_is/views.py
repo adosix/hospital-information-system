@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 from .models import Post
 from .models import Medical_problem
-from .models import AuthUser
+from users.models import AuthUser
 from .models import Doctor
 
 
@@ -33,6 +33,7 @@ def users(request):
         'AuthUser': AuthUser.objects.all()
     }
     return render(request, 'hospital_is/users.html', context)
+
 
 class Medical_problem_ListView(ListView):
     model = Medical_problem
