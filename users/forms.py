@@ -8,7 +8,7 @@ import datetime
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name','email', 'password1', 'password2']
@@ -17,7 +17,7 @@ class ProfileRegisterForm(forms.ModelForm):
     birth_date = forms.DateField(required=True)
     class Meta:
         model = Profile
-        fields = ['image','birth_date']    
+        fields = ['image','birth_date']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(),

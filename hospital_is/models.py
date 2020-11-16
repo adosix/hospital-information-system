@@ -18,13 +18,13 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
 class Medical_problem(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True, max_length=255)
+    id = models.IntegerField(primary_key=True, unique=True)
     Patient_ID =  models.IntegerField()
     Doctor_ID = models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
     Status = models.TextField()
-    
+
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
 
@@ -38,8 +38,8 @@ class Medical_problem(models.Model):
 
 
 class Doctor(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True, max_length=255)
-    
+    id = models.IntegerField(primary_key=True, unique=True)
+
     def get_absolute_url(self):
         return reverse('doctor', kwargs={'pk': self.pk})
 
@@ -50,8 +50,8 @@ class Doctor(models.Model):
         return self.id
 
 class Patient(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True, max_length=255)
-    
+    id = models.IntegerField(primary_key=True, unique=True)
+
     def get_absolute_url(self):
         return reverse('doctor', kwargs={'pk': self.pk})
 
@@ -60,4 +60,3 @@ class Patient(models.Model):
 
     def __unicode__(self):
         return self.id
-

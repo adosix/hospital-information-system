@@ -8,6 +8,7 @@ from .models import AuthUser
 from .models import Profile
 from django.contrib.auth.hashers import make_password
 
+
 def edit_profile(request, username_to_find):
 
     usr = get_object_or_404(AuthUser, username= username_to_find)
@@ -38,7 +39,7 @@ def edit_profile(request, username_to_find):
             }
 
     return render(request, 'users/edit_profile.html', context)
-    
+
 
 def register(request):
     if request.method == 'POST':

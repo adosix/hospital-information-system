@@ -1,30 +1,69 @@
- 
+
 {% extends "hospital_is/base.html" %}
 {% load customtags %}
 
 
 {% load crispy_forms_tags %}
 {% block content %}
- 
+
 {% if user.is_authenticated  %}
-{% if user|is_admin  %}
     <div class="content-section">
-            {% for m in Medical_problem %}
-                {% if m.id == pk %}
-               
-                <h1>Title: {{m.Title}} </h1>
+        {% if  user|is_doctor %}
+          {% for m in Medical_problem %}
+          {% if  m.Doctor_ID == user.id %}
+          <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">Username pacienta</legend>
+                  {{ p_form|crispy }}
+                  <legend class="border-bottom mb-4">Username doktora</legend>
+                  {{ d_form|crispy }}
+                  <legend class="border-bottom mb-4">Medical problem info</legend>
+                  {{ m_form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Update</button>
+              </div>
+          </form>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if  user|is_admin %}
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Username pacienta</legend>
+                        {{ p_form|crispy }}
+                        <legend class="border-bottom mb-4">Username doktora</legend>
+                        {{ d_form|crispy }}
+                        <legend class="border-bottom mb-4">Medical problem info</legend>
+                        {{ m_form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Update</button>
+                    </div>
+                </form>
+          {% endif %}
+
+	<!-- /Error messaging -->
+
+            <!---    <h1>Title: {{m.Title}} </h1>
 
                 <h3>patient: <br>
                     username: {{ m.Patient_ID|get_username:AuthUser  }}<br>
-                    username: {{ m.Patient_ID|get_first_name:AuthUser  }}<br>
-                    username: {{ m.Patient_ID|get_last_name:AuthUser  }}
+                    first_name: {{ m.Patient_ID|get_first_name:AuthUser  }}<br>
+                    last_name: {{ m.Patient_ID|get_last_name:AuthUser  }}
                     </h3>
-                <h3>doctor: {{ m.Doctor_ID|get_username:AuthUser  }}</h3>
+                <h3>doctor: <br>
+                      username: {{ m.Doctor_ID|get_username:AuthUser  }}<br>
+                      first_name: {{ m.Doctor_ID|get_first_name:AuthUser  }}<br>
+                      last_name: {{ m.Doctor_ID|get_last_name:AuthUser  }}
+
+                </h3>
                 <p>Desription: <br> {{m.Description}}</p>
-                </p>
-                {% endif %}
-            {% endfor %}
+                </p> -->
     </div>
     {% endif %}
-    {% endif %}
+
 {% endblock content %}
