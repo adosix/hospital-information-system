@@ -5,21 +5,19 @@
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
  
-<table id="table" class="table table-bordered " style="width:100%">
+<table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
-          <tr>
                 <th >patient</th>
                 <th>doctor</th>
                 <th>title</th>
                 <th>status</th>
-                <th>more</th>
-          </tr>          
+                <th>more</th>   
         </thead>
           <tbody id="tablebody" >
 
-              
           {% for m in Medical_problem %}
+            <tr>
                 <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Title }}</td>
@@ -29,8 +27,7 @@
                   <td>finished</td>
                 {% endif %}
                 <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
-        </td>
-              </tr>
+            </tr>
           {% endfor %}
 
           </tbody>
@@ -39,8 +36,11 @@
         <th class="order">doctor</th>
         <th class="order">title</th>
         <th class="order" >status</th>
+        <th class="order" >more</th>
       </foot>
     </table>
+
+    
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
@@ -69,19 +69,18 @@
 
 
 
+
 $(document).ready(function() { 
   // Setup - add a text input to each footer cell 
-  $('#table tfoot th').each( function () 
-  { var title = $('#table thead th').eq( $(this).index() ).text(); 
-  $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
-  // DataTable 
-  var table = $('#table').DataTable(); 
-  // Apply the search 
-  table.columns().eq( 0 ).each( function ( colIdx ) 
-  { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () 
-  { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
-
-
+  $('#search_table tfoot th').each( function () { 
+    var title = $('#search_table thead th').eq( $(this).index() ).text(); 
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
+    // DataTable 
+    var table = $('#search_table').DataTable(); 
+    // Apply the search 
+    table.columns().eq( 0 ).each( function ( colIdx ) 
+    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () 
+    { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
 
 //sorting 
 
