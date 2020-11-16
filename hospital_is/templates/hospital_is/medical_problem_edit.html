@@ -10,15 +10,21 @@
     <div class="content-section">
         {% if  user|is_doctor %}
           {% for m in Medical_problem %}
-          {% if  m.Doctor_ID == user.id %}
+          {% if  m.Doctor_ID == user.id and m.id == pk%}
           <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset class="form-group">
-                  <legend class="border-bottom mb-4">Username pacienta</legend>
-                  {{ p_form|crispy }}
-                  <legend class="border-bottom mb-4">Username doktora</legend>
-                  {{ d_form|crispy }}
+
                   <legend class="border-bottom mb-4">Medical problem info</legend>
+                  {{ formset.management_form }}
+                  {% for form in formset %}
+                  {% if forloop.first %}
+                  <legend class="border-bottom mb-4">Username pacienta</legend>
+                  {% else %}
+                  <legend class="border-bottom mb-4">Username doktora</legend>
+                  {% endif %}
+                    {{form}}
+                  {%endfor%}
                   {{ m_form|crispy }}
               </fieldset>
               <div class="form-group">
@@ -33,11 +39,17 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Username pacienta</legend>
-                        {{ p_form|crispy }}
-                        <legend class="border-bottom mb-4">Username doktora</legend>
-                        {{ d_form|crispy }}
+
                         <legend class="border-bottom mb-4">Medical problem info</legend>
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                        {% if forloop.first %}
+                        <legend class="border-bottom mb-4">Username pacienta</legend>
+                        {% else %}
+                        <legend class="border-bottom mb-4">Username doktora</legend>
+                        {% endif %}
+                          {{form}}
+                        {%endfor%}
                         {{ m_form|crispy }}
                     </fieldset>
                     <div class="form-group">

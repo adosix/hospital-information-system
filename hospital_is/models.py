@@ -24,6 +24,7 @@ class Medical_problem(models.Model):
     Title = models.TextField()
     Description = models.TextField()
     Status = models.TextField()
+    start_date =models.DateField()
 
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
