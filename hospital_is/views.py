@@ -39,12 +39,18 @@ def users(request):
 def medical_problems_admin(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
-        'Profiles': Profile.objects.all(),
         'AuthUser': AuthUser.objects.all()
     }
 
     return render(request, 'hospital_is/medical_problems_admin.html', context)
 
+def medical_problem_edit(request, pk):
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'AuthUser': AuthUser.objects.all(),
+        'pk': pk
+    }
+    return render(request, 'hospital_is/medical_problem_edit.html', context)
 
 class Medical_problem_ListView(ListView):
     model = Medical_problem

@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    medical_problem_edit,
     medical_problems_admin,
     Medical_problem_ListView,
     Medical_problem_DetailView,
@@ -13,6 +14,7 @@ from . import views
 urlpatterns = [
     path('', views.default, name='hospital_is-home'),
     path('user/<str:username>', User_Medical_problem_ListView.as_view(), name='user-posts'),
+     path('medical_problem_edit/<int:pk>/', views.medical_problem_edit, name='medical_problem_edit'),
     path('post/<int:pk>/',Medical_problem_DetailView.as_view(), name='post-detail'),
     path('post/new/', Medical_problem_CreateView.as_view(), name='post-create'),
     path('users/', views.users, name='users'),

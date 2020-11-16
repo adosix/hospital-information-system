@@ -1,0 +1,30 @@
+ 
+{% extends "hospital_is/base.html" %}
+{% load customtags %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+ 
+{% if user.is_authenticated  %}
+{% if user|is_admin  %}
+    <div class="content-section">
+            {% for m in Medical_problem %}
+                {% if m.id == pk %}
+               
+                <h1>Title: {{m.Title}} </h1>
+
+                <h3>patient: <br>
+                    username: {{ m.Patient_ID|get_username:AuthUser  }}<br>
+                    username: {{ m.Patient_ID|get_first_name:AuthUser  }}<br>
+                    username: {{ m.Patient_ID|get_last_name:AuthUser  }}
+                    </h3>
+                <h3>doctor: {{ m.Doctor_ID|get_username:AuthUser  }}</h3>
+                <p>Desription: <br> {{m.Description}}</p>
+                </p>
+                {% endif %}
+            {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+{% endblock content %}

@@ -31,8 +31,26 @@ def is_user(user):
         return True
     return False
 
+@register.filter(name='is_active')
+def is_active(active):
+    if active:
+        return True
+    return False
+
 @register.filter(name='get_username')
 def get_username(id, user):
     for u in user:
         if id == u.id:
             return u.username
+
+@register.filter(name='get_first_name')
+def get_first_name(id, user):
+    for u in user:
+        if id == u.id:
+            return u.first_name
+
+@register.filter(name='get_last_name')
+def get_last_name(id, user):
+    for u in user:
+        if id == u.id:
+            return u.last_name

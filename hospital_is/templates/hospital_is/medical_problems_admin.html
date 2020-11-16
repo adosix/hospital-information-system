@@ -4,16 +4,16 @@
  
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
- <table>
  
 <table id="table" class="table table-bordered " style="width:100%">
 
-        <thead>
+        <thead class="sorting">
           <tr>
-                <th>patient</th>
+                <th >patient</th>
                 <th>doctor</th>
                 <th>title</th>
                 <th>status</th>
+                <th>more</th>
           </tr>          
         </thead>
           <tbody id="tablebody" >
@@ -23,7 +23,12 @@
                 <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Title }}</td>
-                <td><a >more</a></td>
+                {% if m.status|is_active  %}
+                  <td>active</td>
+                {% else %}
+                  <td>finished</td>
+                {% endif %}
+                <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
         </td>
               </tr>
           {% endfor %}
@@ -62,34 +67,25 @@
 
 <script>
 
+
+
 $(document).ready(function() { 
   // Setup - add a text input to each footer cell 
-  $('#table thead th').each( 
-    function () { var title = $('#example thead th').eq( $(this).index() ).text();
-   $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
-   // DataTable 
-   var table = $('#table').DataTable(); 
-   // Apply the search 
-   table.columns().eq( 0 ).each( function ( colIdx ) 
-   { $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
+  $('#table tfoot th').each( function () 
+  { var title = $('#table thead th').eq( $(this).index() ).text(); 
+  $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
+  // DataTable 
+  var table = $('#table').DataTable(); 
+  // Apply the search 
+  table.columns().eq( 0 ).each( function ( colIdx ) 
+  { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () 
+  { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
+
 
 
 //sorting 
 
 
-const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
-    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-// do the work...
-document.querySelectorAll('tfoot th').forEach( th => th.addEventListener('click', (() => {
-    const table = th.closest('table');
-    Array.from(table.querySelectorAll('tr:nth'))
-        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        .forEach(tr => tablebody.appendChild(tr) );
-})));
 </script>
 
 
