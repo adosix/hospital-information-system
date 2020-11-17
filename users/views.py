@@ -19,6 +19,7 @@ from django.contrib.auth.hashers import make_password
 def edit_profile(request, username_to_find):
 
     usr = get_object_or_404(AuthUser, username= username_to_find)
+    pass_tmp = usr.password
     usr_admin = get_object_or_404(AuthUser, username= request.user)
     profile = get_object_or_404(Profile, user= usr.id)
     if request.method == 'POST':
@@ -27,16 +28,22 @@ def edit_profile(request, username_to_find):
                                    request.FILES,
                                    instance=profile)
         if u_form.is_valid() and p_form.is_valid():
-            messages.success(request, f'Your account has been updated!')
+            if 'del' in request.POST:
+                usr = u_form.save(commit=False)
+                usr.delete()
+                messages.success(request, f'User has been deleted!')
+                return HttpResponseRedirect("/users/")
+
+            messages.success(request, f'An account has been updated!')
             usr_tmp = u_form.save(commit=False)
             if usr_tmp.password != '':
                 usr_tmp.password = make_password(usr_tmp.password)
             else:
-                usr_tmp.password = usr_admin.password
+                usr_tmp.password = pass_tmp
             usr_tmp.save()
             p_form.save()
         else:
-            messages.warning(request, f'Your account hasn\'t been updated!')
+            messages.warning(request, f'An account hasn\'t been updated!')
             usr = get_object_or_404(AuthUser, username= username_to_find)
             profile = get_object_or_404(Profile, user= usr.id)
 
@@ -51,19 +58,6 @@ def edit_profile(request, username_to_find):
             }
 
     return render(request, 'users/edit_profile.html', context)
-def delete_profile(request,pk):
-
-    usr = get_object_or_404(AuthUser, id=pk)
-    if request.method == "POST" and request.user.is_authenticated and request.user.is_superuser==True and request.user.is_staff==True:
-
-
-
-        usr.delete()
-        messages.success(request, "User successfully deleted!")
-        return HttpResponseRedirect("/users/")
-    context= {'usr': usr,              }
-
-    return render(request, 'users/delete_profile.html', context)
 def register(request):
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
@@ -95,10 +89,11 @@ def register(request):
 
 
 @login_required
-def profile(request):
-    usr = get_object_or_404(AuthUser, username= request.user)
+def profile(request,pk):
+    usr = get_object_or_404(AuthUser, id=pk)
+    pass_tmp = usr.password
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = UserUpdateForm(request.POST, instance=usr)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
@@ -107,7 +102,8 @@ def profile(request):
             if usr_tmp.password != '':
                 usr_tmp.password = make_password(usr_tmp.password)
             else:
-                usr_tmp.password = usr.password
+                usr_tmp.password = pass_tmp
+            usr_tmp.save()
             messages.success(request, f'Your account has been updated!')
             #return redirect('   ')
 
@@ -116,6 +112,7 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
+    'pk':pk,
         'u_form': u_form,
         'p_form': p_form
     }

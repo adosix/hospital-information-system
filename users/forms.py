@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from .models import Profile
+from .models import AuthUser
 from django.forms import HiddenInput
 import datetime
 
@@ -24,14 +25,14 @@ class UserUpdateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, required=False)
 
     class Meta:
-        model = User
+        model = AuthUser
         fields = ['username', 'email','first_name', 'last_name', 'password']
 class AdminUserUpdateForm(forms.ModelForm):
     email = forms.EmailField(),
     password = forms.CharField(widget=forms.PasswordInput, required=False)
 
     class Meta:
-        model = User
+        model = AuthUser
         fields = ['username', 'email','first_name', 'last_name', 'is_active', 'password']
 
 

@@ -23,9 +23,8 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
-    path('profile/', user_views.profile, name='profile'),
+    path('profile/<int:pk>', user_views.profile, name='profile'),
     path('edit_profile/<str:username_to_find>/', user_views.edit_profile, name='edit_profile'),
-    path('delete_profile/<str:pk>/', user_views.delete_profile, name='delete_profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('hospital_is.urls')),

@@ -21,7 +21,8 @@ from users.models import AuthUser
 from users.models import Profile
 from .models import Doctor
 from .models import Patient
-from .forms import MedicalProblemUpdateForm, MedicalProblemUpdateUser,MedicalProblemCreate,MedicalProblemUsers
+from .models import Compensated_operations
+from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -50,15 +51,7 @@ def medical_problems_admin(request):
     }
 
     return render(request, 'hospital_is/medical_problems_admin.html', context)
-def delete_medical_problem(request,pk):
-    med_problem = get_object_or_404(Medical_problem, id=pk)
-    if request.method == "POST" and request.user.is_authenticated and request.user.is_staff==True:
-        med_problem.delete()
-        messages.success(request, "Medical problem successfully deleted!")
-        return HttpResponseRedirect("/profile/")
-    context= {'med_problem': med_problem,              }
 
-    return render(request, 'hospital_is/delete_medical_problem.html', context)
 def medical_problem_edit(request, pk):
     medical_problem = get_object_or_404(Medical_problem, id=pk)
     UserFormSet = modelformset_factory(AuthUser, form=MedicalProblemUsers,fields=('username',),min_num=2,max_num=2, validate_min=True, extra=2)
@@ -93,6 +86,13 @@ def medical_problem_edit(request, pk):
             medical_problem = m_form.save(commit=False)
             medical_problem.Patient_ID=patient.id
             medical_problem.Doctor_ID=doctor.id
+            if 'del' in request.POST:
+                medical_problem.delete()
+                messages.success(request, "Medical problem successfully deleted!")
+                if request.user.is_superuser:
+                    return HttpResponseRedirect("/medical_problems_admin/")
+                else:
+                    return HttpResponseRedirect("/medical_problems_doc/" + str(doctor.id))
             medical_problem.save()
             messages.success(request, f'Medical problem updated.')
         else:
@@ -164,52 +164,55 @@ def medical_problems_doc(request,pk):
         'Medical_problem' : Medical_problem.objects.all(),
     }
     return render(request, 'hospital_is/medical_problems_doc.html',context)
-class Medical_problem_ListView(ListView):
-    model = Medical_problem
-    template_name = 'hospital_is/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'Medical_problem'
-    ordering = ['-id']
-    paginate_by = 20
-#netreba?
-class User_Medical_problem_ListView(ListView):
-    model = Medical_problem
-    template_name = 'hospital_is/user_posts.html'  # <app>/<model>_<viewtype>.html
+def compensation_operations(request):
+    context = {
+        'Compensated_operations':  Compensated_operations.objects.all(),
+    }
+    return render(request, 'hospital_is/compensation_operations.html', context)
+def compensation_operations_create(request):
+    if request.method == 'POST':
+        c_form = CompensationOperationsCreate(request.POST)
+        p_form = UsersCompensation(request.POST)
+        if c_form.is_valid() and p_form.is_valid():
+            insurance_worker = p_form.save(commit=False)
+            insurance_worker = get_object_or_404(AuthUser, username = insurance_worker.username)
+            operation = c_form.save(commit=False)
+            operation.creator = insurance_worker.id
+            operation.save()
+            messages.success(request, f'Compensation operation created.')
+        elif c_form.is_valid() and request.user.is_superuser and request.user.is_staff==False:
+            operation = c_form.save(commit=False)
+            operation.creator = request.user.id
+            operation.save()
+            messages.success(request, f'Compensation operation created.')
+        else:
+            messages.warning(request, f'Compensation operation not created.')
+    c_form = CompensationOperationsCreate()
+    p_form = UsersCompensation()
+    context = {
+        'c_form': c_form,
+        'p_form': p_form,
+    }
+    return render(request, 'hospital_is/compensation_operations_create.html', context)
+def compensation_operations_edit(request,pk):
+    compensated_operation = get_object_or_404(Compensated_operations, Operation=pk)
+    if request.method == 'POST':
+                c_form = CompensationOperationsCreate(request.POST,instance=compensated_operation)
+                compensated_operation.delete()
+                if c_form.is_valid():
+                    c = c_form.save()
+                    if 'del' in request.POST:
+                        c.delete()
+                        messages.success(request, "Compensation request successfully deleted!")
+                        return HttpResponseRedirect("/compensation_operations/")
+                    messages.success(request, f'Compensation operation updated.')
+                    return HttpResponseRedirect("/compensation_operations_edit/"+c.Operation)
 
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
-
-
-class Medical_problem_CreateView(LoginRequiredMixin, CreateView):
-    model = Medical_problem
-    fields = ['id','Patient_ID','Doctor_ID','Title', 'Description', 'Status']
-
-    def form_valid(self, form):
-        #form.instance.Doctor_ID = self.request.user
-        return super().form_valid(form)
-
-class Medical_problem_UpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Medical_problem
-    fields = ['Title', 'Description', 'Status', 'Patient_ID']
-
-    def form_valid(self, form):
-        form.instance.Doctor_ID = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        Medical_problem = self.get_object()
-        if self.request.user == Medical_problem.Doctor_ID:
-            return True
-        return False
-
-
-class Medical_problem_DeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Medical_problem
-    success_url = '/'
-
-    def test_func(self):
-        Medical_problem = self.get_object()
-        if self.request.user == Medical_problem.Doctor_ID:
-            return True
-        return False
+                else:
+                    messages.warning(request, f'Compensation operation not updated.')
+    c_form = CompensationOperationsCreate(instance=compensated_operation)
+    context = {
+        'pk' :pk,
+        'c_form': c_form,
+    }
+    return render(request, 'hospital_is/compensation_operations_edit.html', context)

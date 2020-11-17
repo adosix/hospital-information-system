@@ -1,0 +1,23 @@
+{% extends "hospital_is/base.html" %}
+{% load crispy_forms_tags %}
+{% load customtags %}
+{% block content %}
+{% if  user|is_insurance_w or user|is_admin%}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Create new compensated operation</legend>
+                {{ c_form|crispy }}
+                {%if user|is_admin%}
+                {{ p_form|crispy }}
+                {%endif%}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+{%endif%}
+{% endblock content %}

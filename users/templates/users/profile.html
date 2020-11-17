@@ -1,7 +1,10 @@
 {% extends "hospital_is/base.html" %}
 {% load crispy_forms_tags %}
+{% load customtags %}
 {% block content %}
+
     <div class="content-section">
+      {% if user.id == pk %}
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
@@ -20,5 +23,7 @@
               <button class="btn btn-outline-info" type="submit">Update</button>
           </div>
       </form>
+      {% endif %}
     </div>
+
 {% endblock content %}
