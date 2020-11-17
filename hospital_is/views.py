@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.forms.formsets import formset_factory
 from django.forms import modelformset_factory
+from django.http import HttpResponseRedirect
+
 from django.db.models import Q
 from django.views.generic import (
     ListView,
@@ -48,7 +50,15 @@ def medical_problems_admin(request):
     }
 
     return render(request, 'hospital_is/medical_problems_admin.html', context)
+def delete_medical_problem(request,pk):
+    med_problem = get_object_or_404(Medical_problem, id=pk)
+    if request.method == "POST" and request.user.is_authenticated and request.user.is_staff==True:
+        med_problem.delete()
+        messages.success(request, "Medical problem successfully deleted!")
+        return HttpResponseRedirect("/profile/")
+    context= {'med_problem': med_problem,              }
 
+    return render(request, 'hospital_is/delete_medical_problem.html', context)
 def medical_problem_edit(request, pk):
     medical_problem = get_object_or_404(Medical_problem, id=pk)
     UserFormSet = modelformset_factory(AuthUser, form=MedicalProblemUsers,fields=('username',),min_num=2,max_num=2, validate_min=True, extra=2)
@@ -147,7 +157,13 @@ def medical_problem_create(request):
         'formset' : formset,
     }
     return render(request, 'hospital_is/medical_problem_create.html', context)
-
+def medical_problems_doc(request,pk):
+    context = {
+        'pk':pk,
+        'AuthUser': AuthUser.objects.all(),
+        'Medical_problem' : Medical_problem.objects.all(),
+    }
+    return render(request, 'hospital_is/medical_problems_doc.html',context)
 class Medical_problem_ListView(ListView):
     model = Medical_problem
     template_name = 'hospital_is/home.html'  # <app>/<model>_<viewtype>.html

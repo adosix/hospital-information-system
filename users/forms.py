@@ -21,7 +21,14 @@ class ProfileRegisterForm(forms.ModelForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(),
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, required=False)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email','first_name', 'last_name', 'password']
+class AdminUserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(),
+    password = forms.CharField(widget=forms.PasswordInput, required=False)
 
     class Meta:
         model = User

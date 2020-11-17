@@ -29,6 +29,8 @@
               </fieldset>
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Update</button>
+                  <a href="{% url 'delete_medical_problem' pk %}">Delete medical problem</a>
+
               </div>
           </form>
           {% endif %}
@@ -54,6 +56,7 @@
                     </fieldset>
                     <div class="form-group">
                         <button class="btn btn-outline-info" type="submit">Update</button>
+                          <a href="{% url 'delete_medical_problem' pk %}">Delete medical problem</a>
                     </div>
                 </form>
           {% endif %}

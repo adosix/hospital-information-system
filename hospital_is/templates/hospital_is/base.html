@@ -1,6 +1,6 @@
 {% load customtags %}
 {% load static %}
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +45,7 @@
               {% if user.is_authenticated %}
                 {% if user|is_doctor %}
                   <a class="nav-item nav-link" href="{% url 'medical_problem_create' %}">Tickets</a>
-                  <a class="nav-item nav-link" href="{% url 'medical_problem_create' %}">Med problems</a>
+                  <a class="nav-item nav-link" href="{% url 'medical_problems_doc' user.id %}">Med problems</a>
                   <a class="nav-item nav-link" href="{% url 'medical_problem_create' %}">Register patient</a>
                 {% elif user|is_insurance_w%}
                   <a class="nav-item nav-link" href="{% url 'medical_problem_create' %}">Tickets</a>

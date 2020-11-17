@@ -1,11 +1,11 @@
- 
+
 {% extends "hospital_is/base.html" %}
 {% load customtags %}
 
 
 {% load crispy_forms_tags %}
 {% block content %}
- 
+
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
     <div class="content-section">
@@ -24,10 +24,10 @@
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Update</button>
+              <a href="{% url 'delete_profile' u_id %}">Delete user</a>
           </div>
       </form>
     </div>
     {% endif %}
     {% endif %}
 {% endblock content %}
-
