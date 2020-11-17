@@ -20,31 +20,29 @@ CREATE TABLE users_profile (
   birth_date DATE,
   PRIMARY KEY (id),
   UNIQUE KEY user_id (user_id),
-  CONSTRAINT users_profile_user_id_2112e78d_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user (id)
+  CONSTRAINT users_profile_user_id_2112e78d_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user (id) ON DELETE CASCADE
 );
  CREATE TABLE hospital_is_insurance_worker(
      id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
-     CONSTRAINT usr0 FOREIGN KEY (id) REFERENCES auth_user(id)
+     CONSTRAINT usr0 FOREIGN KEY (id) REFERENCES auth_user(id) ON DELETE CASCADE
 
  );
  CREATE TABLE hospital_is_patient(
      id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
-     CONSTRAINT usr1 FOREIGN KEY (id) REFERENCES auth_user(id)
+     CONSTRAINT usr1 FOREIGN KEY (id) REFERENCES auth_user(id) ON DELETE CASCADE
  );
  CREATE TABLE hospital_is_doctor(
      id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
-     CONSTRAINT usr2 FOREIGN KEY (id) REFERENCES auth_user(id)
+     CONSTRAINT usr2 FOREIGN KEY (id) REFERENCES auth_user(id) ON DELETE CASCADE
  );
  CREATE TABLE hospital_is_admin(
      id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
-     CONSTRAINT usr3 FOREIGN KEY (id) REFERENCES auth_user(id)
+     CONSTRAINT usr3 FOREIGN KEY (id) REFERENCES auth_user(id) ON DELETE CASCADE
  );
  CREATE TABLE hospital_is_compensated_operations(
     Operation varchar(255) NOT NULL primary key ,
     Description varchar(1024),
-    Creator INTEGER NOT NULL,
-
-    CONSTRAINT Insurance_worker FOREIGN KEY (Creator) REFERENCES hospital_is_insurance_worker(id)
+    Creator INTEGER
  );
  CREATE TABLE hospital_is_medical_problem(
     id INTEGER NOT NULL primary key ,
@@ -55,8 +53,8 @@ CREATE TABLE users_profile (
     Status  varchar(255) NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,
-    CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id),
-    CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_is_patient(id)
+    CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
+    CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_is_patient(id) ON DELETE CASCADE
  );
   CREATE TABLE hospital_is_ticket(
     id INTEGER NOT NULL primary key,
@@ -66,8 +64,8 @@ CREATE TABLE users_profile (
     Status  varchar(255) NOT NULL,
     Description varchar(1024),
     create_date DATE NOT NULL,
-    CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id),
-    CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_is_medical_problem(id)
+    CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
+    CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_is_medical_problem(id) ON DELETE CASCADE
  );
    CREATE TABLE hospital_is_medical_record(
     id INTEGER NOT NULL primary key ,
@@ -76,7 +74,7 @@ CREATE TABLE users_profile (
     Description  varchar(1024) NOT NULL,
     Images varchar(255),
     create_date DATE NOT NULL,
-    CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_is_ticket(id)
+    CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_is_ticket(id) ON DELETE CASCADE
 
  );
  CREATE TABLE hospital_is_compensation_request(

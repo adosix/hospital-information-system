@@ -1,0 +1,25 @@
+{% extends "hospital_is/base.html" %}
+{% load customtags %}
+
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if user.is_authenticated  %}
+{% if user|is_admin or user.id == med_problem.Doctor_ID %}
+    <div class="content-section">
+      <div class="media">
+        <div class="media-body">
+          <h2 class="account-heading">{{ username }}</h2>
+        </div>
+      </div>
+      <form method="POST" action="">
+        {% csrf_token %}
+        Are you sure you want to delete this profile?
+        <input type="submit" value="Yes"/>
+        <a href="/edit_medical_problem/{{ med_problem.id}}/">Cancel </a>
+      </form>
+    </div>
+    {% endif %}
+    {% endif %}
+{% endblock content %}
