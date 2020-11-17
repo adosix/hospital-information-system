@@ -1,6 +1,8 @@
 {% extends "hospital_is/base.html" %}
 {% load crispy_forms_tags %}
+{% load customtags %}
 {% block content %}
+{% if  user|is_doctor or user|is_admin%}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -26,4 +28,5 @@
             </div>
         </form>
     </div>
+{%endif%}
 {% endblock content %}

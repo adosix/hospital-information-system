@@ -80,7 +80,20 @@ class Compensation_request(models.Model):
 
     def __unicode__(self):
         return self.id
+class Compensated_operations(models.Model):
+    Operation = models.TextField(primary_key=True, unique=True)
+    Description = models.TextField()
+    Creator = models.IntegerField()
 
+
+    def get_absolute_url(self):
+        return reverse('Medical_problem', kwargs={'pk': self.pk})
+
+    class Meta:
+        ordering = ['Operation']
+
+    def __unicode__(self):
+        return self.id
 
 
 
