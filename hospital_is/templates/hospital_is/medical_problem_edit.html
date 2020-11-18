@@ -19,9 +19,9 @@
                   {{ formset.management_form }}
                   {% for form in formset %}
                   {% if forloop.first %}
-                  <legend class="border-bottom mb-4">Username pacienta</legend>
+                  <legend class="border-bottom mb-4">Patient's username</legend>
                   {% else %}
-                  <legend class="border-bottom mb-4">Username doktora</legend>
+                  <legend class="border-bottom mb-4">Doctor's username</legend>
                   {% endif %}
                     {{form}}
                   {%endfor%}
@@ -46,9 +46,9 @@
                         {{ formset.management_form }}
                         {% for form in formset %}
                         {% if forloop.first %}
-                        <legend class="border-bottom mb-4">Username pacienta</legend>
+                        <legend class="border-bottom mb-4">Patient's username</legend>
                         {% else %}
-                        <legend class="border-bottom mb-4">Username doktora</legend>
+                        <legend class="border-bottom mb-4">Doctor's username</legend>
                         {% endif %}
                           {{form}}
                         {%endfor%}

@@ -22,13 +22,15 @@ class MedicalProblemCreate(forms.ModelForm):
 
     class Meta:
         model = Medical_problem
-        fields = ['Title', 'Description','Status','start_date']
+        fields = ['Title', 'Description','Status']
 class MedicalProblemUsers(forms.ModelForm):
     username = forms.CharField(required=True)
+
 class UsersCompensation(forms.ModelForm):
     class Meta:
         model = AuthUser
         fields = ['username']
+
 class CompensationOperationsCreate(forms.ModelForm):
     class Meta:
         model = Compensated_operations

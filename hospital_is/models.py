@@ -3,12 +3,13 @@ from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import datetime
 
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
+    date_posted = models.DateTimeField(default=datetime.now())
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -24,7 +25,8 @@ class Medical_problem(models.Model):
     Title = models.TextField()
     Description = models.TextField()
     Status = models.TextField()
-    start_date =models.DateField()
+    created =models.DateTimeField(default=datetime.now())
+    updated =models.DateTimeField(default=datetime.now())
 
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
@@ -40,7 +42,8 @@ class Medical_record(models.Model):
     Title = models.TextField()
     Description = models.TextField()
     Images = models.ImageField()
-    create_date = models.DateField()
+    created =models.DateTimeField(default=datetime.now())
+    updated =models.DateTimeField(default=datetime.now())
 
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
@@ -57,7 +60,8 @@ class Ticket(models.Model):
     Operation = models.TextField()
     Status = models.TextField()
     Description = models.TextField()
-    create_date = models.DateField()
+    created =models.DateTimeField(default=datetime.now())
+    updated =models.DateTimeField(default=datetime.now())
 
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})

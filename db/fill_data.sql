@@ -218,35 +218,35 @@ INSERT INTO hospital_is_compensated_operations
 VALUES ("chirurgicke odstranenie slepeho creva","v pripade dlhsieho pobytu v nemocnici vypisat ticket",(SELECT id FROM  auth_user WHERE username = "pes123"));
 
 -- MEDICAL PROBLEM
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("0",(SELECT id FROM auth_user  WHERE username = "lostonyou"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Corona", "Pacient ma koronu, oznamte rodine a Igorovi.", "NOT DONE",'2013-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("1",(SELECT id FROM auth_user  WHERE username = "starostaOravy"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Zlomenina", "Pacient si ublizil a ruku a zlomil si ju.", "NOT DONE",'2018-05-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("2",(SELECT id FROM auth_user  WHERE username = "hahahehe"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Zapal stredneho ucha", "Pacient ma zapal stredneho ucha, pravdepodoben pride o obe oci", "NOT DONE",'2020-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("3",(SELECT id FROM auth_user  WHERE username = "username"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Zapal mozgovych blan", "Pacient prisiel s bolestami hlavy, zistili sme ze ho napadli cervy v mozgu", "NOT DONE",'2013-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("4",(SELECT id FROM auth_user  WHERE username = "troska_dlhsia_prezyvka"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Plesen na nohe", "Pacient ma plesen na nohe uz dva tyzdne, smrdia mu nohy", "NOT DONE",'2016-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("5",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Bolesti brucha", "Pacient ma bolesti brucha, pravdepodobne tehotenstvo", "NOT DONE",'2018-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("6",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Bolesti na hrudi", "Pacient ma bolesti na hrudi, infarkt asi.", "DONE",'2015-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("7",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "stromdubsmrek"), "Poranenie hlavy", "Pacient si ublizil na halvu a musim to zasit", "DONE",'2016-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("8",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "stromdubsmrek"), "Porezanie", "Pacient sa porezal a musim to zasit", "DONE",'2020-10-14');
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status,start_date)
-VALUES ("9",(SELECT id FROM auth_user  WHERE username = "skrecok"),(SELECT id FROM  auth_user  WHERE username = "robocopy"), "Zlomeniny nos", "Pacient si ublizil na nos", "NOT DONE",'2008-10-14');
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("0",(SELECT id FROM auth_user  WHERE username = "lostonyou"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Corona", "Pacient ma koronu, oznamte rodine a Igorovi.", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("1",(SELECT id FROM auth_user  WHERE username = "starostaOravy"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Zlomenina", "Pacient si ublizil a ruku a zlomil si ju.", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("2",(SELECT id FROM auth_user  WHERE username = "hahahehe"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Zapal stredneho ucha", "Pacient ma zapal stredneho ucha, pravdepodoben pride o obe oci", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("3",(SELECT id FROM auth_user  WHERE username = "username"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Zapal mozgovych blan", "Pacient prisiel s bolestami hlavy, zistili sme ze ho napadli cervy v mozgu", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("4",(SELECT id FROM auth_user  WHERE username = "troska_dlhsia_prezyvka"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Plesen na nohe", "Pacient ma plesen na nohe uz dva tyzdne, smrdia mu nohy", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("5",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Bolesti brucha", "Pacient ma bolesti brucha, pravdepodobne tehotenstvo", "NOT DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("6",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Bolesti na hrudi", "Pacient ma bolesti na hrudi, infarkt asi.", "DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("7",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "stromdubsmrek"), "Poranenie hlavy", "Pacient si ublizil na halvu a musim to zasit", "DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("8",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "stromdubsmrek"), "Porezanie", "Pacient sa porezal a musim to zasit", "DONE");
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description,Status)
+VALUES ("9",(SELECT id FROM auth_user  WHERE username = "skrecok"),(SELECT id FROM  auth_user  WHERE username = "robocopy"), "Zlomeniny nos", "Pacient si ublizil na nos", "NOT DONE");
 
 -- MEDICAL TICKET
-INSERT INTO hospital_is_ticket
-VALUES ("0",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Corona"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Potrebujem spravit PCR test", "OPEN", "none",'2013-10-16');
-INSERT INTO hospital_is_ticket
-VALUES ("1",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Corona"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Potrebujem plucnu ventilaciu", "OPEN", "none",'2013-10-18');
-INSERT INTO hospital_is_ticket
-VALUES ("2",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Zlomenina"),(SELECT id FROM  auth_user  WHERE username = "prezyvka"), "Rontgen", "OPEN", "Potrebujem rontgen v pravej casti lavej ruky",'2018-05-16');
-INSERT INTO hospital_is_ticket
-VALUES ("4",(SELECT id FROM hospital_is_medical_problem  WHERE Title = "Bolesti na hrudi"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "CT", "OPEN", "Potrebujem CT",'2015-10-16');
-INSERT INTO hospital_is_ticket
-VALUES ("5",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Zapal mozgovych blan"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Magneticka rezonancia", "OPEN", "Potrebujem rezonanciu",'2013-10-16');
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status, description)
+VALUES ("0",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Corona"),(SELECT id FROM  auth_user  WHERE username = "xmartinox"), "Potrebujem spravit PCR test", "OPEN", "none");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status, description)
+VALUES ("1",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Corona"),(SELECT id FROM  auth_user  WHERE username = "prackanavraky"), "Potrebujem plucnu ventilaciu", "OPEN", "none");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status, description)
+VALUES ("2",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Zlomenina"),(SELECT id FROM  auth_user  WHERE username = "prezyvka"), "Rontgen", "OPEN", "Potrebujem rontgen v pravej casti lavej ruky");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status, description)
+VALUES ("4",(SELECT id FROM hospital_is_medical_problem  WHERE Title = "Bolesti na hrudi"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "CT", "OPEN", "Potrebujem CT");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status, description)
+VALUES ("5",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Zapal mozgovych blan"),(SELECT id FROM  auth_user  WHERE username = "adosi1"), "Magneticka rezonancia", "OPEN", "Potrebujem rezonanciu");
