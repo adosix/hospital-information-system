@@ -22,5 +22,6 @@ urlpatterns = [
     path('compensation_operations/', views.compensation_operations, name='compensation_operations'),
     path('compensation_operations_create/', views.compensation_operations_create, name='compensation_operations_create'),
     path('compensation_operations_edit/<str:pk>/', views.compensation_operations_edit, name='compensation_operations_edit'),
+    path('tickets_admin/', views.tickets_admin, name='tickets_admin'),
     path('about/', views.about, name='hospital_is-about'),
 ]

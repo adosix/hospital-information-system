@@ -9,6 +9,8 @@ import datetime
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
 
     class Meta:
         model = User
@@ -40,3 +42,11 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image','birth_date']
+class UserRoleForm(forms.Form):
+
+    Role = forms.TypedChoiceField(label = "Choose role",
+        choices = ((1, "Pacient"), (0, "Admin"),(2,"Insurance_worker"),(3,"Doctor")),
+        coerce = lambda x: bool(int(x)),
+        widget = forms.RadioSelect,
+        initial = '1',
+        required = True,)

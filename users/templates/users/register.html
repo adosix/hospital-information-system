@@ -1,6 +1,9 @@
 {% extends "hospital_is/base.html" %}
 {% load crispy_forms_tags %}
+{% load customtags %}
 {% block content %}
+{% if user.is_authenticated  %}
+{% if user|is_admin or user|is_doctor %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -8,10 +11,15 @@
                 <legend class="border-bottom mb-4">Join Today</legend>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
+                {% if user|is_admin  %}
+                  {{role_form.as_p}}
+                {% endif %}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
+  {% endif %}
+  {% endif %}
 {% endblock content %}

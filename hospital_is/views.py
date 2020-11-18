@@ -22,6 +22,7 @@ from users.models import Profile
 from .models import Doctor
 from .models import Patient
 from .models import Compensated_operations
+from .models import Ticket
 from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation
 def default(request):
     context = {
@@ -51,7 +52,13 @@ def medical_problems_admin(request):
     }
 
     return render(request, 'hospital_is/medical_problems_admin.html', context)
+def tickets_admin(request):
+    context = {
+        'Ticket': Ticket.objects.all(),
+        'AuthUser': AuthUser.objects.all()
+    }
 
+    return render(request, 'hospital_is/tickets_admin.html', context)
 def medical_problem_edit(request, pk):
     medical_problem = get_object_or_404(Medical_problem, id=pk)
     UserFormSet = modelformset_factory(AuthUser, form=MedicalProblemUsers,fields=('username',),min_num=2,max_num=2, validate_min=True, extra=2)

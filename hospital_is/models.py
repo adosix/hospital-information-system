@@ -117,7 +117,7 @@ class Patient(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('Patient', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
@@ -128,7 +128,7 @@ class Admin(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('admin', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
@@ -139,7 +139,7 @@ class Insurance_worker(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('insurance', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
