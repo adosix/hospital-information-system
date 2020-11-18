@@ -27,10 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TIME_ZONE = 'Europe/Prague'
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'multiforloop',
     'hospital_is.apps.hospital_isConfig',
     'users.apps.UsersConfig',

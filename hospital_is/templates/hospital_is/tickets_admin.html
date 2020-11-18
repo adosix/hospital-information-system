@@ -8,6 +8,7 @@
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
+                <th >Patient</th>
                 <th >Doctor</th>
                 <th>Operation</th>
                 <th>Status</th>
@@ -18,18 +19,30 @@
           <tbody id="tablebody" >
 
           {% for m in Ticket %}
-            <tr>
-                <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
-                <td>{{ m.Operation}}</td>
-                <td>{{m.Status}}</td>
-                <td>{{m.Description}}</td>
-                <td>{{m.create_date}}</td>
-                <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
-            </tr>
+
+          <tr>
+              <td>{{ m.Medical_problem_ID|get_username_ticket:Medical_problem  }}</td>
+              <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
+              <td>{{ m.Operation}}</td>
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+              {% if m.Status == True %}
+
+                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
+              {% else %}
+
+                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+              {%endif%}
+              </form>
+              <td>{{m.Description}}</td>
+              <td>{{m.created}}</td>
+              <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
+          </tr>
           {% endfor %}
 
           </tbody>
        <tfoot>
+         <th >Patient</th>
          <th >Doctor</th>
          <th>Operation</th>
          <th>Status</th>

@@ -50,8 +50,9 @@ CREATE TABLE users_profile (
     Doctor_ID INTEGER NOT NULL,
     Title varchar(255) NOT NULL,
     Description varchar(1024)  NOT NULL,
-    Status  varchar(255) NOT NULL,
-    created timestamp default now(), 
+    Image varchar(255),
+    Status  int NOT NULL default 0,
+    created timestamp default now(),
     updated timestamp default now() on update now(),
 
     CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
@@ -62,9 +63,9 @@ CREATE TABLE users_profile (
     Medical_problem_ID INTEGER NOT NULL ,
     Doctor_ID INTEGER NOT NULL ,
     Operation  varchar(255) NOT NULL,
-    Status  varchar(255) NOT NULL,
+    Status  boolean NOT NULL default False,
     Description varchar(1024),
-    created timestamp default now(), 
+    created timestamp default now(),
     updated timestamp default now() on update now(),
 
     CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
@@ -75,8 +76,12 @@ CREATE TABLE users_profile (
     Ticket_ID INTEGER NOT NULL ,
     Title  varchar(255) NOT NULL,
     Description  varchar(1024) NOT NULL,
-    Images varchar(255),
-    created timestamp default now(), 
+    Image0 varchar(255),
+    Image1 varchar(255),
+    Image2 varchar(255),
+    Image3 varchar(255),
+    Image4 varchar(255),
+    created timestamp default now(),
     updated timestamp default now() on update now(),
 
     CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_is_ticket(id) ON DELETE CASCADE
@@ -84,5 +89,5 @@ CREATE TABLE users_profile (
  );
  CREATE TABLE hospital_is_compensation_request(
     id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id) ON DELETE CASCADE,
-    Status varchar(255) NOT NULL 
+    Status varchar(255) NOT NULL
  );

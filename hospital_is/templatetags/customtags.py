@@ -1,5 +1,5 @@
 from django import template
-
+from users.models import AuthUser
 register = template.Library()
 
 # 1 1 admin
@@ -42,6 +42,11 @@ def get_username(id, user):
     for u in user:
         if id == u.id:
             return u.username
+@register.filter(name='get_username_ticket')
+def get_username_ticket(id, med_p):
+    for m in med_p:
+        if id == m.id:
+            return get_username(m.Patient_ID,AuthUser.objects.all())
 
 @register.filter(name='get_first_name')
 def get_first_name(id, user):

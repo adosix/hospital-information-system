@@ -9,11 +9,13 @@
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
-                <th >patient</th>
-                <th>doctor</th>
-                <th>title</th>
-                <th>status</th>
-                <th>more</th>
+          <th >patient</th>
+          <th>doctor</th>
+          <th>title</th>
+          <th>create_date</th>
+          <th>status</th>
+          <th>update_date</th>
+          <th>more</th>
         </thead>
           <tbody id="tablebody" >
 
@@ -23,22 +25,28 @@
               <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
               <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
               <td>{{ m.Title }}</td>
-              {% if m.status|is_active  %}
+              <td>{{ m.created }}</td>
+              {% if m.Status == 0  %}
                 <td>active</td>
+              {% elif m.Status == 1 %}
+                <td>waiting</td>
               {% else %}
                 <td>finished</td>
               {% endif %}
+                  <td>{{m.updated}}</td>
               <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
           </tr>
           {% endif %}
           {% endfor %}
           </tbody>
        <tfoot>
-        <th class="order">patient</th>
-        <th class="order">doctor</th>
-        <th class="order">title</th>
-        <th class="order" >status</th>
-        <th class="order" >more</th>
+         <th class="order">patient</th>
+         <th class="order">doctor</th>
+         <th class="order">title</th>
+         <th class="order">create_date</th>
+         <th class="order" >status</th>
+         <th class="order">update_date</th>
+         <th class="order" >more</th>
         </tfoot>
     </table>
 
