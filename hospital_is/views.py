@@ -7,6 +7,7 @@ from django.forms.formsets import formset_factory
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect
 
+import datetime
 from django.utils import timezone
 
 from django.db.models import Q
@@ -159,9 +160,16 @@ def medical_problem_edit(request, pk):
             medical_problem = m_form.save(commit=False)
             medical_problem.Patient_ID=patient.id
             medical_problem.Doctor_ID=doctor.id
+
             if(status_f == '2'):
                 medical_problem.Status = 2;
-            medical_problem.updated = timezone.now()
+
+
+
+
+            timezone.deactivate()
+            medical_problem.updated = datetime.datetime.now()
+            print(medical_problem.updated )
 
             if 'del' in request.POST:
                 medical_problem.delete()

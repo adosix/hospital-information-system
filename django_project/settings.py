@@ -24,7 +24,7 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+USE_L10N = True
 ALLOWED_HOSTS = []
 
 TIME_ZONE = 'Europe/Prague'
@@ -122,7 +122,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
