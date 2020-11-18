@@ -51,8 +51,9 @@ CREATE TABLE users_profile (
     Title varchar(255) NOT NULL,
     Description varchar(1024)  NOT NULL,
     Status  varchar(255) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE,
+    created timestamp default now(), 
+    updated timestamp default now() on update now(),
+
     CONSTRAINT Doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
     CONSTRAINT Patient FOREIGN KEY (Patient_ID) REFERENCES hospital_is_patient(id) ON DELETE CASCADE
  );
@@ -63,7 +64,9 @@ CREATE TABLE users_profile (
     Operation  varchar(255) NOT NULL,
     Status  varchar(255) NOT NULL,
     Description varchar(1024),
-    create_date DATE NOT NULL,
+    created timestamp default now(), 
+    updated timestamp default now() on update now(),
+
     CONSTRAINT Examining_doctor FOREIGN KEY (Doctor_ID) REFERENCES hospital_is_doctor(id) ON DELETE CASCADE,
     CONSTRAINT Medical_problem FOREIGN KEY (Medical_problem_ID) REFERENCES hospital_is_medical_problem(id) ON DELETE CASCADE
  );
@@ -73,11 +76,13 @@ CREATE TABLE users_profile (
     Title  varchar(255) NOT NULL,
     Description  varchar(1024) NOT NULL,
     Images varchar(255),
-    create_date DATE NOT NULL,
+    created timestamp default now(), 
+    updated timestamp default now() on update now(),
+
     CONSTRAINT Ticket FOREIGN KEY (Ticket_ID) REFERENCES hospital_is_ticket(id) ON DELETE CASCADE
 
  );
  CREATE TABLE hospital_is_compensation_request(
-    id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id),
-    Status varchar(255) NOT NULL
+    id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id) ON DELETE CASCADE,
+    Status varchar(255) NOT NULL 
  );

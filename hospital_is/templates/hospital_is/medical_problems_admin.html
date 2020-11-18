@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
- 
+ <a href="{% url 'medical_problem_create' %}">Create new medical problem</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
