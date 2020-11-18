@@ -3,51 +3,53 @@
 {% load customtags %}
 
 {% if user.is_authenticated  %}
-{% if user|is_doctor  %}
+{% if user|is_admin  %}
 <a href="{% url 'medical_problem_create' %}">Create new medical problem</a>
-
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
-          <th >patient</th>
-          <th>doctor</th>
-          <th>title</th>
-          <th>create_date</th>
-          <th>status</th>
-          <th>update_date</th>
-          <th>more</th>
+                <th >Patient</th>
+                <th >Doctor</th>
+                <th>Operation</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>create_date</th>
+                <th class="order" >more</th>
         </thead>
           <tbody id="tablebody" >
 
-          {% for m in Medical_problem %}
-          {% if  user.id == pk and user.id == m.Doctor_ID %}
+          {% for m in Ticket %}
+
           <tr>
-              <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
+              <td>{{ m.Medical_problem_ID|get_username_ticket:Medical_problem  }}</td>
               <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
-              <td>{{ m.Title }}</td>
-              <td>{{ m.created }}</td>
-              {% if m.Status == 0  %}
-                <td>active</td>
-              {% elif m.Status == 1 %}
-                <td>waiting</td>
+              <td>{{ m.Operation}}</td>
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+              {% if m.Status == True %}
+
+                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
               {% else %}
-                <td>finished</td>
-              {% endif %}
-                  <td>{{m.updated}}</td>
+
+                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+              {%endif%}
+              </form>
+              <td>{{m.Description}}</td>
+              <td>{{m.created}}</td>
               <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
           </tr>
-          {% endif %}
           {% endfor %}
+
           </tbody>
        <tfoot>
-         <th class="order">patient</th>
-         <th class="order">doctor</th>
-         <th class="order">title</th>
-         <th class="order">create_date</th>
-         <th class="order" >status</th>
-         <th class="order">update_date</th>
-         <th class="order" >more</th>
-        </tfoot>
+         <th >Patient</th>
+         <th >Doctor</th>
+         <th>Operation</th>
+         <th>Status</th>
+         <th>Description</th>
+         <th>create_date</th>
+        <th class="order" >more</th>
+      </tfoot>
     </table>
 
 

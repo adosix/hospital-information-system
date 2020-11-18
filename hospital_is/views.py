@@ -25,7 +25,8 @@ from users.models import Profile
 from .models import Doctor
 from .models import Patient
 from .models import Compensated_operations
-from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation
+from .models import Ticket
+from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -54,14 +55,84 @@ def medical_problems_admin(request):
     }
 
     return render(request, 'hospital_is/medical_problems_admin.html', context)
+def tickets_admin(request):
+    if request.method == 'POST':
+        for name,value in request.POST.items():
+            if value == "opened" or value == "closed":
+                key = name
+                status = value
+        ticket = get_object_or_404(Ticket,id=key)
+        medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
+        if(status == "opened"):
+            ticket.Status = True
+            ticket.save()
+            medical_problem.Status = 0
+            for t in Ticket.objects.all():
+                if t.Medical_problem_ID == medical_problem.id and t.Status == False:
+                    medical_problem.Status = 1
+            medical_problem.save()
+        else:
+            ticket.Status = False
+            ticket.save()
+            medical_problem.Status = 1
+            medical_problem.save()
+    context = {
+        'Ticket': Ticket.objects.all(),
+        'AuthUser': AuthUser.objects.all(),
+        'Patient':  Patient.objects.all(),
+        'Medical_problem':  Medical_problem.objects.all(),
+    }
+
+    return render(request, 'hospital_is/tickets_admin.html', context)
+def medical_problem_tickets(request, pk):
+    if request.method == 'POST':
+        for name,value in request.POST.items():
+            if value == "opened" or value == "closed":
+                key = name
+                status = value
+        ticket = get_object_or_404(Ticket,id=key)
+        medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
+        if(status == "opened"):
+            ticket.Status = True
+            ticket.save()
+            medical_problem.Status = 0
+            for t in Ticket.objects.all():
+                if t.Medical_problem_ID == medical_problem.id and t.Status == False:
+                    medical_problem.Status = 1
+            medical_problem.save()
+        else:
+            ticket.Status = False
+            ticket.save()
+            medical_problem.Status = 1
+            medical_problem.save()
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'Ticket' : Ticket.objects.all(),
+        'pk':pk,
+        'AuthUser': AuthUser.objects.all(),
+
+        'doctor': Doctor.objects.all()
+    }
+    return render(request, 'hospital_is/medical_problem_tickets.html', context)
+def medical_ticket_edit(request, pk):
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'Ticket' : Ticket.objects.all(),
+        'pk':pk,
+        'AuthUser': AuthUser.objects.all(),
+
+        'doctor': Doctor.objects.all()
+    }
+    return render(request, 'hospital_is/medical_problem_tickets.html', context)
 
 def medical_problem_edit(request, pk):
+    status_f = Status()
     medical_problem = get_object_or_404(Medical_problem, id=pk)
     UserFormSet = modelformset_factory(AuthUser, form=MedicalProblemUsers,fields=('username',),min_num=2,max_num=2, validate_min=True, extra=2)
     patient = get_object_or_404(AuthUser, id = medical_problem.Patient_ID)
     doctor= get_object_or_404(AuthUser, id = medical_problem.Doctor_ID)
-
     if request.method == 'POST':
+        status_f = request.POST['Status']
         formset = UserFormSet(request.POST or None, request.FILES or None)
         m_form = MedicalProblemUpdateForm(request.POST, instance=medical_problem)
         for form0 in formset:
@@ -90,9 +161,16 @@ def medical_problem_edit(request, pk):
             medical_problem.Patient_ID=patient.id
             medical_problem.Doctor_ID=doctor.id
 
+            if(status_f == '2'):
+                medical_problem.Status = 2;
+
+
+
+
             timezone.deactivate()
             medical_problem.updated = datetime.datetime.now()
             print(medical_problem.updated )
+
             if 'del' in request.POST:
                 medical_problem.delete()
                 messages.success(request, "Medical problem successfully deleted!")
@@ -102,6 +180,10 @@ def medical_problem_edit(request, pk):
                     return HttpResponseRedirect("/medical_problems_doc/" + str(doctor.id))
             medical_problem.save()
             messages.success(request, f'Medical problem updated.')
+            if request.user.is_superuser:
+                return HttpResponseRedirect("/medical_problems_admin/")
+            else:
+                return HttpResponseRedirect("/medical_problems_doc/" + str(doctor.id))
         else:
             messages.warning(request, f'Medical problem not updated.')
             medical_problem = get_object_or_404(Medical_problem, id=pk)
@@ -112,6 +194,7 @@ def medical_problem_edit(request, pk):
         formset = UserFormSet(queryset=AuthUser.objects.all().order_by('is_staff').filter(Q(username=patient.username,is_staff=patient.is_staff) | Q(username=doctor.username,is_staff=doctor.is_staff)))
     m_form = MedicalProblemUpdateForm(instance=medical_problem)
     context = {
+        'Status' :status_f,
         'pk' : pk,
         'formset' : formset,
         'm_form' : m_form,
@@ -151,6 +234,10 @@ def medical_problem_create(request):
             medical_problem.Doctor_ID=doctor.id
             medical_problem.save()
             messages.success(request, f'Medical problem created.')
+            if request.user.is_superuser:
+                return HttpResponseRedirect("/medical_problems_admin/")
+            else:
+                return HttpResponseRedirect("/medical_problems_doc/" + str(doctor.id))
         else:
             messages.warning(request, f'Medical problem not updated.')
 

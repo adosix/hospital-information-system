@@ -24,7 +24,8 @@ class Medical_problem(models.Model):
     Doctor_ID = models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    Status = models.TextField()
+    Image = models.ImageField()
+    Status = models.IntegerField(default=0)
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
 
@@ -41,7 +42,11 @@ class Medical_record(models.Model):
     Ticket_ID =  models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    Images = models.ImageField()
+    Image0= models.ImageField()
+    Image1= models.ImageField()
+    Image2= models.ImageField()
+    Image3= models.ImageField()
+    Image4 = models.ImageField()
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
 
@@ -58,7 +63,7 @@ class Ticket(models.Model):
     Medical_problem_ID =  models.IntegerField()
     Doctor_ID = models.IntegerField()
     Operation = models.TextField()
-    Status = models.TextField()
+    Status = models.BooleanField(default=False)
     Description = models.TextField()
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
@@ -121,7 +126,7 @@ class Patient(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('Patient', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
@@ -132,7 +137,7 @@ class Admin(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('admin', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
@@ -143,7 +148,7 @@ class Insurance_worker(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
     def get_absolute_url(self):
-        return reverse('doctor', kwargs={'pk': self.pk})
+        return reverse('insurance', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']

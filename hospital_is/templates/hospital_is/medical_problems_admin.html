@@ -11,8 +11,11 @@
                 <th >patient</th>
                 <th>doctor</th>
                 <th>title</th>
+                <th>create_date</th>
                 <th>status</th>
-                <th>more</th>   
+                <th>update_date</th>
+                <th>edit</th>
+                <th>view tickets</th>
         </thead>
           <tbody id="tablebody" >
 
@@ -21,12 +24,17 @@
                 <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Title }}</td>
-                {% if m.status|is_active  %}
+                <td>{{ m.created }}</td>
+                {% if m.Status == 0  %}
                   <td>active</td>
+                {% elif m.Status == 1 %}
+                  <td>waiting</td>
                 {% else %}
                   <td>finished</td>
                 {% endif %}
-                <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
+                    <td>{{m.updated}}</td>
+                <td><a href="{% url 'medical_problem_edit' m.id %}">edit</a></td>
+                <td><a href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
             </tr>
           {% endfor %}
 
@@ -35,12 +43,14 @@
         <th class="order">patient</th>
         <th class="order">doctor</th>
         <th class="order">title</th>
+        <th class="order">create_date</th>
         <th class="order" >status</th>
-        <th class="order" >more</th>
-      </foot>
+        <th class="order">update_date</th>
+        <th class="order">edit</th>
+        <th class="order">view tickets</th>
     </table>
 
-    
+
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
@@ -70,19 +80,19 @@
 
 
 
-$(document).ready(function() { 
-  // Setup - add a text input to each footer cell 
-  $('#search_table tfoot th').each( function () { 
-    var title = $('#search_table thead th').eq( $(this).index() ).text(); 
-    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } ); 
-    // DataTable 
-    var table = $('#search_table').DataTable(); 
-    // Apply the search 
-    table.columns().eq( 0 ).each( function ( colIdx ) 
-    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () 
+$(document).ready(function() {
+  // Setup - add a text input to each footer cell
+  $('#search_table tfoot th').each( function () {
+    var title = $('#search_table thead th').eq( $(this).index() ).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } );
+    // DataTable
+    var table = $('#search_table').DataTable();
+    // Apply the search
+    table.columns().eq( 0 ).each( function ( colIdx )
+    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
     { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
 
-//sorting 
+//sorting
 
 
 </script>

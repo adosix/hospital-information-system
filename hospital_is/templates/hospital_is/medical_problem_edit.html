@@ -26,6 +26,7 @@
                     {{form}}
                   {%endfor%}
                   {{ m_form|crispy }}
+                  {{Status.as_p}}
               </fieldset>
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Update</button>
@@ -53,6 +54,7 @@
                           {{form}}
                         {%endfor%}
                         {{ m_form|crispy }}
+                        {{Status.as_p}}
                     </fieldset>
                     <div class="form-group">
                         <button class="btn btn-outline-info" type="submit">Update</button>

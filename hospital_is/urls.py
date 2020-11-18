@@ -14,6 +14,9 @@ from . import views
 urlpatterns = [
     path('', views.default, name='hospital_is-home'),
      path('medical_problem_edit/<int:pk>/', views.medical_problem_edit, name='medical_problem_edit'),
+     path('medical_ticket_edit/<int:pk>/', views.medical_ticket_edit, name='medical_ticket_edit'),
+
+     path('medical_problem_tickets/<int:pk>/', views.medical_problem_tickets, name='medical_problem_tickets'),
     #path('post/<int:pk>/',Medical_problem_DetailView.as_view(), name='post-detail'),
     path('medical_problem_create/', views.medical_problem_create, name='medical_problem_create'),
     path('users/', views.users, name='users'),
@@ -22,5 +25,6 @@ urlpatterns = [
     path('compensation_operations/', views.compensation_operations, name='compensation_operations'),
     path('compensation_operations_create/', views.compensation_operations_create, name='compensation_operations_create'),
     path('compensation_operations_edit/<str:pk>/', views.compensation_operations_edit, name='compensation_operations_edit'),
+    path('tickets_admin/', views.tickets_admin, name='tickets_admin'),
     path('about/', views.about, name='hospital_is-about'),
 ]

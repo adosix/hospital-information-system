@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileRegisterForm,AdminUserUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileRegisterForm,AdminUserUpdateForm,UserRoleForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from .models import AuthUser
 from .models import Profile
 from hospital_is.models import Admin
+from hospital_is.models import Insurance_worker
+from hospital_is.models import Doctor
+from hospital_is.models import Patient
 from hospital_is.models import Ticket
 from hospital_is.models import Medical_record
 from hospital_is.models import Medical_problem
@@ -59,28 +62,60 @@ def edit_profile(request, username_to_find):
 
     return render(request, 'users/edit_profile.html', context)
 def register(request):
+    role_form = UserRoleForm()
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES)
+        role_form = request.POST['Role']
         if u_form.is_valid() and p_form.is_valid():
-            user = u_form.save()
+            user = u_form.save(commit=False)
+            if(request.user.is_superuser):
+                if(role_form == '0'):
+                    user.is_superuser = True
+                    user.is_staff = True
+                    user.save()
+                    Admin.objects.create(id = user.id)
+                elif(role_form == '1'):
+                    user.is_superuser = False
+                    user.is_staff = False
+                    user.save()
+                    Patient.objects.create(id = user.id)
+
+                elif(role_form == '2'):
+                    user.is_superuser = True
+                    user.is_staff = False
+                    user.save()
+                    Insurance_worker.objects.create(id = user.id)
+                else:
+                    user.is_superuser = False
+                    user.is_staff = True
+                    user.save()
+                    Doctor.objects.create(id = user.id)
+            else:
+                user.save()
+                Patient.objects.create(id = user.id)
             created_row = get_object_or_404(Profile, user_id= user.id)
             profile = p_form.save(commit = False)
             created_row.birth_date = profile.birth_date
             created_row.image = profile.image
             created_row.save()
 
-
+            #TOGO
             username = u_form.cleaned_data.get('username')
             messages.success(request, f'Account has been created')
-            return redirect('login')
+            return redirect('hospital_is-home')
         else:
             messages.warning(request, f'Your account wasn\t created!')
+            u_form = UserRegisterForm()
+            p_form = ProfileRegisterForm()
+            role_form = UserRoleForm()
     else:
         u_form = UserRegisterForm()
         p_form = ProfileRegisterForm()
+        role_form = UserRoleForm()
     context = {
+        'role_form' :role_form,
         'u_form': u_form,
         'p_form': p_form
     }

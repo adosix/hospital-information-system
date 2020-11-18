@@ -24,13 +24,15 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+USE_L10N = True
 ALLOWED_HOSTS = []
 
+TIME_ZONE = 'Europe/Prague'
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'multiforloop',
     'hospital_is.apps.hospital_isConfig',
     'users.apps.UsersConfig',
