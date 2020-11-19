@@ -4,7 +4,6 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
-<a href="{% url 'medical_problem_create' %}">Create new medical problem</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -36,7 +35,7 @@
               </form>
               <td>{{m.Description}}</td>
               <td>{{m.created}}</td>
-              <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
+              <td><a href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
           </tr>
           {% endfor %}
 

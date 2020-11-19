@@ -20,13 +20,14 @@ from django.views.generic import (
 )
 from .models import Post
 from .models import Medical_problem
+from .models import Medical_record
 from users.models import AuthUser
 from users.models import Profile
 from .models import Doctor
 from .models import Patient
 from .models import Compensated_operations
 from .models import Ticket
-from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status
+from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -53,8 +54,43 @@ def medical_problems_admin(request):
         'Medical_problem': Medical_problem.objects.all(),
         'AuthUser': AuthUser.objects.all()
     }
+def tickets_doc(request,pk):
+    if request.method == 'POST':
+        for name,value in request.POST.items():
+            if value == "opened" or value == "closed":
+                key = name
+                status = value
+        ticket = get_object_or_404(Ticket,id=key)
+        medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
+        if(status == "opened"):
+            tmp = False
+            for r in Medical_record.objects.all():
+                if ticket.id == r.Ticket_ID:
+                    tmp = True
+            if not tmp:
+                messages.warning(request, f'Can not close ticket without record.')
+                return HttpResponseRedirect("/tickets_doc/" + str(pk))
+            ticket.Status = True
+            ticket.save()
+            medical_problem.Status = 0
+            for t in Ticket.objects.all():
+                if t.Medical_problem_ID == medical_problem.id and t.Status == False:
+                    medical_problem.Status = 1
+            medical_problem.save()
+        else:
+            ticket.Status = False
+            ticket.save()
+            medical_problem.Status = 1
+            medical_problem.save()
+    context = {
+        'pk': pk,
+        'Ticket': Ticket.objects.all(),
+        'AuthUser': AuthUser.objects.all(),
+        'Patient':  Patient.objects.all(),
+        'Medical_problem':  Medical_problem.objects.all(),
+    }
 
-    return render(request, 'hospital_is/medical_problems_admin.html', context)
+    return render(request, 'hospital_is/tickets_doc.html', context)
 def tickets_admin(request):
     if request.method == 'POST':
         for name,value in request.POST.items():
@@ -64,6 +100,13 @@ def tickets_admin(request):
         ticket = get_object_or_404(Ticket,id=key)
         medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
         if(status == "opened"):
+            tmp = False
+            for r in Medical_record.objects.all():
+                if ticket.id == r.Ticket_ID:
+                    tmp = True
+            if not tmp:
+                messages.warning(request, f'Can not close ticket without record.')
+                return HttpResponseRedirect("/tickets_admin/")
             ticket.Status = True
             ticket.save()
             medical_problem.Status = 0
@@ -86,24 +129,64 @@ def tickets_admin(request):
     return render(request, 'hospital_is/tickets_admin.html', context)
 def medical_problem_tickets(request, pk):
     if request.method == 'POST':
+
         for name,value in request.POST.items():
             if value == "opened" or value == "closed":
                 key = name
                 status = value
-        ticket = get_object_or_404(Ticket,id=key)
+        try :
+            ticket = get_object_or_404(Ticket, id = key)
+        except:
+            for name,value in request.POST.items():
+                if value == "Delete":
+                    key = name
+            ticket = get_object_or_404(Ticket,id=key)
+            medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
+
+            if ticket.Status == True:
+                ticket.delete()
+                medical_problem.Status = 0
+                for t in Ticket.objects.all():
+                    if t.Medical_problem_ID == medical_problem.id and t.Status == False:
+                        medical_problem.Status = 1
+                medical_problem.save()
+                return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
+            else:
+                if request.user.is_superuser:
+                    ticket.delete()
+                    medical_problem.Status = 0
+                    for t in Ticket.objects.all():
+                        if t.Medical_problem_ID == medical_problem.id and t.Status == False:
+                            medical_problem.Status = 1
+                    medical_problem.save()
+                    return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
+                else :
+                    messages.warning(request, f'Can not delete opened ticket.')
+                    return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
         medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
+
+
         if(status == "opened"):
+            tmp = False
+            for r in Medical_record.objects.all():
+                if ticket.id == r.Ticket_ID:
+                    tmp = True
+            if not tmp:
+                messages.warning(request, f'Can not close ticket without record.')
+                return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
             ticket.Status = True
             ticket.save()
             medical_problem.Status = 0
             for t in Ticket.objects.all():
                 if t.Medical_problem_ID == medical_problem.id and t.Status == False:
                     medical_problem.Status = 1
+            medical_problem.updated=ticket.updated
             medical_problem.save()
         else:
             ticket.Status = False
             ticket.save()
             medical_problem.Status = 1
+            medical_problem.updated=ticket.updated
             medical_problem.save()
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -124,6 +207,55 @@ def medical_ticket_edit(request, pk):
         'doctor': Doctor.objects.all()
     }
     return render(request, 'hospital_is/medical_problem_tickets.html', context)
+def medical_ticket_record(request, pk):
+    try:
+        record = get_object_or_404(Medical_record, Ticket_ID=pk)
+        record_f = Record(instance=record)
+    except:
+        record_f = Record()
+    if request.method == 'POST':
+        try:
+            record = get_object_or_404(Medical_record, Ticket_ID=pk)
+            record_f = Record(request.POST,instance=record)
+        except:
+            record_f = Record(request.POST)
+        ticket = get_object_or_404(Ticket, id=pk)
+        if(request.user.id != ticket.Doctor_ID):
+            messages.warning(request, f'You dont have permissions to update this file')
+            return HttpResponseRedirect("/medical_ticket_record/" + str(pk))
+        if(ticket.Status == True):
+            messages.warning(request, f'Medical record can not be updated when the ticket is closed.')
+            return HttpResponseRedirect("/medical_ticket_record/" + str(pk))
+        if record_f.is_valid():
+            record = record_f.save(commit=False)
+            ticket=get_object_or_404(Ticket,id = pk)
+            medical_problem=get_object_or_404(Medical_problem, id=ticket.Medical_problem_ID)
+            ticket.updated = record.updated
+            medical_problem.updated = record.updated
+            ticket.save()
+            medical_problem.save()
+            record.Ticket_ID = ticket.id
+            tmp = Medical_record.objects.all()
+            try:
+                tmp = tmp[len(tmp)-1]
+                id = tmp.id+1
+            except:
+                id = 0
+            record.id = id
+            record.save()
+            messages.success(request, f'Medical record updated.')
+        else :
+            messages.warning(request, f'Medical record not updated.')
+    context = {
+        'record_f':record_f,
+        'Medical_problem': Medical_problem.objects.all(),
+        'Ticket' : Ticket.objects.all(),
+        'pk':pk,
+        'AuthUser': AuthUser.objects.all(),
+
+        'doctor': Doctor.objects.all()
+    }
+    return render(request, 'hospital_is/medical_ticket_record.html', context)
 
 def medical_problem_edit(request, pk):
     status_f = Status()
@@ -138,6 +270,12 @@ def medical_problem_edit(request, pk):
         for form0 in formset:
             form0.save(commit=False)
         if m_form.is_valid() and formset.is_valid():
+            if(status_f == '2'):
+                for t in Ticket.objects.all():
+                    if(t.Medical_problem_ID == pk and t.Status == False):
+                        messages.warning(request, f'All tickets have to be done before closing medical problem.')
+                        return HttpResponseRedirect("/medical_problem_edit/" + str(pk))
+                medical_problem.Status = 2;
             tmp = 0
             formset = formset.save(commit=False)
             if(len(formset) == 2):
@@ -161,15 +299,13 @@ def medical_problem_edit(request, pk):
             medical_problem.Patient_ID=patient.id
             medical_problem.Doctor_ID=doctor.id
 
-            if(status_f == '2'):
-                medical_problem.Status = 2;
+
 
 
 
 
             timezone.deactivate()
             medical_problem.updated = datetime.datetime.now()
-            print(medical_problem.updated )
 
             if 'del' in request.POST:
                 medical_problem.delete()
@@ -251,6 +387,44 @@ def medical_problem_create(request):
         'formset' : formset,
     }
     return render(request, 'hospital_is/medical_problem_create.html', context)
+def medical_ticket_create(request,pk):
+
+    t_form = TicketForm()
+    user_f = UsersCompensation()
+    if request.method == 'POST':
+        medical_problem = get_object_or_404(Medical_problem, id=pk)
+        if(medical_problem.Status == 2):
+            messages.warning(request, f'Ticket   can not be updated when the med problem is finished.')
+            return HttpResponseRedirect("/medical_problems_admin/" )
+        t_form = TicketForm(request.POST)
+        user_f = UsersCompensation(request.POST)
+        if(t_form.is_valid() and user_f.is_valid()):
+            user_f = user_f.save(commit=False)
+            t_form = t_form.save(commit=False)
+            user_f = get_object_or_404(AuthUser, username=user_f.username)
+            t_form.Medical_problem_ID = pk
+            t_form.Doctor_ID = user_f.id
+            medical_problem.updated = t_form.updated
+            medical_problem.Status = 1
+            medical_problem.save()
+            tmp = Ticket.objects.all()
+            tmp = tmp[len(tmp)-1]
+            t_form.id = tmp.id+1
+            t_form.save()
+            messages.success(request, f'Medical ticket created.')
+            return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
+        else:
+            messages.warning(request, f'Medical ticket not created.')
+            t_form = TicketForm()
+            user_f = UsersCompensation()
+    context = {
+        'user_f': user_f,
+        't_form': t_form,
+        'Medical_problem': Medical_problem.objects.all(),
+        'AuthUser': AuthUser.objects.all(),
+        'Doctor': Doctor.objects.all(),
+    }
+    return render(request, 'hospital_is/medical_ticket_create.html', context)
 def medical_problems_doc(request,pk):
     context = {
         'pk':pk,

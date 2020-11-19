@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Medical_problem
+from .models import Medical_record
+from .models import Ticket
 from .models import Compensated_operations
 from users.models import AuthUser
 from django.db import models
@@ -41,3 +43,16 @@ class CompensationOperationsCreate(forms.ModelForm):
     class Meta:
         model = Compensated_operations
         fields = ['Operation', 'Description']
+class Record(forms.ModelForm):
+    Image0 = forms.ImageField(required=False)
+    Image1 = forms.ImageField(required=False)
+    Image2 = forms.ImageField(required=False)
+    Image3 = forms.ImageField(required=False)
+    Image4 = forms.ImageField(required=False)
+    class Meta:
+        model = Medical_record
+        fields = ['Title', 'Description','Image0','Image1','Image2','Image3','Image4']
+class TicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ['Operation','Description']
