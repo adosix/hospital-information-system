@@ -1,6 +1,7 @@
 from django import template
 from users.models import AuthUser
 register = template.Library()
+import datetime
 
 # 1 1 admin
 # 1 0 insurance worker
@@ -59,3 +60,8 @@ def get_last_name(id, user):
     for u in user:
         if id == u.id:
             return u.last_name
+
+@register.filter(name='return_date')
+def return_date(date):
+    return date.strftime('%Y-%m-%d')
+

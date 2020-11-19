@@ -24,7 +24,7 @@
                 <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Title }}</td>
-                <td>{{ m.created }}</td>
+                <td>{{ m.created|return_date }}</td>
                 {% if m.Status == 0  %}
                   <td>active</td>
                 {% elif m.Status == 1 %}
