@@ -4,6 +4,7 @@ from .models import Medical_problem
 from .models import Medical_record
 from .models import Ticket
 from .models import Compensated_operations
+from .models import Compensation_request
 from users.models import AuthUser
 from django.db import models
 
@@ -38,7 +39,22 @@ class UsersCompensation(forms.ModelForm):
     class Meta:
         model = AuthUser
         fields = ['username']
+class ChooseOperation(forms.Form):
+        def __init__(self,pk,initial,*args,**kwargs):
+           super(ChooseOperation, self).__init__(*args, **kwargs)
+           choices = []
+           choices.append(['',''])
+           for u  in Compensated_operations.objects.all():
+               choices.append([u.Description,u.Operation])
+           self.fields['Operation']=forms.ChoiceField(choices=choices, widget=forms.Select,required=False)
+        Operation = forms.ChoiceField()
+class MakeCompensation(forms.ModelForm):
+    Operation_r = forms.CharField(required=False)
+    Description_r = forms.CharField(required=False)
 
+    class Meta:
+        model = Compensation_request
+        fields = ['Operation_r','Description_r' ]
 class CompensationOperationsCreate(forms.ModelForm):
     class Meta:
         model = Compensated_operations

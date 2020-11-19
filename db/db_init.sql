@@ -41,7 +41,7 @@ CREATE TABLE users_profile (
  );
  CREATE TABLE hospital_is_compensated_operations(
     Operation varchar(255) NOT NULL primary key ,
-    Description varchar(1024),
+    Description varchar(1024) NOT NULL,
     Creator INTEGER
  );
  CREATE TABLE hospital_is_medical_problem(
@@ -63,7 +63,7 @@ CREATE TABLE users_profile (
     Medical_problem_ID INTEGER NOT NULL ,
     Doctor_ID INTEGER NOT NULL ,
     Operation  varchar(255) NOT NULL,
-    Status  boolean NOT NULL default False,
+    Status  int NOT NULL default 0,
     Description varchar(1024),
     created timestamp default now(),
     updated timestamp default now() on update now(),
@@ -88,6 +88,8 @@ CREATE TABLE users_profile (
 
  );
  CREATE TABLE hospital_is_compensation_request(
-    id INTEGER NOT NULL PRIMARY KEY REFERENCES hospital_is_ticket(id) ON DELETE CASCADE,
-    Status varchar(255) NOT NULL
+    ticket_id INTEGER NOT NULL REFERENCES hospital_is_ticket(id) ON DELETE CASCADE,
+    Operation_r varchar(255) NOT NULL,
+    Description_r varchar(255) NOT NULL,
+    primary  key(ticket_id,Operation_r,Description_r)
  );

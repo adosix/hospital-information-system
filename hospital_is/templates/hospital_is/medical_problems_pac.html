@@ -3,8 +3,7 @@
 {% load customtags %}
 
 {% if user.is_authenticated  %}
-{% if user|is_doctor  %}
-<a href="{% url 'medical_problem_create' %}">Create new medical problem </a>
+{% if user|is_patient  %}
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -13,15 +12,14 @@
           <th>create_date</th>
           <th>status</th>
           <th>update_date</th>
-          <<th>edit</th>
-          <th>view tickets</th>
+          <th>view more</th>
         </thead>
           <tbody id="tablebody" >
 
           {% for m in Medical_problem %}
-          {% if  user.id == pk and user.id == m.Doctor_ID %}
+          {% if  user.id == pk and user.id == m.Patient_ID %}
           <tr>
-              <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
+              <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
               <td>{{ m.Title }}</td>
               <td>{{ m.created }}</td>
               {% if m.Status == 0  %}
@@ -32,8 +30,7 @@
                 <td>finished</td>
               {% endif %}
                   <td>{{m.updated}}</td>
-              <td><a href="{% url 'medical_problem_edit' m.id %}">edit</a></td>
-              <td><a href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
+              <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -44,8 +41,7 @@
          <th class="order">create_date</th>
          <th class="order" >status</th>
          <th class="order">update_date</th>
-         <th class="order">edit</th>
-         <th class="order">view tickets</th>
+         <th class="order">view more</th>
         </tfoot>
     </table>
 
