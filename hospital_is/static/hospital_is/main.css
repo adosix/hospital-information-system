@@ -695,3 +695,141 @@ table.dataTable td {
         margin-top: 0.5em;
     }
 }
+
+body {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.masthead h1 {
+    color: rgb(203, 213, 219);
+    border-radius: 25px;
+    background-color: rgb(95, 120, 138, 0.8);
+    height: 150px;
+}
+
+header.masthead {
+    position: relative;
+    background: url("../../media/main.jpg") no-repeat center center;
+    background-size: cover;
+    background-position: bottom;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+header.masthead h1 {
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+    }
+    header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+
+.showcase .showcase-img {
+    min-height: 30rem;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+    max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+    height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+    font-size: 5rem;
+}
+
+.testimonials {
+    background-color: rgb(197, 199, 200, 0.8);
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.testimonials .testimonial-item {
+    max-width: 18rem;
+}
+
+.testimonials .testimonial-item img {
+    max-width: 12rem;
+    box-shadow: 0px 5px 5px 0px #adb5bd;
+}
+
+.call-to-action .overlay {
+    position: absolute;
+    background-color: #4a5055;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+footer.footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+#fullvw {
+    position: absolute;
+    left: 0;
+    top: -20px;
+    width: 100vw!important;
+}
+
+.info_icon {
+    margin-left: auto;
+    margin-right: auto;
+    filter: invert(47%) sepia(20%) saturate(523%) hue-rotate(162deg) brightness(91%) contrast(86%);
+}
+
+.info_icon:hover,
+.info_icon:focus {
+    filter: invert(67%) sepia(17%) saturate(281%) hue-rotate(164deg) brightness(90%) contrast(93%);
+}
