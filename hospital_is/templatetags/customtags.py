@@ -1,5 +1,6 @@
 from django import template
 from users.models import AuthUser
+from hospital_is.models import Medical_problem
 register = template.Library()
 import datetime
 
@@ -25,6 +26,11 @@ def is_admin(user):
     if user.is_staff and user.is_superuser:
         return True
     return False
+@register.filter(name='is_patient')
+def is_patient(user):
+    if not user.is_staff and not user.is_superuser:
+        return True
+    return False
 
 @register.filter(name='is_user')
 def is_user(user):
@@ -37,7 +43,11 @@ def is_active(active):
     if active:
         return True
     return False
-
+@register.filter(name='get_username_request')
+def get_username_request(id,ticket):
+    for u in ticket:
+        if id == u.id:
+            return get_username_ticket(u.Medical_problem_ID, Medical_problem.objects.all())
 @register.filter(name='get_username')
 def get_username(id, user):
     for u in user:
@@ -48,6 +58,11 @@ def get_username_ticket(id, med_p):
     for m in med_p:
         if id == m.id:
             return get_username(m.Patient_ID,AuthUser.objects.all())
+@register.filter(name='get_doctor_ticket')
+def get_doctor_ticket(id, med_p):
+    for m in med_p:
+        if id == m.id:
+            return get_username(m.Doctor_ID,AuthUser.objects.all())
 
 @register.filter(name='get_first_name')
 def get_first_name(id, user):
@@ -64,4 +79,3 @@ def get_last_name(id, user):
 @register.filter(name='return_date')
 def return_date(date):
     return date.strftime('%Y-%m-%d')
-

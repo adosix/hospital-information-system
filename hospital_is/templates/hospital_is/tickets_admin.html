@@ -4,7 +4,6 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
-<a href="{% url 'medical_problem_create' %}">Create new medical problem</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -26,17 +25,19 @@
               <td>{{ m.Operation}}</td>
               <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-              {% if m.Status == True %}
+              {% if m.Status == 1 %}
 
                   <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
-              {% else %}
+              {% elif m.Status == 0 %}
 
                   <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+                  {%else%}
+                  <td>Doctor neexistuje.</td>
               {%endif%}
               </form>
               <td>{{m.Description}}</td>
               <td>{{m.created}}</td>
-              <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
+              <td><a href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
           </tr>
           {% endfor %}
 

@@ -63,7 +63,7 @@ class Ticket(models.Model):
     Medical_problem_ID =  models.IntegerField()
     Doctor_ID = models.IntegerField()
     Operation = models.TextField()
-    Status = models.BooleanField(default=False)
+    Status = models.IntegerField(default=0)
     Description = models.TextField()
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
@@ -77,18 +77,15 @@ class Ticket(models.Model):
     def __unicode__(self):
         return self.id
 class Compensation_request(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    Status = models.TextField()
+    ticket_id = models.IntegerField()
+    Operation_r = models.TextField()
+    Description_r = models.TextField(primary_key=True)
 
 
-    def get_absolute_url(self):
-        return reverse('Medical_problem', kwargs={'pk': self.pk})
 
     class Meta:
-        ordering = ['id']
-
-    def __unicode__(self):
-        return self.id
+        ordering = ['ticket_id']
+        unique_together = (("ticket_id", "Operation_r","Description_r"))
 class Compensated_operations(models.Model):
     Operation = models.TextField(primary_key=True, unique=True)
     Description = models.TextField()
@@ -121,7 +118,9 @@ class Doctor(models.Model):
 
     def __unicode__(self):
         return self.id
-
+    def delete(self,a=0):
+        if a:
+            raise RelatedRecordsExist("SomeModel has child records!")
 class Patient(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
@@ -133,6 +132,9 @@ class Patient(models.Model):
 
     def __unicode__(self):
         return self.id
+    def delete(self,a=0):
+        if a:
+            raise RelatedRecordsExist("SomeModel has child records!")
 class Admin(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
@@ -144,6 +146,9 @@ class Admin(models.Model):
 
     def __unicode__(self):
         return self.id
+    def delete(self,a=0):
+        if a:
+            raise RelatedRecordsExist("SomeModel has child records!")
 class Insurance_worker(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
 
@@ -155,3 +160,6 @@ class Insurance_worker(models.Model):
 
     def __unicode__(self):
         return self.id
+    def delete(self,a=0):
+        if a:
+            raise RelatedRecordsExist("SomeModel has child records!")

@@ -16,22 +16,32 @@
               <fieldset class="form-group">
 
                   <legend class="border-bottom mb-4">Medical problem info</legend>
-                  {{ formset.management_form }}
-                  {% for form in formset %}
-                  {% if forloop.first %}
-                  <legend class="border-bottom mb-4">Patient's username</legend>
-                  {% else %}
-                  <legend class="border-bottom mb-4">Doctor's username</legend>
-                  {% endif %}
-                    {{form}}
-                  {%endfor%}
+                  <legend class="border-bottom mb-4">Username pacienta</legend>
+                  {{tmp.as_p}}
+                    <legend class="border-bottom mb-4">Username doktora</legend>
+                  {{tmp2.as_p}}
                   {{ m_form|crispy }}
                   {{Status.as_p}}
               </fieldset>
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Update</button>
                   <input type="submit" name="del" onclick="return confirm('Are you sure you want to delete this medical problem?')" value="Delete">
+                <h3>Medical records</h3>
+            {%for t in Ticket%}
+            {%if t.Medical_problem_ID == m.id %}
+            {%for r in Record%}
+            {%if r.Ticket_ID == t.id%}
+            <h4>Author</h4>
+            <p>{{t.Doctor_ID|get_username:AuthUser}}</p>
+            <h4>Title</h4>
+            <p>{{r.Title}}</p>
+            <h4>Description</h4>
+            <p>{{r.Description}}</p>
 
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+            {%endfor%}
               </div>
           </form>
           {% endif %}
@@ -44,15 +54,10 @@
                     <fieldset class="form-group">
 
                         <legend class="border-bottom mb-4">Medical problem info</legend>
-                        {{ formset.management_form }}
-                        {% for form in formset %}
-                        {% if forloop.first %}
-                        <legend class="border-bottom mb-4">Patient's username</legend>
-                        {% else %}
-                        <legend class="border-bottom mb-4">Doctor's username</legend>
-                        {% endif %}
-                          {{form}}
-                        {%endfor%}
+                        <legend class="border-bottom mb-4">Username pacienta</legend>
+                        {{tmp.as_p}}
+                          <legend class="border-bottom mb-4">Username doktora</legend>
+                        {{tmp2.as_p}}
                         {{ m_form|crispy }}
                         {{Status.as_p}}
                     </fieldset>
@@ -62,6 +67,49 @@
                     </div>
                 </form>
           {% endif %}
+          {% if  user|is_patient %}
+
+          {% for m in Medical_problem %}
+          {% if  m.Patient_ID == user.id and m.id == pk %}
+              {% csrf_token %}
+              <fieldset class="form-group">
+
+                  <legend class="border-bottom mb-4">Medical problem info</legend>
+                  <legend class="border-bottom mb-4">Username pacienta</legend>
+                  {{user.username}}
+                    <legend class="border-bottom mb-4">Username doktora</legend>
+                  <p>{{m.Doctor_ID|get_username:AuthUser}}<br>
+                  {{m.Title}}<br>
+                  {{m.Description}}<br>
+                  {{m.Image}}<br>
+                  {%if m.Status == 0%}
+                    active
+                  {%elif m.Status == 1%}
+                    waiting
+                  {%else %}
+                  finished
+                  {%endif%}<br></p>
+              <div class="form-group">
+                <h3>Medical records</h3>
+            {%for t in Ticket%}
+            {%if t.Medical_problem_ID == m.id %}
+            {%for r in Record%}
+            {%if r.Ticket_ID == t.id%}
+            <h4>Author</h4>
+            <p>{{t.Doctor_ID|get_username:AuthUser}}</p>
+            <h4>Title</h4>
+            <p>{{r.Title}}</p>
+            <h4>Description</h4>
+            <p>{{r.Description}}</p>
+
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+            {%endfor%}
+              </div>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
 
 	<!-- /Error messaging -->
 

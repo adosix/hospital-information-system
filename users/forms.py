@@ -37,7 +37,39 @@ class AdminUserUpdateForm(forms.ModelForm):
         model = AuthUser
         fields = ['username', 'email','first_name', 'last_name', 'is_active', 'password']
 
+class ChooseDoctor(forms.Form):
 
+     def __init__(self,pk,initial,*args,**kwargs):
+        super(ChooseDoctor, self).__init__(*args, **kwargs)
+        choices = []
+        for u  in AuthUser.objects.all():
+            if u.is_staff and not u.is_superuser and not u.id==pk :
+                choices.append([u.username,u.username])
+        self.fields['Doctor']=forms.ChoiceField(choices=choices, widget=forms.Select)
+        self.fields['Doctor'].initial = initial
+     Doctor = forms.ChoiceField()
+class ChoosePacient(forms.Form):
+
+     def __init__(self,pk,initial,*args,**kwargs):
+        super(ChoosePacient, self).__init__(*args, **kwargs)
+        choices = []
+        for u  in AuthUser.objects.all():
+            if not u.is_staff and not u.is_superuser and not u.id==pk :
+                choices.append([u.username,u.username])
+        self.fields['Pacient']=forms.ChoiceField(choices=choices, widget=forms.Select)
+        self.fields['Pacient'].initial = initial
+     Pacient = forms.ChoiceField()
+class ChooseInsurance_worker(forms.Form):
+
+     def __init__(self,pk,initial,*args,**kwargs):
+        super(ChooseInsurance_worker, self).__init__(*args, **kwargs)
+        choices = []
+        for u  in AuthUser.objects.all():
+            if not u.is_staff and u.is_superuser and not u.id==pk :
+                choices.append([u.username,u.username])
+        self.fields['Insurance']=forms.ChoiceField(choices=choices, widget=forms.Select)
+        self.fields['Insurance'].initial = initial
+     Insurance = forms.ChoiceField()
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile

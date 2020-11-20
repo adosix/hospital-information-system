@@ -24,7 +24,11 @@
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Update</button>
+              {%if usr|is_doctor%}
+              <input type="submit" name="del1" onclick="return confirm('Are you sure you want to delete this doc?')" value="Delete">
+              {%else%}
               <input type="submit" name="del" onclick="return confirm('Are you sure you want to delete this user?')" value="Delete">
+              {%endif%}
           </div>
       </form>
     </div>

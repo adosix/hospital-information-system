@@ -2,24 +2,21 @@
 {% load crispy_forms_tags %}
 {% load customtags %}
 {% block content %}
-{% if  user|is_doctor or user|is_admin%}
+{% if  user|is_doctor or user|is_admin %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
 
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Create new medical problem</legend>
-                <legend class="border-bottom mb-4">Username pacienta</legend>
-                {{tmp.as_p}}
-                  <legend class="border-bottom mb-4">Username doktora</legend>
-                {{tmp2.as_p}}
-                {{ m_form|crispy }}
-
+                <legend class="border-bottom mb-4">Create new ticket</legend>
+                
+                {{ user_f|crispy }}
+                {{ t_form|crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Post</button>
             </div>
         </form>
     </div>
-{%endif%}
+{% endif %}
 {% endblock content %}

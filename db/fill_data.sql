@@ -19,6 +19,8 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "robocopy","Tibor","Krik","lolko@gmail.sk","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "prezyvka","Samuel","Slovak","gumenak@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
+        VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "doc do not exist","doc","doc","doc@gmail.sk","1","1","2020-10-18 21:40:34.113892");
 
 
 INSERT INTO auth_user(password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
@@ -57,6 +59,8 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
 --
 INSERT INTO users_profile( user_id,birth_date)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "nemamkreativitu"),'2000-09-01');
+INSERT INTO users_profile( user_id,birth_date)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "doc do not exist"),'2000-09-01');
 INSERT INTO users_profile( user_id,birth_date)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "haterko"),'1990-09-01');
 INSERT INTO users_profile( user_id,birth_date)
@@ -139,6 +143,10 @@ INSERT INTO hospital_is_doctor
 SELECT id
 FROM  auth_user
 WHERE username = "prezyvka";
+INSERT INTO hospital_is_doctor
+SELECT id
+FROM  auth_user
+WHERE username = "doc do not exist";
 -- ADMIN 2
 
 INSERT INTO hospital_is_admin

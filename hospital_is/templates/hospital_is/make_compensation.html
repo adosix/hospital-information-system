@@ -1,0 +1,40 @@
+{% extends "hospital_is/base.html" %}
+{% load crispy_forms_tags %}
+{% load customtags %}
+{% block content %}
+{% if  user|is_doctor or user|is_admin%}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Create new request</legend>
+                <legend class="border-bottom mb-4">Choose from existing</legend>
+
+                {{ c_form.as_p }}
+                <h3>Description</h3>
+                <p id='p1'></p>
+                <div id='p2'>
+                <legend class="border-bottom mb-4" >Or fill a new one</legend>
+
+                  {{ m_form|crispy }}
+                  </div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+{%endif%}
+<script>
+$('select').change(function() {
+    document.getElementById("p1").innerHTML = this.value;
+    document.getElementById("p2").hidden=true;
+
+    if(this.value == ''){
+      document.getElementById("p2").hidden=false;
+
+    }
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends "hospital_is/base.html" %}
+{% load crispy_forms_tags %}
+{% load customtags %}
+{% block content %}
+{% if  user|is_doctor or user|is_admin%}
+    <div class="content-section">
+        <form method="POST">
+          {% csrf_token %}
+
+          {%if user|is_doctor%}
+          {%for t in Ticket%}
+          {%if t.id == pk %}
+          {%if t.Doctor_ID == user.id%}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
+
+              {{ record_f|crispy }}
+
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+          </div>
+          {%else%}
+          {%for m in Medical_problem%}
+          {%if m.id == t.Medical_problem_ID and m.Doctor_ID == user.id%}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
+
+              {{ record_f|crispy }}
+
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Post</button>
+          </div>
+          {%endif%}
+          {%endfor%}
+          {%endif%}
+          {%endif%}
+          {%endfor%}
+          {%endif%}
+          {% if user|is_admin%}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
+
+              {{ record_f|crispy }}
+
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Post</button>
+          </div>
+          {%endif%}
+
+        </form>
+    </div>
+{%endif%}
+{% endblock content %}
