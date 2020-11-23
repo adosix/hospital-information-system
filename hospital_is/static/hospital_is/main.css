@@ -722,7 +722,8 @@ header.masthead {
     background: url("../../media/main.jpg") no-repeat center center;
     background-size: cover;
     background-position: bottom;
-    padding-bottom: 8rem;
+    margin-top: 3rem;
+    padding-bottom: 10rem;
 }
 
 header.mastheadcontact {
@@ -730,7 +731,7 @@ header.mastheadcontact {
     background: url("../../media/doctor_banner.png") no-repeat center center;
     background-size: cover;
     margin-top: 3rem;
-    padding-top: 15rem;
+    padding-top: 10rem;
 }
 
 header.masthead .overlay {
