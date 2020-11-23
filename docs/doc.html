@@ -21,14 +21,14 @@
 	<dt>Autoři</dt>
 	<dd>První jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xjezik03@stud.fit.vutbr.cz">xjezik03@stud.fit.vutbr.cz</a> -
-		popis činnosti v týmu
+		Príprava rchitektúry projektu, implementácia užívateľského rozhrania, návrh a implementácia databázy, authentikácia používateľov, návrh a implementácia mechanizmov získavania dát z databázy	
 	</dd>
 	<dd>Druhé jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xdubec01@stud.fit.vutbr.cz">xdubec01@stud.fit.vutbr.cz</a> - 
-		popis činnosti v týmu
+		Implementácia databázy, návrh a implementácia mechanizmov získavania dát z databázy, implementácia užívateľského rozhrania, Tvorba modelov, implemetnácia template tags,  
 	</dd>
 	<dt>URL aplikace</dt>
-	<dd><a href="http://www.stud.fit.vutbr.cz/~xautor01/IIS">http://www.stud.fit.vutbr.cz/~xautor01/IIS</a></dd>
+	<dd><a href="http://213.181.147.71:89/">http://213.181.147.71:89/</a></dd>
 </dl>
 
 <h2>Uživatelia systému pre testovanie</h2>
@@ -36,8 +36,9 @@
 <table>
 <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
 <tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
-<tr><td>prodavac</td><td>prodavac</td><td>Prodavač</td></tr>
-<tr><td>franta</td><td>franta</td><td>Zákazník</td></tr>
+<tr><td>jurvica00</td><td>dokto123</td><td>Doktor</td></tr>
+<tr><td>dobrym00</td><td>patie123</td><td>Pacient</td></tr>
+<tr><td>slivkaj00</td><td>insur123</td><td>Pracovník poisťovne</td></tr>
 </table>
 
 <p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p> 
@@ -54,12 +55,30 @@ Zde vložte grafické schéma relační databáze (tabulek v databázi).
 Stručně popište: 
 <ul>
 <li>postup instalace na server,</li>
-<li>softwarové požadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
-</ul>
+	<p>
+	Vytvoríme virtuálne prostredie python3. Aktivujeme virtuálne prostredie.
+	Nainštalujeme mysqlclienta a prihlásime sa do mysql ako root. Vytvoríme databázu "hospital_data".
+	Vytvoríme používateľa "djangouser" s heslom "password". Dáme mu všetky práva na databázu "hospital_data".
+	Nainštalujeme django a do neho inštalujeme django-multiforloop a django-multiforloop.
 
-<h2>Známé problémy</h2>
-<p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme muset dlouze hledat.</p>
+	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie 
+	a spustí sa server na porte 8080
+	</p>
+
+<li>softwarové požadavky (verze PHP apod.),</li>
+	<p>
+	php 7.4.3
+	python 3.8.5
+	pip3
+	django
+	mysqlclient
+	</p>
+
+<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+	<p>
+	Inicializujeme databázu tak, že z priečinku db zavoláme skript db_setup.sh.
+	</p>
+</ul>
 
 </body>
 </html>

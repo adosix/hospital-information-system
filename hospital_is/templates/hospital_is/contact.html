@@ -1,0 +1,90 @@
+{% extends "hospital_is/base_wide.html" %}
+{% block content %}
+
+<section class="py-5 bg-cover bg-gray">
+      <div class="container py-5" style="padding-top: 1rem!important">
+        <h1><strong>Contact</strong></h1>
+        <p class="lead my-4" >Please contact us with following means.</p>
+      </div>
+    </section>
+
+    <section class="py-5" style="padding-top: 1rem!important">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12 col-md-6 mb-4">
+                <div class="icon mb-4"><i class="pe-7s-map-2"></i></div>
+                <h5 class="lined mb-4">Address</h5>
+                <a href="https://www.google.com/maps/dir//Pis%C3%A1reck%C3%A1+269%2F6,+Pis%C3%A1rky,+603+00+Brno/@49.1924534,16.562615,18z/data=!4m17!1m7!3m6!1s0x4712942cabb1766b:0x41ccc6819e055040!2zUGlzw6FyZWNrw6EgMjY5LzYsIFBpc8Ohcmt5LCA2MDMgMDAgQnJubw!3b1!8m2!3d49.1926173!4d16.5633805!4m8!1m0!1m5!1m1!1s0x4712942cabb1766b:0x41ccc6819e055040!2m2!1d16.5633805!2d49.1926173!3e3">
+                <p class="text-muted mb-0 text-small">Pisárecká 269/6</p>
+                <p class="text-muted mb-0 text-small">Brno, 601 00</p>
+                <p class="text-muted mb-0 text-small">Czechrepublic</p>
+</a>
+              </div>
+              <div class="col-lg-12 col-md-6 mb-4">
+                <div class="icon mb-4"><i class="pe-7s-phone"></i></div>
+                <h5 class="lined mb-4">Phone number</h5>
+                <p class="text-muted mb-3 text-small">Call us for further information about registration</p>
+                <ul>
+                  <li><a href="tel:+420547215502" class="font-weight-bold text-small">+420 547 532 122</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-12 col-md-6 mb-4">
+                <div class="icon mb-4"><i class="pe-7s-mail-open"></i></div>
+                <h5 class="lined mb-4">email</h5>
+                <p class="text-muted mb-3 text-small">Our email address.</p>
+                <ul>
+                  <li><a href="#" class="font-weight-bold text-small">info@hotelrandomo.cz</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 ml-auto">
+            <div class="col-lg-12 col-md-6 mb-4">
+              <div class="icon mb-4"><i class="pe-7s-pen"></i></div>
+              <h5 class="lined mb-4">Contact form</h5>
+              <p class="text-muted text-small">Please use contact form to send us email with your questions.</p>
+              <form id="contact-form" method="post" action="kontakt.php" class="contact-form form">
+                <div class="row">
+                  <div class="form-group col-lg-6">
+                    <label for="name" class="font-weight-normal">Name</label>
+                    <input id="name" type="text" name="name" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="surname" class="font-weight-normal">Surname</label>
+                    <input id="surname" type="text" name="surname" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="email" class="font-weight-normal">Email</label>
+                    <input id="email" type="email" name="email" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label for="subject" class="font-weight-normal">Subject</label>
+                    <input id="subject" type="text" name="subject" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-12">
+                    <label for="message" class="font-weight-normal">message</label>
+                    <textarea id="message" rows="4" name="message" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group col-lg-12">
+                    <button  type="submit" name="submit" value="Submit" class="btn btn-outline-primary"> <i class="far fa-envelope mr-2"> </i>Odoslať</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe width="100%" height="500" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2607.4186455959707!2d16.561191815686247!3d49.1926172793216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471295932562eb5b%3A0xc0c0290e6d5e1615!2sSkydent!5e0!3m2!1sen!2scz!4v1603024120782!5m2!1sen!2scz" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+        </iframe>
+        </div>
+          <style>
+          .mapouter{position:relative;text-align:right;height:500px;width:100%;}
+          .gmap_canvas {overflow:hidden;background:none!important;height:500px;
+          }</style>
+      </div>
+{% endblock content %}

@@ -39,12 +39,12 @@ def default(request):
     }
     return render(request, 'hospital_is/home.html', context)
 
-def about(request):
+def contact(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
         'doctor': Doctor.objects.all()
     }
-    return render(request, 'hospital_is/about.html', context)
+    return render(request, 'hospital_is/contact.html', context)
 
 def users(request):
     context = {
