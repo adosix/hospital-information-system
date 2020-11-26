@@ -1,17 +1,17 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
- <a href="{% url 'medical_problem_create' %}">Create new medical problem</a>
-<table id="search_table" class="table table-bordered " style="width:100%">
+<div style="width: 95%; margin:auto;margin-top:100px;">
+ <a class="btn btn-outline-info"  href="{% url 'medical_problem_create' %}" >Create new medical problem</a>
+<table id="search_table"style="width:100%">
 
         <thead class="sorting">
                 <th >patient</th>
                 <th>doctor</th>
                 <th>title</th>
-                <th>create_date</th>
                 <th>status</th>
                 <th>update_date</th>
                 <th>edit</th>
@@ -24,17 +24,18 @@
                 <td>{{ m.Patient_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Title }}</td>
-                <td>{{ m.created|return_date }}</td>
+                <td id="status">
                 {% if m.Status == 0  %}
-                  <td>active</td>
+                  active
                 {% elif m.Status == 1 %}
-                  <td>waiting</td>
+                  waiting
                 {% else %}
-                  <td>finished</td>
+                  finished
                 {% endif %}
+                </td>
                     <td>{{m.updated}}</td>
-                <td><a href="{% url 'medical_problem_edit' m.id %}">edit</a></td>
-                <td><a href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_problem_edit' m.id %}">edit</a></td>
+                <td><a style="width:100%;"class="btn btn-outline-info" href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
             </tr>
           {% endfor %}
 
@@ -43,7 +44,6 @@
         <th class="order">patient</th>
         <th class="order">doctor</th>
         <th class="order">title</th>
-        <th class="order">create_date</th>
         <th class="order" >status</th>
         <th class="order">update_date</th>
         <th class="order">edit</th>
@@ -74,6 +74,8 @@
 
 {% endif %}
 {% endif %}
+
+</div>
 
 <script>
 

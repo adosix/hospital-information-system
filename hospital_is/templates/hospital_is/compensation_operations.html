@@ -1,10 +1,12 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
 {% if user.is_authenticated  %}
 {% if user|is_admin or user|is_insurance_w %}
-<a href="{% url 'compensation_operations_create' %}">Create new compensation_operations</a>
+
+<div style="width: 95%; margin:auto;margin-top:100px;">
+<a class="btn btn-outline-info" style="margin-bottom: 15px;" href="{% url 'compensation_operations_create' %}">Create new compensation_operations</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -18,7 +20,7 @@
             <tr>
                 <td>{{m.Operation}}</td>
                 <td>{{m.Description}}</td>
-                <td><a href="{% url 'compensation_operations_edit' m.Operation %}">view more</a></td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'compensation_operations_edit' m.Operation %}">view more</a></td>
             </tr>
           {% endfor %}
 
@@ -55,10 +57,9 @@
 {% endif %}
 {% endif %}
 
+
+</div>
 <script>
-
-
-
 
 $(document).ready(function() {
   // Setup - add a text input to each footer cell

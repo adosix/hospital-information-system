@@ -1,9 +1,12 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
+
+
+<div style="width: 95%; margin:auto;margin-top:100px;">
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -27,17 +30,17 @@
                 {% csrf_token %}
               {% if m.Status == 1 %}
 
-                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
+                  <td><input style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
               {% elif m.Status == 0 %}
 
-                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+                  <td><input style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
                   {%else%}
                   <td>Doctor neexistuje.</td>
               {%endif%}
               </form>
               <td>{{m.Description}}</td>
               <td>{{m.created}}</td>
-              <td><a href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
+              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
           </tr>
           {% endfor %}
 
@@ -63,26 +66,24 @@
 
       {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+          <a style="width:100%;" class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a>
         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+          <a style="width:100%;" class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a>
         {% endif %}
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        <a style="width:100%;" class="btn btn-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a style="width:100%;" class="btn btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
       {% endif %}
        {% endif %}
 
 {% endif %}
 {% endif %}
 
+
+</div>
 <script>
-
-
-
-
 $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table tfoot th').each( function () {
