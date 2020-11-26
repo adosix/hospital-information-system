@@ -4,9 +4,9 @@
 
 {% if user.is_authenticated  %}
 
-<div style=" margin:auto; margin-top:100px;">
+<div style=" margin:auto; margin-top:120px;">
 {% if  user|is_admin %}
-<td><a style="margin-left:2.5%" class="btn btn-outline-info" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
+<td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">
               <th >Patient</th>
@@ -32,7 +32,7 @@
 
                     <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed" label = "del" ></td>
                 {% elif m.Status == 0 %}
-
+                  
                     <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
                 {% else %}
                 <td>Doctor neexistuje, vytvorit novy tiket</td>
@@ -62,7 +62,7 @@
 {% elif  user|is_doctor %}
   {% for j in Medical_problem %}
   {% if  j.Doctor_ID == user.id and j.id == pk%}
-  <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
+  <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
   <table id="search_table" class="table table-bordered " style="width:100%">
           <thead class="sorting">
                   <th >Patient</th>

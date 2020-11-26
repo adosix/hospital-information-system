@@ -4,6 +4,8 @@
 {% block content %}
 {% if user.is_authenticated  %}
 {% if user|is_admin or user|is_doctor %}
+
+<div style=" margin:auto; margin-top:130px;">
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -20,7 +22,7 @@
             </div>
         </form>
     </div>
-    
+    </div>
   {% endif %}
   {% endif %}
 {% endblock content %}

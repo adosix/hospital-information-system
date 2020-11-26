@@ -1,9 +1,12 @@
 {% extends "hospital_is/base.html" %}
 {% block content %}
+
+<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
     <h2>You have been logged out</h2>
     <div class="border-top pt-3">
         <small class="text-muted">
-            <a href="{% url 'login' %}">Log In Again</a>
+            <a class="btn btn-outline-info" style="margin-bottom:15px;"  href="{% url 'login' %}">Log In Again</a>
         </small>
     </div>
+</div>
 {% endblock content %}

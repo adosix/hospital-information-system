@@ -3,6 +3,8 @@
 {% load customtags %}
 {% block content %}
 {% if  user|is_doctor or user|is_admin %}
+
+<div style=" margin:auto; margin-top:120px;">
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -17,6 +19,7 @@
                 <button class="btn btn-outline-info" type="submit">Post</button>
             </div>
         </form>
+    </div>
     </div>
 {% endif %}
 {% endblock content %}

@@ -1,7 +1,7 @@
 {% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
-<div style="width: 95%; margin:auto;margin-top:150px;">
+<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}

@@ -82,8 +82,6 @@ def make_compensation(request, pk):
                 return HttpResponseRedirect("/tickets_admin/" )
             else :
                 return HttpResponseRedirect("/tickets_doc/"+str(request.user.id) )
-
-
     context = {
     'c_form':c_form,
     'm_form':m_form,
@@ -92,12 +90,14 @@ def make_compensation(request, pk):
         'Profiles': Profile.objects.all()
     }
     return render(request, 'hospital_is/make_compensation.html', context)
+
 def medical_problems_admin(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
         'AuthUser': AuthUser.objects.all()
     }
     return render(request, 'hospital_is/medical_problems_admin.html', context)
+
 def medical_problems_pac(request,pk):
     context = {
         'pk':pk,
@@ -105,6 +105,7 @@ def medical_problems_pac(request,pk):
         'Medical_problem' : Medical_problem.objects.all(),
     }
     return render(request, 'hospital_is/medical_problems_pac.html',context)
+
 def tickets_doc(request,pk):
     if request.method == 'POST':
         for name,value in request.POST.items():
@@ -191,7 +192,7 @@ def medical_problem_tickets(request, pk):
             key = 0
             for name,value in request.POST.items():
                 try:
-                    if int(value) >=0 :
+                    if int(value) >= 0 :
                         key = name
                 except Exception as e:
                     key = name
@@ -415,6 +416,7 @@ def medical_problem_create(request):
         'm_form' :m_form,
     }
     return render(request, 'hospital_is/medical_problem_create.html', context)
+    
 def medical_ticket_create(request,pk):
 
     t_form = TicketForm()
@@ -452,6 +454,7 @@ def medical_ticket_create(request,pk):
         'Doctor': Doctor.objects.all(),
     }
     return render(request, 'hospital_is/medical_ticket_create.html', context)
+
 def medical_problems_doc(request,pk):
     context = {
         'pk':pk,
@@ -459,11 +462,13 @@ def medical_problems_doc(request,pk):
         'Medical_problem' : Medical_problem.objects.all(),
     }
     return render(request, 'hospital_is/medical_problems_doc.html',context)
+
 def compensation_operations(request):
     context = {
         'Compensated_operations':  Compensated_operations.objects.all(),
     }
     return render(request, 'hospital_is/compensation_operations.html', context)
+
 def compensation_operations_create(request):
     if request.method == 'POST':
         c_form = CompensationOperationsCreate(request.POST)
@@ -490,6 +495,7 @@ def compensation_operations_create(request):
         'p_form': p_form,
     }
     return render(request, 'hospital_is/compensation_operations_create.html', context)
+
 def compensation_operations_edit(request,pk):
     compensated_operation = get_object_or_404(Compensated_operations, Operation=pk)
     if request.method == 'POST':

@@ -12,18 +12,15 @@
 </head>
 <body>
 
-<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
-     podle použitého editoru -->
-
-<h1>Název zadání (editujte)</h1> <!-- Nahradte názvem svého zadání -->
+<h1>Nemocnice: elektronická zdravotní knížka</h1> 
 
 <dl>
 	<dt>Autoři</dt>
-	<dd>První jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	<dd>Andrej Ježík 
 	    <a href="mailto:xjezik03@stud.fit.vutbr.cz">xjezik03@stud.fit.vutbr.cz</a> -
 		Príprava rchitektúry projektu, implementácia užívateľského rozhrania, návrh a implementácia databázy, authentikácia používateľov, návrh a implementácia mechanizmov získavania dát z databázy	
 	</dd>
-	<dd>Druhé jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	<dd>Branislav Dubec
 	    <a href="mailto:xdubec01@stud.fit.vutbr.cz">xdubec01@stud.fit.vutbr.cz</a> - 
 		Implementácia databázy, návrh a implementácia mechanizmov získavania dát z databázy, implementácia užívateľského rozhrania, Tvorba modelov, implemetnácia template tags,  
 	</dd>
@@ -41,10 +38,35 @@
 <tr><td>slivkaj00</td><td>insur123</td><td>Pracovník poisťovne</td></tr>
 </table>
 
-<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p> 
 
 <h2>Implementace</h2>
-<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+<h3>Backend</h3>
+<p>
+	Rozhodli sme sa pre implementáciu pomocou programovacieho jazdyka Python3, ku ktorému sme <br>
+	vybrali framerok Django ktorý nám poskytol základnú kostru pre náš informačný systém.<br> 
+	Informačný systém sme rozdelili na dve časti a to users kde sú implementované časti systému, <br>
+	ktoré sa zaobrajú registráciou, prihlasovaním a spravovaním užívateľkých účtov, <br>
+	v časti hospital_is je implementovaná zvyšná funkcionalita systému <br>
+	<br>
+	Odpovede serveru na požiadavky sme riešili v súboroch views.py kde je každá požiadavka na server spracovaná <br>
+	odpovedajúcou metódou a následne je odpoveď zaslaná odpoveď klientovi.
+</p>
+<h4>Užívatelia</h4>
+<p>
+	heslá su zahashované v databáze kôli bezpečnosti a teda administrátor môže heslo iba zmeniť ale nemôže ho vidieť.
+</p>
+<h4> Databáza a Modely </h4>
+<p>
+	Pre databázu sme si vybrali jazyk mySQL. inicializačný skrip, ktorý je nutné spustit s priečinku db/ vytvorí schému tabuliek nutných pre chod informačného systému.
+<br>
+	K dátam z databázy mapujeme pomocou modelov do objektov pomocou, ktorých zobrazujeme užívateľom pre nich dôležité dáta.
+</p>
+
+<h3>Frontend</h3>
+<p>
+	Je implementovaný v jazyku html,css a javascript s použitím html tagov poskytovaných Djangom, <br>
+	taktiež CSS framoworku Bootstrap ale taktiež javascript frameworkom jquery.
+</p>
 
 <h3>Databáze</h3>
 
@@ -56,13 +78,13 @@ Stručně popište:
 <ul>
 <li>postup instalace na server,</li>
 	<p>
-	Vytvoríme virtuálne prostredie python3. Aktivujeme virtuálne prostredie.
-	Nainštalujeme mysqlclienta a prihlásime sa do mysql ako root. Vytvoríme databázu "hospital_data".
-	Vytvoríme používateľa "djangouser" s heslom "password". Dáme mu všetky práva na databázu "hospital_data".
-	Nainštalujeme django a do neho inštalujeme django-multiforloop a django-multiforloop.
+	Vytvoríme virtuálne prostredie python3. Aktivujeme virtuálne prostredie.<br>
+	Nainštalujeme mysqlclienta a prihlásime sa do mysql ako root. Vytvoríme databázu "hospital_data".<br>
+	Vytvoríme používateľa "djangouser" s heslom "password". Dáme mu všetky práva na databázu "hospital_data".<br>
+	Nainštalujeme django a do neho inštalujeme django-multiforloop a django-multiforloop.<br>
 
-	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie 
-	a spustí sa server na porte 8080
+	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie <br>
+	a spustí sa server na porte 8080<br>
 	</p>
 
 <li>softwarové požadavky (verze PHP apod.),</li>

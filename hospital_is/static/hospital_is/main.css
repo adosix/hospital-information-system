@@ -674,7 +674,7 @@ table.dataTable td {
     height: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {
         float: none;
@@ -685,7 +685,7 @@ table.dataTable td {
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1200px) {
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
         float: none;
@@ -748,7 +748,7 @@ header.masthead h1 {
     font-size: 2rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     header.masthead {
         padding-top: 12rem;
         padding-bottom: 12rem;
@@ -767,7 +767,7 @@ header.masthead h1 {
     background-size: cover;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     .showcase .showcase-text {
         padding: 7rem;
     }
@@ -1083,4 +1083,24 @@ ul.social-footer2 li a {
 
 header {
     margin-top: -50px;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 300px;
+    width: 100%;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 300px;
+}
+
+.add_new_btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
 }

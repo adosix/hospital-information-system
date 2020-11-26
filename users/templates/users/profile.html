@@ -3,6 +3,7 @@
 {% load customtags %}
 {% block content %}
 
+<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
     <div class="content-section">
       {% if user.id == pk %}
       <div class="media">
@@ -25,5 +26,5 @@
       </form>
       {% endif %}
     </div>
-
+</div>
 {% endblock content %}

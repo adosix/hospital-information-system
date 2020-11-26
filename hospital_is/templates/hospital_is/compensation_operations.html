@@ -5,8 +5,8 @@
 {% if user.is_authenticated  %}
 {% if user|is_admin or user|is_insurance_w %}
 
-<div style="width: 95%; margin:auto;margin-top:150px;">
-<a class="btn btn-outline-info" style="margin-bottom: 15px;" href="{% url 'compensation_operations_create' %}">Create compensated operation</a>
+<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
+<a class="btn btn-outline-info add_new_btn" href="{% url 'compensation_operations_create' %}">Create compensated operation</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">

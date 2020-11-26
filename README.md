@@ -1,34 +1,15 @@
 #DOTOS
 
-# Hospital information system
+vytvorit konstruktor pre auth user aby sme nemuseli pustat django potom db script a o5 django
 
-Instalation:
-###We will install all prerequisites by following commands
-sudo apt install python3-pip
+opravit backed register a pridavanie ticketov a pod
 
-pip3 install virtualenv
+pridat hint pri vkladaní dátumov
 
-###Create virtual environment
+pridat ukladanie profilových obrázkov a obrázkov pri vysetreniach (rontgeny a pod)
 
-###installprerequisites to environment
+automatické generovanie usernames 
 
-sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
-pip3 install mysqlclient
+Upraviť a pridať do databázy zmysluplné údaje, (nezabudnúť užívateľov z dokumentácie) 
 
-###after that we will login as root
-sudo mysql -u root
-
-###create database
-CREATE DATABASE hospital_data;
-
-###create django user and give him priviledges
-CREATE USER 'djangouser'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
-GRANT ALL ON hospital_data.* TO 'djangouser'@'%';
-FLUSH PRIVILEGES;
-
-###libraries for our django application
-pip3 install django-multiforloop
-pip3 install django-crispy-forms
-
-###run django localy
-./start
+ked som doktor a kliknem tickets tak najprv sa mi objavy ticket ako pridanie nov=eho a az ked druhy krat tak tabulka s ticketmi

@@ -1,10 +1,11 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
 {% if user.is_authenticated  %}
 {% if user|is_doctor %}
 
+<div style=" margin:auto; margin-top:150px;">
 <table id="search_table" class="table table-bordered " style="width:100%">
 
 
@@ -79,6 +80,7 @@
       {% endif %}
        {% endif %}
 
+</div>
 {% endif %}
 {% endif %}
 
