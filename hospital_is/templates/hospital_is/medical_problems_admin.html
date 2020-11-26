@@ -4,9 +4,9 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
-<div style="width: 95%; margin:auto;margin-top:100px;">
- <a class="btn btn-outline-info"  href="{% url 'medical_problem_create' %}" >Create new medical problem</a>
-<table id="search_table"style="width:100%">
+<div style="width: 95%; margin:auto;margin-top:150px;">
+ <a class="btn btn-outline-info" style="margin-bottom:15px;" href="{% url 'medical_problem_create' %}" >Create new medical problem</a>
+<table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
                 <th >patient</th>

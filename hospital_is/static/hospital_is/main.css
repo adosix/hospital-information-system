@@ -825,9 +825,8 @@ footer.footer {
 }
 
 #fullvw {
-    position: absolute;
-    left: 0;
-    top: -20px;
+    margin-top: 100px;
+    left: 0px;
     width: 100vw!important;
 }
 
@@ -1080,4 +1079,8 @@ ul.social-footer2 li a {
 
 .footer_btn {
     background-color: white;
+}
+
+header {
+    margin-top: -50px;
 }

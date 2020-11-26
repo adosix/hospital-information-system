@@ -1,15 +1,14 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
  {% load multifor %}
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
-<input type="text" id="search" class="textarea form-control" placeholder="search in table" >
-<table class="table table-bordered " style="width:100%">
+<div style="width: 95%; margin:auto;margin-top:150px;">
+<table id="search_table" class="table table-bordered " style="width:100%">
 
-        <thead>
-          <tr>
+        <thead  class="sorting">
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
@@ -18,15 +17,9 @@
                 <th>role</th>
                 <th>birth date</th>
                 <th>edit</th>
-          </tr>
         </thead>
           <tbody id="tablebody" >
-              <tr style="display: none;">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <tr>
+
           {% for u in AuthUser ; p in Profiles %}
                 <td>{{ u.username }}</td>
                 <td>{{ u.first_name }}</td>
@@ -37,18 +30,19 @@
                 {% else %}
                     <td>yes</td>
                 {% endif %}
+                <td>
                 {% if u|is_insurance_w%}
-                    <td>insurance_w</td>
+                    insurance_w
                 {% elif u|is_doctor%}
-                    <td>doctor</td>
+                    doctor
                 {% elif u|is_admin%}
-                    <td>admin</td>
+                    admin
                 {% else %}
-                    <td>patient</td>
+                    patient
                 {% endif %}
+                </td>
                 <td>{{ p.birth_date }}</td>
-                <td><a href="{% url 'edit_profile' u.username %}">edit</a>
-</td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
               </tr>
           {% endfor %}
 
@@ -118,6 +112,8 @@
 
     </table>
 {% endif %}
+
+    </div>
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
@@ -138,39 +134,28 @@
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
       {% endif %}
        {% endif %}
-
 {% endif %}
 
 <script>
-var $rows = $('#tablebody tr');
-  $('#search').keyup(function() {
 
-      var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
-          reg = RegExp(val, 'i'),
-          text;
 
-      $rows.show().filter(function() {
-          text = $(this).text().replace(/\s+/g, ' ');
-          return !reg.test(text);
-      }).hide();
-  });
+
+
+$(document).ready(function() {
+  // Setup - add a text input to each footer cell
+  $('#search_table tfoot th').each( function () {
+    var title = $('#search_table thead th').eq( $(this).index() ).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } );
+    // DataTable
+    var table = $('#search_table').DataTable();
+    // Apply the search
+    table.columns().eq( 0 ).each( function ( colIdx )
+    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
+    { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
 
 //sorting
 
 
-const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-// do the work...
-document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-    const table = th.closest('table');
-    Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        .forEach(tr => tablebody.appendChild(tr) );
-})));
 </script>
 
 

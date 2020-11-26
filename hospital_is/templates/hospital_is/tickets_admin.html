@@ -1,13 +1,13 @@
 {% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
+<div style="width: 95%; margin:auto;margin-top:150px;">
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
 
-
-<div style="width: 95%; margin:auto;margin-top:100px;">
 <table id="search_table" class="table table-bordered " style="width:100%">
+
 
         <thead class="sorting">
                 <th >Patient</th>
@@ -40,7 +40,7 @@
               </form>
               <td>{{m.Description}}</td>
               <td>{{m.created}}</td>
-              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
+              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
           </tr>
           {% endfor %}
 

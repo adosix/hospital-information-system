@@ -1,11 +1,12 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
 {% if user.is_authenticated  %}
 
+<div style=" margin:auto; margin-top:100px;">
 {% if  user|is_admin %}
-<td><a href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
+<td><a style="margin-left:2.5%" class="btn btn-outline-info" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">
               <th >Patient</th>
@@ -20,8 +21,8 @@
           <tbody id="tablebody" >
 
           {% for m in Ticket %}
-          {% if m.Medical_problem_ID == pk %}
-            <tr>
+            {% if m.Medical_problem_ID == pk %}
+              <tr>
                 <td>{{ m.Medical_problem_ID|get_username_ticket:Medical_problem  }}</td>
                 <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                 <td>{{ m.Operation}}</td>
@@ -29,22 +30,21 @@
                     {% csrf_token %}
                 {% if m.Status == 1 %}
 
-                    <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed" label = "del" ></td>
+                    <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed" label = "del" ></td>
                 {% elif m.Status == 0 %}
 
-                    <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
-                {%else%}
+                    <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+                {% else %}
                 <td>Doctor neexistuje, vytvorit novy tiket</td>
-
-                {%endif%}
+                {% endif %}
 
                 <td>{{m.Description}}</td>
                 <td>{{m.created}}</td>
-                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
-                <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete"  ></td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
+                <td><input type="submit" style="width:100%;" class="btn btn-outline-info"   name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete"  ></td>
                 </form>
-            </tr>
-          {% endif %}
+              </tr>
+            {% endif %}
           {% endfor %}
 
           </tbody>
@@ -59,14 +59,13 @@
         <th class="order" >delete</th>
       </tfoot>
     </table>
-{% endif %}
-{% if  user|is_doctor %}
+{% elif  user|is_doctor %}
   {% for j in Medical_problem %}
   {% if  j.Doctor_ID == user.id and j.id == pk%}
   <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
   <table id="search_table" class="table table-bordered " style="width:100%">
           <thead class="sorting">
-                <th >Patient</th>
+                  <th >Patient</th>
                   <th >Doctor</th>
                   <th>Operation</th>
                   <th>Status</th>
@@ -78,30 +77,32 @@
             <tbody id="tablebody" >
 
             {% for m in Ticket %}
-            {% if m.Medical_problem_ID == pk %}
+              {% if m.Medical_problem_ID == pk %}
               <tr>
                   <td>{{ m.Medical_problem_ID|get_username_ticket:Medical_problem  }}</td>
                   <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
                   <td>{{ m.Operation}}</td>
-                    <form method="POST" enctype="multipart/form-data">
-                      {% csrf_token %}
+                  <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <td><a style="width:100%;" class="btn btn-outline-info" href="#">
                   {% if m.Status == 1%}
+                    closed
 
-                      <td>closed></td>
                   {% elif m.Status == 0 %}
+                    open
 
-                      <td>open</td>
-                    {%else%}
-                    <td> Doctor neexistuje </td>
-                  {%endif%}
+                  {% else %}
+                    Doctor neexistuje
 
+                  {% endif %}
+                  </a></td>
                   <td>{{m.Description}}</td>
                   <td>{{m.created}}</td>
-                  <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill_data</a></td>
-                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete" ></td>
+                  <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
+                  <td><input type="submit"  class="btn btn-outline-info" name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete" ></td>
                   </form>
               </tr>
-            {% endif %}
+              {% endif %}
             {% endfor %}
 
             </tbody>
@@ -116,36 +117,15 @@
           <th class="order" >delete</th>
         </tfoot>
       </table>
-{% endif %}
-{% endfor %}
-{% endif %}
-    {% if is_paginated %}
-
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
       {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
-       {% endif %}
+  {% endfor %}
 
 {% endif %}
+{% endif %}
+
+</div>
 
 <script>
-
-
-
 
 $(document).ready(function() {
   // Setup - add a text input to each footer cell
@@ -160,9 +140,6 @@ $(document).ready(function() {
     { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
 
 //sorting
-
-
 </script>
-
 
 {% endblock content %}
