@@ -144,6 +144,21 @@ def register(request):
 
             user = u_form.save(commit=False)
             profile=p_form.save(commit=False)
+            
+            #getting username
+            while True:
+                i = 0
+                stop = False
+                user.username = user.last_name[0 : 5]+str(i)
+                for u in  AuthUser.objects.all():
+                    if u.username == user.username:
+                        stop = False
+                        break
+                    stop = True
+                if stop:
+                    break
+                i += 1
+
             max = datetime.now().date()
             min = datetime(1900,1,1).date()
             if(profile.birth_date >= max or profile.birth_date<= min ):

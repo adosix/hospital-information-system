@@ -4,11 +4,13 @@
  {% load multifor %}
 
 {% if user.is_authenticated  %}
-{% if user|is_admin  %}
+
 <div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
 <table id="search_table" class="table table-bordered " style="width:100%">
 
+{% if user|is_admin  %}
         <thead  class="sorting">
+                <th>edit</th>
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
@@ -16,11 +18,11 @@
                 <th>banned</th>
                 <th>role</th>
                 <th>birth date</th>
-                <th>edit</th>
         </thead>
           <tbody id="tablebody" >
 
           {% for u in AuthUser ; p in Profiles %}
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
                 <td>{{ u.username }}</td>
                 <td>{{ u.first_name }}</td>
                 <td>{{ u.last_name }}</td>
@@ -41,45 +43,36 @@
                     patient
                 {% endif %}
                 </td>
-                <td>{{ p.birth_date }}</td>
-                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
-              </tr>
+                <td>{{ p.birth_date.year}}-{{p.birth_date.month}}-{{p.birth_date.day}}</td>
+                 </tr>
           {% endfor %}
 
           </tbody>
       <tfoot>
+                <th>edit</th>
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
                 <th>email</th>
                 <th>banned</th>
                 <th>role</th>
-                <th>edit</th>
+                <th>birth date</th>
         </tfoot>
 
-    </table>
 {% endif %}
 {% if user|is_doctor  %}
-<input type="text" id="search" class="textarea form-control" placeholder="search in table" >
-<table class="table table-bordered " style="width:100%">
 
-        <thead>
-          <tr>
-                <th>username</th>
-                <th>first name</th>
-                <th>last name</th>
-                <th>email</th>
-                <th>banned</th>
-                <th>role</th>
-          </tr>
+        <thead class="sorting">
+            <th>username</th>
+            <th>first name</th>
+            <th>last name</th>
+            <th>email</th>
+            <th>banned</th>
+            <th>role</th>
+            <th>birth date</th>
         </thead>
           <tbody id="tablebody" >
-              <tr style="display: none;">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <tr>
+
           {% for u in AuthUser ; p in Profiles %}
           {% if u|is_doctor or u|is_patient%}
                 <td>{{ u.username }}</td>
@@ -93,8 +86,10 @@
                 {% endif %}
                 {% if u|is_doctor%}
                     <td>doctor</td>
+                    <td></td>
                 {% else %}
                     <td>patient</td>
+                    <td>{{ p.birth_date.year}}-{{p.birth_date.month}}-{{p.birth_date.day}}</td>
                 {% endif %}
               </tr>
           {% endif %}
@@ -108,11 +103,12 @@
                 <th>email</th>
                 <th>banned</th>
                 <th>role</th>
+                <th>birth date</th>
         </tfoot>
-
-    </table>
 {% endif %}
 
+    </table>
+    
     </div>
     {% if is_paginated %}
 
@@ -137,10 +133,6 @@
 {% endif %}
 
 <script>
-
-
-
-
 $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table tfoot th').each( function () {
@@ -152,10 +144,6 @@ $(document).ready(function() {
     table.columns().eq( 0 ).each( function ( colIdx )
     { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
     { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
-
-//sorting
-
-
 </script>
 
 

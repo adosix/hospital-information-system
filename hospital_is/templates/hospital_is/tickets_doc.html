@@ -15,7 +15,7 @@
                 <th>Operation</th>
                 <th>Status</th>
                 <th>Description</th>
-                <th>create_date</th>
+                <th>create date</th>
                 <th class="order" >more</th>
                 <th class="order" >more</th>
         </thead>
@@ -30,31 +30,31 @@
                 {% csrf_token %}
               {% if m.Status == 1 %}
 
-                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
+                  <td><input class="btn btn-outline-info" style="width:100%"  type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed"label = "del"></td>
               {% elif m.Status == 0 %}
 
-                  <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
+                  <td><input class="btn btn-outline-info" style="width:100%"  type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
                   {%else%}
                   <td>Doctor neexistuje</td>
               {%endif%}
               </form>
               <td>{{m.Description}}</td>
-              <td>{{m.created}}</td>
-              <td><a href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
-              <td><a href="{% url 'make_compensation' m.id %}">request</a></td>
+              <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
+              <td><a  class="btn btn-outline-info" style="width:100%"  href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
+              <td><a  class="btn btn-outline-info" style="width:100%"  href="{% url 'make_compensation' m.id %}">request</a></td>
           </tr>
           {% endif %}
           {% endfor %}
           </tbody>
        <tfoot>
-         <th >Patient</th>
-         <th >Doctor</th>
+         <th>Patient</th>
+         <th>Doctor</th>
          <th>Operation</th>
          <th>Status</th>
          <th>Description</th>
-         <th>create_date</th>
-        <th class="order" >more</th>
-        <th class="order" >more</th>
+         <th>create date</th>
+        <th></th>
+        <th></th>
       </tfoot>
     </table>
 

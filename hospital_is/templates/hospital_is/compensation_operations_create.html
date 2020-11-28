@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 {% load customtags %}
 {% block content %}
+
+<div style=" margin:auto; margin-top:150px;">
 {% if  user|is_insurance_w or user|is_admin%}
     <div class="content-section">
         <form method="POST">
@@ -19,5 +21,6 @@
             </div>
         </form>
     </div>
-{%endif%}
+{% endif %}
+</div>
 {% endblock content %}
