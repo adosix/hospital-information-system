@@ -14,11 +14,11 @@ class MedicalProblemUpdateForm(forms.ModelForm):
     Title = forms.CharField(max_length=150,
     widget=forms.TextInput(attrs={'style':'max-width: 24em'}),
     required=True)
-    Image = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Medical_problem
-        fields = ['Title', 'Description','Image']
+        fields = ['Title', 'Description','image']
 class Status(forms.Form):
 
     Status = forms.TypedChoiceField(label = "Finished?",
@@ -28,10 +28,10 @@ class Status(forms.Form):
         initial = '0',
         required = True,)
 class MedicalProblemCreate(forms.ModelForm):
-    Image = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
     class Meta:
         model = Medical_problem
-        fields = ['Title', 'Description', 'Image']
+        fields = ['Title', 'Description', 'image']
 class MedicalProblemUsers(forms.ModelForm):
     username = forms.CharField(required=True)
 

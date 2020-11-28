@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import (
     medical_ticket_create,
     medical_problems_doc,
@@ -26,10 +28,12 @@ urlpatterns = [
     path('medical_problems_doc/<int:pk>/', views.medical_problems_doc, name='medical_problems_doc'),
     path('tickets_doc/<int:pk>/', views.tickets_doc, name='tickets_doc'),
     path('make_compensation/<int:pk>/', views.make_compensation, name='make_compensation'),
-    path('compensation_request/', views.compensation_request, name='compensation_request'),        
+    path('compensation_request/', views.compensation_request, name='compensation_request'),
     path('compensation_operations/', views.compensation_operations, name='compensation_operations'),
     path('compensation_operations_create/', views.compensation_operations_create, name='compensation_operations_create'),
     path('compensation_operations_edit/<str:pk>/', views.compensation_operations_edit, name='compensation_operations_edit'),
     path('tickets_admin/', views.tickets_admin, name='tickets_admin'),
     path('contact/', views.contact, name='hospital_is-contact'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

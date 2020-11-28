@@ -27,6 +27,7 @@ from users.forms import ChooseDoctor
 from users.forms import ChoosePacient
 from users.forms import ChooseInsurance_worker
 from .models import Doctor
+from .models import Admin
 from .models import Patient
 from .models import Compensated_operations
 from .models import Compensation_request
@@ -275,9 +276,10 @@ def medical_ticket_record(request, pk):
             record = get_object_or_404(Medical_record, Ticket_ID=pk)
             record_f = Record(request.POST,instance=record)
         except:
-            record_f = Record(request.POST)
+            record_f = Record(request.POST,request.FILES)
+
         ticket = get_object_or_404(Ticket, id=pk)
-        if(request.user.id != ticket.Doctor_ID):
+        if(request.user.id != ticket.Doctor_ID and(not request.user.is_superuser and not request.user.is_staff)):
             messages.warning(request, f'You dont have permissions to update this file')
             return HttpResponseRedirect("/medical_ticket_record/" + str(pk))
         if(ticket.Status == 1):
@@ -327,7 +329,7 @@ def medical_problem_edit(request, pk):
         status_f = request.POST['Status']
         pac = request.POST['Pacient']
         doc = request.POST['Doctor']
-        m_form = MedicalProblemUpdateForm(request.POST, instance=medical_problem)
+        m_form = MedicalProblemUpdateForm(request.POST, request.FILES, instance=medical_problem)
         if m_form.is_valid() :
             if(status_f == '2'):
                 for t in Ticket.objects.all():
@@ -382,11 +384,11 @@ def medical_problem_edit(request, pk):
 
 def medical_problem_create(request):
     tmp = ChoosePacient(-1,'')
-    tmp2 = ChooseDoctor(-1,'')
+    tmp2 = ChooseDoctor(-1,request.user.username)
     m_form = MedicalProblemCreate()
 
     if request.method == 'POST':
-        m_form = MedicalProblemCreate(request.POST)
+        m_form = MedicalProblemCreate(request.POST, request.FILES)
         if m_form.is_valid():
             medical_problem = m_form.save(commit=False)
             pac = request.POST['Pacient']
@@ -406,7 +408,7 @@ def medical_problem_create(request):
             if request.user.is_superuser:
                 return HttpResponseRedirect("/medical_problems_admin/")
             else:
-                return HttpResponseRedirect("/medical_problems_doc/" + str(doctor.id))
+                return HttpResponseRedirect("/medical_problems_doc/" + str(request.user.id))
         else:
             messages.warning(request, f'Medical problem not updated.')
     m_form = MedicalProblemCreate()
@@ -416,7 +418,7 @@ def medical_problem_create(request):
         'm_form' :m_form,
     }
     return render(request, 'hospital_is/medical_problem_create.html', context)
-    
+
 def medical_ticket_create(request,pk):
 
     t_form = TicketForm()

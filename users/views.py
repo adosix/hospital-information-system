@@ -17,7 +17,7 @@ from hospital_is.models import Medical_problem
 from hospital_is.models import Compensation_request
 from hospital_is.models import Insurance_worker
 from django.contrib.auth.hashers import make_password
-
+from datetime import datetime
 
 def edit_profile(request, username_to_find):
 
@@ -63,7 +63,21 @@ def edit_profile(request, username_to_find):
             else:
                 usr_tmp.password = pass_tmp
             usr_tmp.save()
-            p_form.save()
+            p=p_form.save(commit=False)
+            max = datetime.now().date()
+            min = datetime(1900,1,1).date()
+            if(p.birth_date >= max or p.birth_date<= min ):
+                messages.warning(request, f'Your account wasnt created!')
+                u_form = UserUpdateForm(instance=request.user)
+                p_form = ProfileUpdateForm(instance=request.user.profile)
+                context = {
+                'pk':pk,
+                    'u_form': u_form,
+                    'p_form': p_form
+                }
+
+                return render(request, 'users/profile.html', context)
+            p.save()
         else:
             messages.warning(request, f'An account hasn\'t been updated!')
             usr = get_object_or_404(AuthUser, username= username_to_find)
@@ -122,9 +136,27 @@ def register(request):
         u_form = UserRegisterForm(request.POST)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES)
-        role_form = request.POST['Role']
+        try:
+            role_form = request.POST['Role']
+        except:
+            pass
         if u_form.is_valid() and p_form.is_valid():
+
             user = u_form.save(commit=False)
+            profile=p_form.save(commit=False)
+            max = datetime.now().date()
+            min = datetime(1900,1,1).date()
+            if(profile.birth_date >= max or profile.birth_date<= min ):
+                messages.warning(request, f'Your account wasnt created!')
+                u_form = UserUpdateForm(instance=request.user)
+                p_form = ProfileUpdateForm(instance=request.user.profile)
+                context = {
+                'pk':pk,
+                    'u_form': u_form,
+                    'p_form': p_form
+                }
+
+                return render(request, 'users/profile.html', context)
             if(request.user.is_superuser):
                 if(role_form == '0'):
                     user.is_superuser = True
@@ -151,7 +183,6 @@ def register(request):
                 user.save()
                 Patient.objects.create(id = user.id)
             created_row = get_object_or_404(Profile, user_id= user.id)
-            profile = p_form.save(commit = False)
             created_row.birth_date = profile.birth_date
             created_row.image = profile.image
             created_row.save()
@@ -161,7 +192,7 @@ def register(request):
             messages.success(request, f'Account has been created')
             return redirect('hospital_is-home')
         else:
-            messages.warning(request, f'Your account wasn\t created!')
+            messages.warning(request, f'Your account wasnt created!')
             u_form = UserRegisterForm()
             p_form = ProfileRegisterForm()
             role_form = UserRoleForm()
@@ -194,6 +225,21 @@ def profile(request,pk):
             else:
                 usr_tmp.password = pass_tmp
             usr_tmp.save()
+            p=p_form.save(commit=False)
+            max = datetime.now().date()
+            min = datetime(1900,1,1).date()
+            if(p.birth_date >= max or p.birth_date<= min ):
+                messages.warning(request, f'Your account wasnt created!')
+                u_form = UserUpdateForm(instance=request.user)
+                p_form = ProfileUpdateForm(instance=request.user.profile)
+                context = {
+                'pk':pk,
+                    'u_form': u_form,
+                    'p_form': p_form
+                }
+
+                return render(request, 'users/profile.html', context)
+            p.save()
             messages.success(request, f'Your account has been updated!')
             #return redirect('   ')
 

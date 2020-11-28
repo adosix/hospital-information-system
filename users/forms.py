@@ -15,11 +15,13 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name','email', 'password1', 'password2']
-
+class DateInput(forms.DateInput):
+    input_type= 'date'
 class ProfileRegisterForm(forms.ModelForm):
-    birth_date = forms.DateField(required=True)
     class Meta:
         model = Profile
+        widgets= {'birth_date' : DateInput()
+        }
         fields = ['image','birth_date']
 
 class UserUpdateForm(forms.ModelForm):
@@ -73,6 +75,7 @@ class ChooseInsurance_worker(forms.Form):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
+        widgets= {'birth_date' : DateInput()}
         fields = ['image','birth_date']
 class UserRoleForm(forms.Form):
 

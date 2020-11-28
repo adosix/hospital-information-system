@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime
-
+from PIL import Image
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -24,13 +24,14 @@ class Medical_problem(models.Model):
     Doctor_ID = models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    Image = models.ImageField()
+    image = models.ImageField(default='hand_cross.svg',upload_to='medical_problems_media')
     Status = models.IntegerField(default=0)
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
 
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
+
 
     class Meta:
         ordering = ['id']
