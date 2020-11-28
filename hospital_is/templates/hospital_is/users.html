@@ -44,7 +44,6 @@
                 {% endif %}
                 </td>
                 <td>{{ p.birth_date.year}}-{{p.birth_date.month}}-{{p.birth_date.day}}</td>
-                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
               </tr>
           {% endfor %}
 
@@ -132,7 +131,7 @@
       {% endif %}
        {% endif %}
 {% endif %}
-
+</table>
 <script>
 $(document).ready(function() {
   // Setup - add a text input to each footer cell
