@@ -4,6 +4,7 @@
 use hospital_data;
 DROP TABLE IF EXISTS hospital_is_post ;
 DROP TABLE IF EXISTS hospital_is_compensation_request;
+DROP TABLE IF EXISTS hospital_is_picture;
 DROP TABLE IF EXISTS hospital_is_medical_record;
 DROP TABLE IF EXISTS hospital_is_ticket;
 DROP TABLE IF EXISTS hospital_is_medical_problem;

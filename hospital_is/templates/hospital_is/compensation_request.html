@@ -13,14 +13,21 @@
                 <th>edit</th>
         </thead>
           <tbody id="tablebody" >
+            {% for m in Compensation_request %}
+            {%if m.status == 0%}
 
-          {% for m in Compensation_request %}
+
             <tr>
                 <td>{{ m.ticket_id|get_username_request:Ticket }}</td>
                 <td>{{ m.Operation_r }}</td>
                 <td>{{ m.Description_r }}</td>
-                <td>>edit</td>
+
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to decline this request?')" value="Decline"><input type="submit" name="{{m.id}}" onclick="return confirm('Are you sure you want to accept this request?')" id="accept" value="Accept"></td>
+                </form>
             </tr>
+              {%endif%}
           {% endfor %}
 
           </tbody>
@@ -30,7 +37,39 @@
         <th class="order">Description</th>
         <th class="order">edit</th>
     </table>
+    <table id="search_table" class="table table-bordered " style="width:100%">
 
+            <thead class="sorting">
+                    <th >patient</th>
+                    <th>Operation</th>
+                    <th>Description</th>
+                    <th>edit</th>
+            </thead>
+              <tbody id="tablebody" >
+                {% for m in Compensation_request %}
+                  {%if m.status != 0%}
+
+                <tr>
+                    <td>{{ m.ticket_id|get_username_request:Ticket }}</td>
+                    <td>{{ m.Operation_r }}</td>
+                    <td>{{ m.Description_r }}</td>
+                    {%if m.status == 1%}
+                    <td>accepted</td>
+                    {%else%}
+                    <td>not accepted</td>
+                    {%endif%}
+                </tr>
+
+                {%endif%}
+            {% endfor %}
+              </tbody>
+           <tfoot>
+            <th class="order">patient</th>
+            <th class="order">Operation</th>
+            <th class="order">Description</th>
+            <th class="order">edit</th>
+
+        </table>
 
     {% if is_paginated %}
 

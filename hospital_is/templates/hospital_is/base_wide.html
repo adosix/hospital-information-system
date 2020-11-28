@@ -57,7 +57,7 @@
                   <a class="nav-item nav-link" href="{% url 'medical_problems_doc' user.id %}">Med problems</a>
                   <a class="nav-item nav-link" href="{% url 'register' %}">Register patient</a>
                 {% elif user|is_insurance_w%}
-                  <a class="nav-item nav-link" href="{% url 'medical_problem_create' %}">Compensation requests</a>
+                  <a class="nav-item nav-link" href="{% url 'compensation_request' %}">Compensation requests</a>
                   <a class="nav-item nav-link" href="{% url 'compensation_operations' %}">Compensated operations</a>
                 {% elif user|is_admin%}
                   <a class="nav-item nav-link" href="{% url 'users' %}">Users</a>

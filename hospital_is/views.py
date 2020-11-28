@@ -31,8 +31,8 @@ from .models import Admin
 from .models import Patient
 from .models import Compensated_operations
 from .models import Compensation_request
-from .models import Ticket
-from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation
+from .models import Ticket,Picture
+from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -54,6 +54,20 @@ def users(request):
     }
     return render(request, 'hospital_is/users.html', context)
 def compensation_request(request):
+
+    if request.method == 'POST':
+        for name,value in request.POST.items():
+            if value == "Decline" or value == "Accept":
+                key = name
+                status = value
+        request=get_object_or_404(Compensation_request,id=key)
+        if(value=='Decline'):
+            request.status=2
+        else:
+            request.status=1
+        request.save()
+        return HttpResponseRedirect("/compensation_request/")
+
     context = {
             'Ticket': Ticket.objects.all(),
         'AuthUser': AuthUser.objects.all(),
@@ -68,14 +82,20 @@ def make_compensation(request, pk):
         c_r= request.POST['Operation']
 
         if m_form.is_valid():
-            #m_form.save(commit=False)
+            tmp = Compensation_request.objects.all()
+            try:
+                tmp = tmp[len(tmp)-1]
+                id = tmp.id+1
+            except:
+                id = 0
             try:
                 c = get_object_or_404(Compensated_operations, Description=c_r)
-                tmp= Compensation_request.objects.create(ticket_id = pk,Operation_r=c.Operation,Description_r=c.Description)
+                tmp= Compensation_request.objects.create(id=id,ticket_id = pk,Operation_r=c.Operation,Description_r=c.Description)
             except:
 
                 c = m_form.save(commit=False)
                 c.ticket_id=pk
+                c.id=id
                 c.save()
 
             messages.success(request, f'Request made updated.')
@@ -269,8 +289,11 @@ def medical_ticket_record(request, pk):
     try:
         record = get_object_or_404(Medical_record, Ticket_ID=pk)
         record_f = Record(instance=record)
+
     except:
+
         record_f = Record()
+    picture_form = PictureForm()
     if request.method == 'POST':
         try:
             record = get_object_or_404(Medical_record, Ticket_ID=pk)
@@ -278,6 +301,8 @@ def medical_ticket_record(request, pk):
         except:
             record_f = Record(request.POST,request.FILES)
 
+        picture_form=PictureForm(request.POST,request.FILES)
+        print(picture_form)
         ticket = get_object_or_404(Ticket, id=pk)
         if(request.user.id != ticket.Doctor_ID and(not request.user.is_superuser and not request.user.is_staff)):
             messages.warning(request, f'You dont have permissions to update this file')
@@ -294,20 +319,39 @@ def medical_ticket_record(request, pk):
             ticket.save()
             medical_problem.save()
             record.Ticket_ID = ticket.id
-            tmp = Medical_record.objects.all()
+            try:
+                id = record.id
+                r=record.save()
+
+            except:
+
+                tmp = Medical_record.objects.all()
+                try:
+                    tmp = tmp[len(tmp)-1]
+                    id = tmp.id+1
+                except:
+                    id = 0
+                record.id = id
+                r=record.save()
+            p=picture_form.save(commit=False)
+            p.r_id= id
+            tmp =Picture.objects.all()
             try:
                 tmp = tmp[len(tmp)-1]
                 id = tmp.id+1
             except:
                 id = 0
-            record.id = id
-            record.save()
+            p.id=id
+            p=p.save()
             messages.success(request, f'Medical record updated.')
         else :
             messages.warning(request, f'Medical record not updated.')
     context = {
+        'picture_form':picture_form,
         'record_f':record_f,
         'Medical_problem': Medical_problem.objects.all(),
+        'Medical_record': Medical_record.objects.all(),
+        'Picture' :Picture.objects.all(),
         'Ticket' : Ticket.objects.all(),
         'pk':pk,
         'AuthUser': AuthUser.objects.all(),
