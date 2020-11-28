@@ -24,7 +24,7 @@ class Medical_problem(models.Model):
     Doctor_ID = models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    image = models.ImageField(default='hand_cross.svg',upload_to='medical_problems_media')
+    image = models.ImageField(default='default.jpg',upload_to='medical_problems_media')
     Status = models.IntegerField(default=0)
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
@@ -32,7 +32,17 @@ class Medical_problem(models.Model):
     def get_absolute_url(self):
         return reverse('Medical_problem', kwargs={'pk': self.pk})
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+    def get_pic(self):
+        return "/media/"+str(self.image)
     class Meta:
         ordering = ['id']
 
@@ -43,11 +53,6 @@ class Medical_record(models.Model):
     Ticket_ID =  models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    Image0= models.ImageField()
-    Image1= models.ImageField()
-    Image2= models.ImageField()
-    Image3= models.ImageField()
-    Image4 = models.ImageField()
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
 
@@ -57,6 +62,28 @@ class Medical_record(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __unicode__(self):
+        return self.id
+
+class Picture(models.Model):
+    id = models.IntegerField(primary_key=True, unique=True)
+    Image = models.ImageField(default='default.jpg',upload_to='medical_records_media')
+    r_id =  models.IntegerField()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.Image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.Image.path)
+    def get_pic(self):
+        return "/media/"+str(self.Image)
+    def get_absolute_url(self):
+        return reverse('Picture', kwargs={'pk': self.pk})
+    class Meta:
+        ordering = ['id']
     def __unicode__(self):
         return self.id
 class Ticket(models.Model):
@@ -78,15 +105,18 @@ class Ticket(models.Model):
     def __unicode__(self):
         return self.id
 class Compensation_request(models.Model):
+    id=models.IntegerField(primary_key=True)
     ticket_id = models.IntegerField()
     Operation_r = models.TextField()
-    Description_r = models.TextField(primary_key=True)
-
-
+    Description_r = models.TextField()
+    status = models.IntegerField(default=0)
+    def get_absolute_url(self):
+        return reverse('Compensation_request', kwargs={'pk': self.pk})
 
     class Meta:
-        ordering = ['ticket_id']
-        unique_together = (("ticket_id", "Operation_r","Description_r"))
+        ordering = ['id']
+    def __unicode__(self):
+        return self.id
 class Compensated_operations(models.Model):
     Operation = models.TextField(primary_key=True, unique=True)
     Description = models.TextField()

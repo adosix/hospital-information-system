@@ -76,11 +76,6 @@ CREATE TABLE users_profile (
     Ticket_ID INTEGER NOT NULL ,
     Title  varchar(255) NOT NULL,
     Description  varchar(1024) NOT NULL,
-    Image0 varchar(255),
-    Image1 varchar(255),
-    Image2 varchar(255),
-    Image3 varchar(255),
-    Image4 varchar(255),
     created timestamp default now(),
     updated timestamp default now() on update now(),
 
@@ -88,8 +83,15 @@ CREATE TABLE users_profile (
 
  );
  CREATE TABLE hospital_is_compensation_request(
+    id INTEGER NOT NULL primary key,
     ticket_id INTEGER NOT NULL REFERENCES hospital_is_ticket(id) ON DELETE CASCADE,
     Operation_r varchar(255) NOT NULL,
     Description_r varchar(255) NOT NULL,
-    primary  key(ticket_id,Operation_r,Description_r)
+    status INTEGER NOT NULL DEFAULT 0
  );
+ CREATE TABLE hospital_is_picture(
+   id INTEGER not null primary key ,
+    Image varchar(255),
+    r_id  INTEGER NOT NULL ,
+  CONSTRAINT pictureid FOREIGN KEY (r_id) REFERENCES hospital_is_medical_record(id) ON DELETE CASCADE
+);

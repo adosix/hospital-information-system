@@ -6,7 +6,7 @@
 
 <div style=" margin:auto; margin-top:120px;">
     <div class="content-section">
-        <form method="POST">
+        <form method="POST"  enctype="multipart/form-data">
           {% csrf_token %}
 
           {%if user|is_doctor%}
@@ -17,7 +17,14 @@
               <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
 
               {{ record_f|crispy }}
-
+              {%for p in Picture %}
+              {%if pk == p.r_id %}
+              <div class="media">
+                <img class="rounded-circle account-img" src="{{ p.image.value.url }}">
+              </div>
+              {%endif%}
+              {%endfor%}
+              {{ picture_form|crispy }}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Update</button>
@@ -29,7 +36,14 @@
               <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
 
               {{ record_f|crispy }}
-
+              {%for p in Picture%}
+              {% if pk == p.r_id %}
+              <div class="media">
+                <img class="rounded-circle account-img" src="{{ p.image.value.url }}">
+              </div>
+              {%endif%}
+              {%endfor%}
+              {{ picture_form|crispy }}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Post</button>
@@ -44,8 +58,21 @@
           <fieldset class="form-group">
               <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
 
-              {{ record_f|crispy }}
 
+              {{ record_f|crispy }}
+              {%for m in Medical_record%}
+              {%if pk == m.Ticket_ID %}
+              {%for p in Picture%}
+
+              {%if m.id == p.r_id %}
+              <div class="media">
+                <img class="rounded-circle account-img" src="{{ p.Image.url }}">
+              </div>
+              {%endif%}
+              {%endfor%}
+              {%endif%}
+              {%endfor%}
+              {{ picture_form|crispy }}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Post</button>
@@ -54,6 +81,6 @@
 
         </form>
     </div>
-    </div>  
+    </div>
 {%endif%}
 {% endblock content %}

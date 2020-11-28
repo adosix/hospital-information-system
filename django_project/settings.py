@@ -24,9 +24,9 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-USE_L10N = True
+USE_L10N =True
 ALLOWED_HOSTS = []
-
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 TIME_ZONE = 'Europe/Prague'
 
 # Application definition

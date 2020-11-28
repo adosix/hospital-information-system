@@ -44,7 +44,8 @@
                 {% endif %}
                 </td>
                 <td>{{ p.birth_date.year}}-{{p.birth_date.month}}-{{p.birth_date.day}}</td>
-                 </tr>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
+              </tr>
           {% endfor %}
 
           </tbody>
