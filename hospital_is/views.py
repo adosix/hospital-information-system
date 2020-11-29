@@ -201,11 +201,13 @@ def tickets_admin(request):
                 if t.Medical_problem_ID == medical_problem.id and t.Status == 0:
                     medical_problem.Status = 1
             medical_problem.save()
+            messages.success(request, f'Ticket closed')
         else:
             ticket.Status = 0
             ticket.save()
             medical_problem.Status = 1
             medical_problem.save()
+            messages.success(request, f'Ticket opened')
     context = {
         'Ticket': Ticket.objects.all(),
         'AuthUser': AuthUser.objects.all(),
@@ -322,7 +324,7 @@ def medical_ticket_record(request, pk):
             record_f = Record(request.POST,request.FILES)
         formset=PictureFormSet(request.POST,request.FILES)
         ticket = get_object_or_404(Ticket, id=pk)
-        if(request.user.id != ticket.Doctor_ID and(not request.user.is_superuser and not request.user.is_staff)):
+        if(request.user.id != ticket.Doctor_ID and not request.user.is_superuser ):
             messages.warning(request, f'You dont have permissions to update this file')
             return HttpResponseRedirect("/medical_ticket_record/" + str(pk))
         if(ticket.Status == 1):
