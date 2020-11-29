@@ -14,7 +14,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name','email', 'password1', 'password2']
+        fields = ['first_name', 'last_name','email', 'password1', 'password2']
 class DateInput(forms.DateInput):
     input_type= 'date'
 class ProfileRegisterForm(forms.ModelForm):

@@ -6,9 +6,11 @@
 {% if user.is_authenticated  %}
 
 <div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
+
 <table id="search_table" class="table table-bordered " style="width:100%">
 
 {% if user|is_admin  %}
+      <a  class="btn btn-outline-info add_new_btn" href="{% url 'register' %}">Register user</a>
         <thead  class="sorting">
                 <th>edit</th>
                 <th>username</th>
@@ -62,6 +64,7 @@
 {% endif %}
 {% if user|is_doctor  %}
 
+      <a  class="btn btn-outline-info add_new_btn"  href="{% url 'register' %}">Register patient</a>
         <thead class="sorting">
             <th>username</th>
             <th>first name</th>

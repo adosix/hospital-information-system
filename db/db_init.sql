@@ -66,7 +66,7 @@ CREATE TABLE users_profile (
     Doctor_ID INTEGER NOT NULL,
     Title varchar(255) NOT NULL,
     Description varchar(1024)  NOT NULL,
-    Image varchar(255),
+    Image varchar(255) NOT NULL DEFAULT "../media/default.jpg",
     Status  int NOT NULL default 0,
     created timestamp default now(),
     updated timestamp default now() on update now(),
