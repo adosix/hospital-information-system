@@ -18,7 +18,13 @@
   </header>
 
 <div class="table-responsive" style="margin-top:25px;width: 95%; margin:auto;">
-
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
 <table id="search_table" class="table table-bordered " style="width:100%">
 
 

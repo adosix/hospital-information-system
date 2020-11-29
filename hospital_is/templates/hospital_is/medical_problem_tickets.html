@@ -19,7 +19,13 @@
   </header>
 <div style=" margin:auto;">
 {% if  user|is_admin %}
-
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
 <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">

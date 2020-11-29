@@ -5,6 +5,13 @@
 {% if  user|is_doctor or user|is_admin%}
 
 <div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
+    {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}

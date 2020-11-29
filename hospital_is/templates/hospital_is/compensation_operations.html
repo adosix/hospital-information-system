@@ -17,7 +17,13 @@
       </div>
     </div>
   </header>
-
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
 <div class="table-responsive" style="width: 95%; margin:auto;">
 <a class="btn btn-outline-info add_new_btn" href="{% url 'compensation_operations_create' %}">Create compensated operation</a>
 <table id="search_table" class="table table-bordered " style="width:100%">

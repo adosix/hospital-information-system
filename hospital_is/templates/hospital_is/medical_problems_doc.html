@@ -16,7 +16,13 @@
       </div>
     </div>
   </header>
-  
+  {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
 <div style=" margin:auto; ">
 <div class="table-responsive" style="width: 95%; margin:auto;">
 <a class="btn btn-outline-info add_new_btn" href="{% url 'medical_problem_create' %}">
