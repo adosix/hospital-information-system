@@ -13,6 +13,22 @@ use hospital_data;
     Street varchar(255)
 );
 ALTER TABLE hospital_is_user AUTO_INCREMENT=10000;*/
+CREATE TABLE auth_user (
+  id int NOT NULL AUTO_INCREMENT,
+  password varchar(128) NOT NULL,
+  last_login datetime(6) DEFAULT NULL,
+  is_superuser tinyint(1) NOT NULL,
+  username varchar(150) NOT NULL,
+  first_name varchar(150) NOT NULL,
+  last_name varchar(150) NOT NULL,
+  email varchar(254) NOT NULL,
+  is_staff tinyint(1) NOT NULL,
+  is_active tinyint(1) NOT NULL,
+  date_joined datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+);
+
 CREATE TABLE users_profile (
   id int NOT NULL AUTO_INCREMENT,
   image varchar(100) NOT NULL DEFAULT "../media/default.jpg",

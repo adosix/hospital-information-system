@@ -13,6 +13,10 @@ DROP TABLE IF EXISTS hospital_is_compensated_operations;
 DROP TABLE IF EXISTS hospital_is_insurance_worker;
 DROP TABLE IF EXISTS hospital_is_admin;
 DROP TABLE IF EXISTS hospital_is_patient;
-DROP TABLE IF EXISTS hospital_is_user ;
+DROP TABLE IF EXISTS hospital_is_user;
 DROP TABLE IF EXISTS users_profile;
-DELETE FROM auth_user;
+
+DROP TABLE IF EXISTS auth_user_groups;
+DROP TABLE IF EXISTS auth_user_user_permissions;
+DROP TABLE IF EXISTS django_admin_log;
+DROP TABLE IF EXISTS auth_user;
