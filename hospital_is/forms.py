@@ -7,7 +7,7 @@ from .models import Compensated_operations
 from .models import Compensation_request
 from users.models import AuthUser
 from django.db import models
-
+from django.forms import formset_factory
 
 
 class MedicalProblemUpdateForm(forms.ModelForm):
@@ -69,8 +69,8 @@ class TicketForm(forms.ModelForm):
         model = Ticket
         fields = ['Operation','Description']
 class PictureForm(forms.ModelForm):
-    Image = forms.ImageField(required=False)
-
+    Image = forms.ImageField(required=False, widget=forms.FileInput)
     class Meta:
         model=Picture
-        fields = ['Image']
+        fields = ['Image','id']
+        widgets = {'id': forms.HiddenInput()}

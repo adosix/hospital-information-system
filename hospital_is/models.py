@@ -67,7 +67,7 @@ class Medical_record(models.Model):
 
 class Picture(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
-    Image = models.ImageField(default='default.jpg',upload_to='medical_records_media')
+    Image = models.ImageField(upload_to='medical_records_media')
     r_id =  models.IntegerField()
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

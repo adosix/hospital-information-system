@@ -73,6 +73,8 @@ class ChooseInsurance_worker(forms.Form):
         self.fields['Insurance'].initial = initial
      Insurance = forms.ChoiceField()
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField(required=False, widget=forms.FileInput)
+
     class Meta:
         model = Profile
         widgets= {'birth_date' : DateInput()}

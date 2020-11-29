@@ -33,6 +33,8 @@ from .models import Compensated_operations
 from .models import Compensation_request
 from .models import Ticket,Picture
 from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
+from django.forms import modelformset_factory
+
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -60,7 +62,6 @@ def compensation_request(request):
             if value == "Decline" or value == "Accept" or value == 'Pending':
                 key = name
                 status = value
-        print(value)
         request=get_object_or_404(Compensation_request,id=key)
         if(value=='Decline'):
             request.status=2
@@ -165,6 +166,8 @@ def tickets_doc(request,pk):
         'Patient':  Patient.objects.all(),
         'Medical_problem':  Medical_problem.objects.all(),
     }
+    return render(request, 'hospital_is/tickets_doc.html', context)
+
 def tickets_pac(request,pk):
 
     context = {
@@ -300,20 +303,25 @@ def medical_ticket_record(request, pk):
     try:
         record = get_object_or_404(Medical_record, Ticket_ID=pk)
         record_f = Record(instance=record)
+        PictureFormSet = modelformset_factory(Picture,form=PictureForm,fields=('Image',))
+        initial=[{'Image': x.Image,'id': x.id}  for x in Picture.objects.all() if x.r_id == record.id ]
+        formset=PictureFormSet(queryset=Picture.objects.none(),initial=initial)
+        formset.extra = len(initial)+1
 
     except:
 
         record_f = Record()
-    picture_form = PictureForm()
+        PictureFormSet = modelformset_factory(Picture,form=PictureForm,fields=('Image',))
+        formset=PictureFormSet(queryset=Picture.objects.none())
     if request.method == 'POST':
         try:
             record = get_object_or_404(Medical_record, Ticket_ID=pk)
             record_f = Record(request.POST,instance=record)
         except:
             record_f = Record(request.POST,request.FILES)
-
-        picture_form=PictureForm(request.POST,request.FILES)
-        print(picture_form)
+        print(formset)
+        formset=PictureFormSet(request.POST,request.FILES)
+        print(formset)
         ticket = get_object_or_404(Ticket, id=pk)
         if(request.user.id != ticket.Doctor_ID and(not request.user.is_superuser and not request.user.is_staff)):
             messages.warning(request, f'You dont have permissions to update this file')
@@ -321,6 +329,7 @@ def medical_ticket_record(request, pk):
         if(ticket.Status == 1):
             messages.warning(request, f'Medical record can not be updated when the ticket is closed.')
             return HttpResponseRedirect("/medical_ticket_record/" + str(pk))
+
         if record_f.is_valid():
             record = record_f.save(commit=False)
             ticket=get_object_or_404(Ticket,id = pk)
@@ -344,21 +353,33 @@ def medical_ticket_record(request, pk):
                     id = 0
                 record.id = id
                 r=record.save()
-            p=picture_form.save(commit=False)
-            p.r_id= id
-            tmp =Picture.objects.all()
-            try:
-                tmp = tmp[len(tmp)-1]
-                id = tmp.id+1
-            except:
-                id = 0
-            p.id=id
-            p=p.save()
+
+            instance =formset.save(commit=False)
+            for p in instance:
+                try:
+                    obj = get_object_or_404(Picture, Image=p.Image,r_id=id)
+                    obj.Image = p.Image
+                    obj.save()
+                except:
+
+                    p.r_id= id
+                    tmp =Picture.objects.all()
+                    try:
+                        tmp = tmp[len(tmp)-1]
+                        id = tmp.id+1
+                    except:
+                        id = 0
+                    p.id=id
+                    if(p.Image != ''):
+                        p.save()
+            initial=[{'Image': x.Image}  for x in Picture.objects.all() if x.r_id == record.id ]
+            formset=PictureFormSet(queryset=Picture.objects.none(),initial=initial)
+            formset.extra = len(initial)+1
             messages.success(request, f'Medical record updated.')
         else :
             messages.warning(request, f'Medical record not updated.')
     context = {
-        'picture_form':picture_form,
+        'formset':formset,
         'record_f':record_f,
         'Medical_problem': Medical_problem.objects.all(),
         'Medical_record': Medical_record.objects.all(),
@@ -529,8 +550,9 @@ def compensation_operations(request):
 def compensation_operations_create(request):
     if request.method == 'POST':
         c_form = CompensationOperationsCreate(request.POST)
-        p_form = request.POST['Insurance']
+
         if c_form.is_valid()  and request.user.is_superuser and request.user.is_staff:
+            p_form = request.POST['Insurance']
             insurance_worker = get_object_or_404(AuthUser, username = p_form)
             operation = c_form.save(commit=False)
             operation.creator = insurance_worker.id
