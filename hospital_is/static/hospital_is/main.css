@@ -1104,3 +1104,14 @@ html {
     margin-bottom: 15px;
     width: 100%;
 }
+
+.btn-secondary {
+    background-color: #5F788A;
+    color: #cbd5db;
+    border-radius: .25rem;
+}
+
+.dropdown-menu {
+    padding: 0;
+    border: 0;
+}
