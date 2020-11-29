@@ -57,14 +57,17 @@ def compensation_request(request):
 
     if request.method == 'POST':
         for name,value in request.POST.items():
-            if value == "Decline" or value == "Accept":
+            if value == "Decline" or value == "Accept" or value == 'Pending':
                 key = name
                 status = value
+        print(value)
         request=get_object_or_404(Compensation_request,id=key)
         if(value=='Decline'):
             request.status=2
-        else:
+        elif(value=='Accept'):
             request.status=1
+        else:
+            request.status=0
         request.save()
         return HttpResponseRedirect("/compensation_request/")
 
