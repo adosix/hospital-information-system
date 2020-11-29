@@ -15,7 +15,14 @@
       </div>
     </div>
   </header>
-
+  
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
   <!-- Icons Grid -->
   <section class="features-icons bg-light text-center">
     <div class="container">
