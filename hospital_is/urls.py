@@ -27,6 +27,7 @@ urlpatterns = [
     path('medical_problems_pac/<int:pk>/', views.medical_problems_pac, name='medical_problems_pac'),
     path('medical_problems_doc/<int:pk>/', views.medical_problems_doc, name='medical_problems_doc'),
     path('tickets_doc/<int:pk>/', views.tickets_doc, name='tickets_doc'),
+    path('tickets_pac/<int:pk>/', views.tickets_pac, name='tickets_pac'),
     path('make_compensation/<int:pk>/', views.make_compensation, name='make_compensation'),
     path('compensation_request/', views.compensation_request, name='compensation_request'),
     path('compensation_operations/', views.compensation_operations, name='compensation_operations'),

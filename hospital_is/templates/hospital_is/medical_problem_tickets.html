@@ -32,7 +32,7 @@
 
                     <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed" label = "del" ></td>
                 {% elif m.Status == 0 %}
-                  
+
                     <td><input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open"></td>
                 {% else %}
                 <td>Doctor neexistuje, vytvorit novy tiket</td>
@@ -119,7 +119,54 @@
       </table>
       {% endif %}
   {% endfor %}
+  {% elif  user|is_patient %}
+    {% for j in Medical_problem %}
+    {% if  j.Patient_ID == user.id and j.id == pk%}
+    <table id="search_table" class="table table-bordered " style="width:100%">
+            <thead class="sorting">
+                    <th >Doctor</th>
+                    <th>Operation</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>create_date</th>
+            </thead>
+              <tbody id="tablebody" >
 
+              {% for m in Ticket %}
+                {% if m.Medical_problem_ID == pk %}
+                <tr>
+                    <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
+                    <td>{{ m.Operation}}</td>
+                    {% csrf_token %}
+                    <td>
+                    {% if m.Status == 1%}
+                      closed
+
+                    {% elif m.Status == 0 %}
+                      open
+
+                    {% else %}
+                      Doctor neexistuje
+
+                    {% endif %}
+                    </td>
+                    <td>{{m.Description}}</td>
+                    <td>{{m.created}}</td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+
+              </tbody>
+           <tfoot>
+             <th >Doctor</th>
+             <th>Operation</th>
+             <th>Status</th>
+             <th>Description</th>
+             <th>created</th>
+          </tfoot>
+        </table>
+        {% endif %}
+    {% endfor %}
 {% endif %}
 {% endif %}
 

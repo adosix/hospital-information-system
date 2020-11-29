@@ -1,52 +1,55 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
 
-<div style=" margin:auto; margin-top:120px;">
-{% if user.is_authenticated  %}
-{% if user|is_patient  %}
+
+
+<div style=" margin:auto; margin-top:150px;">
+  {% if user.is_authenticated  %}
+  {% if user|is_patient  %}
 <table id="search_table" class="table table-bordered " style="width:100%">
 
+
         <thead class="sorting">
-          <th >patient</th>
-          <th>title</th>
-          <th>create_date</th>
-          <th>status</th>
-          <th>update_date</th>
-          <th>view more</th>
-          <th>view tickets</th>
+                <th >Doctor</th>
+                <th>Operation</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>create date</th>
         </thead>
           <tbody id="tablebody" >
+    {% for m in Ticket %}
+    {% for p in Medical_problem %}
+    {% if p.id == m.Medical_problem_ID  %}
 
-          {% for m in Medical_problem %}
-          {% if  user.id == pk and user.id == m.Patient_ID %}
+  {%if p.Patient_ID == pk and p.Patient_ID == user.id%}
           <tr>
-              <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
-              <td>{{ m.Title }}</td>
-              <td>{{ m.created }}</td>
-              {% if m.Status == 0  %}
-                <td>active</td>
-              {% elif m.Status == 1 %}
-                <td>waiting</td>
-              {% else %}
-                <td>finished</td>
-              {% endif %}
-                  <td>{{m.updated}}</td>
-              <td><a href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
-              <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
+              <td>{{ m.Medical_problem_ID|get_doctor_ticket:Medical_problem  }}</td>
+              <td>{{ m.Operation}}</td>
+              {% if m.Status == 1 %}
+            <td>  closed</td>
+              {% elif m.Status == 0 %}
+            <td>  opened</td>
+                  {%else%}
+                  <td>Doctor neexistuje</td>
+              {%endif%}
+              <td>{{m.Description}}</td>
+              <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
           </tr>
           {% endif %}
+            {% endif %}
           {% endfor %}
+          {% endfor %}
+
           </tbody>
        <tfoot>
-         <th class="order">patient</th>
-         <th class="order">title</th>
-         <th class="order">create_date</th>
-         <th class="order" >status</th>
-         <th class="order">update_date</th>
-         <th class="order">view more</th>
-         <th>view tickets</th>
-        </tfoot>
+         <th>Doctor</th>
+         <th>Operation</th>
+         <th>Status</th>
+         <th>Description</th>
+         <th>create date</th>
+
+      </tfoot>
     </table>
 
 
