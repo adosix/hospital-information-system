@@ -10,6 +10,13 @@
 {% if user|is_admin  %}
 
 <div style=" margin:auto; margin-top:120px;">
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
     <div class="content-section">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ pic_form }}">

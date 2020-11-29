@@ -8,6 +8,14 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_admin  %}
+<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
     <div class="content-section">
       <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
@@ -19,6 +27,7 @@
               <button class="btn btn-outline-info" type="submit">Update</button>
           </div>
       </form>
+    </div>
     </div>
     {% endif %}
     {% endif %}
