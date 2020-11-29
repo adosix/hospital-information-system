@@ -31,7 +31,7 @@ CREATE TABLE auth_user (
 
 CREATE TABLE users_profile (
   id int NOT NULL AUTO_INCREMENT,
-  image varchar(100) NOT NULL DEFAULT "../media/default.jpg",
+  image varchar(100) NOT NULL DEFAULT "../media/default_user.jpg",
   user_id int ,
   birth_date DATE,
   PRIMARY KEY (id),
@@ -66,7 +66,7 @@ CREATE TABLE users_profile (
     Doctor_ID INTEGER NOT NULL,
     Title varchar(255) NOT NULL,
     Description varchar(1024)  NOT NULL,
-    Image varchar(255) NOT NULL DEFAULT "../media/default.jpg",
+    Image varchar(255) NOT NULL DEFAULT "../media/default_user.png",
     Status  int NOT NULL default 0,
     created timestamp default now(),
     updated timestamp default now() on update now(),

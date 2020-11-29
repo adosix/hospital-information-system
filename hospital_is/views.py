@@ -282,6 +282,7 @@ def medical_problem_tickets(request, pk):
             medical_problem.save()
     context = {
         'Medical_problem': Medical_problem.objects.all(),
+        'm_problem': get_object_or_404(Medical_problem, id =pk),
         'Ticket' : Ticket.objects.all(),
         'pk':pk,
         'AuthUser': AuthUser.objects.all(),

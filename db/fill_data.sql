@@ -10,51 +10,51 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-05-15 21:40:34.113892", "0", "Mckeo0","Mahi","Mckeown","mahimc@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0","Edge0" ,"Aamna","Edge","aamne@volimkotlebu.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0","Edge0" ,"Aamna","Edge","aamne@volimkotlebu.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Cohen0","Fenton","Cohen","wicef@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Cohen0","Fenton","Cohen","wicef@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Firth0","Arianne","Firth","surko69@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Firth0","Arianne","Firth","surko69@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Mcnal0","Humera","Mcnally","lolko@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Mcnal0","Humera","Mcnally","lolko@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Pope0","Nick","Pope","gumenak@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Pope0","Nick","Pope","Nik@gmail.com","1","1","2020-10-18 21:40:34.113892");
     INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-        VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Stout0","Flora","Stout","doc@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+        VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Stout0","Flora","Stout","doc@gmail.com","1","1","2020-10-18 21:40:34.113892");
 
 
 INSERT INTO auth_user(password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Jense0","River","Jensen","lucinqa@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Jense0","River","Jensen","lucinqa@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Kouma0","Jasmin","Kouma","hater85@gmail.sk","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Kouma0","Jasmin","Kouma","hater85@gmail.com","1","1","2020-10-18 21:40:34.113892");
 
 
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "lostonyou","Armani","Mccormick","strbko@gmail.sk","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Needh0","Troy","Needham","Troy.N@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "starostaOravy","Myles","Higgs","orava@orava.sk","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Rubio0","Briony","Rubio","brioo12@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "hahahehe","Traci","Fowler","orav.luc@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Simmo0","Zohaib","Simmonds","simooon.luc@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "username","Gene","Fitzpatrick","vyhral_som@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Humph0","Aaron","Humphrey","umphre@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "troska_dlhsia_Pope0","Kareem","Hassan","mrav.luk@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Walms0","Blossom","Walmsley","Bloss@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "mamradmojhopsa","Freja","Trejo","pesjesuper@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Swift0","Jason","Swift","Jasonswi@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "mamradmojumacku","Maddie","Wharton","mackajesuper@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Worma0","Husnain","Wormald","Husnain2000@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "skrecok","Benedict","Devlin","priatelmaskrecka@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Hampt0","Hania","Hampton","Haniass@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "deadpool","Kuba","Justice","trump_to_vyhral@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Page0","Menachem","Page","MenachemPage@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "ironman","Austin","Koch","avengers@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Koch","Austin","Koch","avengers@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "pursuitofhapiness","Tyler-Jay","Lara","tvrdymarek@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Lara0","Tyler-Jay","Lara","Lararek@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "linkinpark","Finley","Ahmad","makkymarek@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "Ahmad0","Finley","Ahmad","Finleysh@gmail.com","0","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "gunsandflowers","Vincent","Jarvis","krem.marek@gmail.com","0","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "gunsandflowers","Beck","Jarvis","Jarvispeep@gmail.com","0","1","2020-10-18 21:40:34.113892");
 
 --
 INSERT INTO users_profile( user_id,birth_date,image)
@@ -80,29 +80,29 @@ VALUES((SELECT id    FROM  auth_user    WHERE username = "Pope0"),'1985-10-29',"
 INSERT INTO users_profile( user_id,birth_date,image)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "Kouma0"),'1998-10-29',"../media/default_admin.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "lostonyou"),'1988-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Needh0"),'1988-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "starostaOravy"),'1969-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Rubio0"),'1969-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "hahahehe"),'2005-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Simmo0"),'2005-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "username"),'1958-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "troska_dlhsia_Pope0"),'1969-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Walms0"),'1969-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojhopsa"),'1969-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Swift0"),'1969-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojumacku"),'1969-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Worma0"),'1969-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "skrecok"),'1978-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Hampt0"),'1978-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "deadpool"),'1989-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Page0"),'1989-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "ironman"),'1966-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Koch"),'1966-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "pursuitofhapiness"),'1969-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Lara0"),'1969-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "linkinpark"),'1999-10-14',"../media/default_user.png");
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Ahmad0"),'1999-10-14',"../media/default_user.png");
 INSERT INTO users_profile( user_id,birth_date,image)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "gunsandflowers"),'2006-10-14',"../media/default_user.png");
 --
@@ -164,51 +164,51 @@ WHERE username = "Jense0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "lostonyou";
+WHERE username = "Needh0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "starostaOravy";
+WHERE username = "Rubio0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "hahahehe";
+WHERE username = "Simmo0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "username";
+WHERE username = "Humph0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "troska_dlhsia_Pope0";
+WHERE username = "Walms0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "mamradmojhopsa";
+WHERE username = "Swift0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "mamradmojumacku";
+WHERE username = "Worma0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "skrecok";
+WHERE username = "Hampt0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "deadpool";
+WHERE username = "Page0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "ironman";
+WHERE username = "Koch";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "pursuitofhapiness";
+WHERE username = "Lara0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
-WHERE username = "linkinpark";
+WHERE username = "Ahmad0";
 INSERT INTO hospital_is_patient
 SELECT id
 FROM  auth_user
@@ -226,51 +226,51 @@ INSERT INTO hospital_is_compensated_operations
 VALUES ("chirurgicke odstranenie slepeho creva","v pripade dlhsieho pobytu v nemocnici vypisat ticket",(SELECT id FROM  auth_user WHERE username = "Ponce0"));
 
 -- MEDICAL PROBLEM
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("0",(SELECT id FROM auth_user  WHERE username = "lostonyou"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "Stressful Ebola", "Blood in urine and feeling tired slowly increase in severity over several hours, but one symptom generally lags behind the other. After the initial onset, blood in urine generally fades away, only to return later.
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
+VALUES ("0",(SELECT id FROM auth_user  WHERE username = "Needh0"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "1", "Stressful Ebola", "Blood in urine and feeling tired slowly increase in severity over several hours, but one symptom generally lags behind the other. After the initial onset, blood in urine generally fades away, only to return later.
 The experience of ear pain is often experienced more severe due to the experience of feeling tired.");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("1",(SELECT id FROM auth_user  WHERE username = "starostaOravy"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "Decaying Sleep Disorder", "tingling hands and constipation may start within a few days, but one symptom generally lags behind the other. After the initial onset, tingling hands often increases in intensity. Around this time eye discharge is experienced by the majority of people.
+VALUES ("1",(SELECT id FROM auth_user  WHERE username = "Rubio0"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "Decaying Sleep Disorder", "tingling hands and constipation may start within a few days, but one symptom generally lags behind the other. After the initial onset, tingling hands often increases in intensity. Around this time eye discharge is experienced by the majority of people.
 The experience of eye discharge may be amplified by the experience of constipation.
 After a few more days delirium is experienced fairly often and is mostly experienced after eating.
 Throughout the course of the disease, a fever may be experienced, but only in a minority of people and can be experienced at extreme levels.");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("2",(SELECT id FROM auth_user  WHERE username = "hahahehe"),(SELECT id FROM  auth_user  WHERE username = "Mckeo0"), "Dreaming Scurvy", "- a runny nose
+VALUES ("2",(SELECT id FROM auth_user  WHERE username = "Simmo0"),(SELECT id FROM  auth_user  WHERE username = "Mckeo0"), "Dreaming Scurvy", "- a runny nose
 - muscle weakness
 - seizures
 - a skin bump outbreak");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("3",(SELECT id FROM auth_user  WHERE username = "username"),(SELECT id FROM  auth_user  WHERE username = "Mckeo0"), "Animated Allergy", "- hair loss
+VALUES ("3",(SELECT id FROM auth_user  WHERE username = "Humph0"),(SELECT id FROM  auth_user  WHERE username = "Mckeo0"), "Animated Allergy", "- hair loss
 - sleeping difficulty
 - dizziness
 - constipation ");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("4",(SELECT id FROM auth_user  WHERE username = "troska_dlhsia_Pope0"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Rabid Acne", "- hyperactivity
+VALUES ("4",(SELECT id FROM auth_user  WHERE username = "Walms0"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Rabid Acne", "- hyperactivity
 - weight gain
 - walking difficulty
 - arm pain ");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("5",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Shriveling Heart", "- heartburn
+VALUES ("5",(SELECT id FROM auth_user  WHERE username = "Swift0"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Shriveling Heart", "- heartburn
 - confusion
 - feeling sick
 - drooling ");
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("6",(SELECT id FROM auth_user  WHERE username = "mamradmojhopsa"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Crystal Blisters", "- a skin sore outbreak
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
+VALUES ("6",(SELECT id FROM auth_user  WHERE username = "Swift0"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "1","Crystal Blisters", "- a skin sore outbreak
 - heartburn
 - muscle weakness
 - feeling light-headed");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("7",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "Firth0"), "Shaking Irritation", "- feeling sick
+VALUES ("7",(SELECT id FROM auth_user  WHERE username = "Worma0"),(SELECT id FROM  auth_user  WHERE username = "Firth0"), "Shaking Irritation", "- feeling sick
 - mouth sores
 - feeling sleepy
 - neck pain");
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("8",(SELECT id FROM auth_user  WHERE username = "mamradmojumacku"),(SELECT id FROM  auth_user  WHERE username = "Firth0"), "Lion Pox", "- feeling sick
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
+VALUES ("8",(SELECT id FROM auth_user  WHERE username = "Worma0"),(SELECT id FROM  auth_user  WHERE username = "Firth0"),"1", "Lion Pox", "- feeling sick
 - a sore tongue
 - leg swelling
 - sleeping difficulty");
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("9",(SELECT id FROM auth_user  WHERE username = "skrecok"),(SELECT id FROM  auth_user  WHERE username = "Mcnal0"), "Incurable Rabies", "- a loss of taste
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
+VALUES ("9",(SELECT id FROM auth_user  WHERE username = "Hampt0"),(SELECT id FROM  auth_user  WHERE username = "Mcnal0"),"1", "Incurable Rabies", "- a loss of taste
 - bloody nose
 - acid reflux
 - joint stiffness");

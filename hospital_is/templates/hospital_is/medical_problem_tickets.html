@@ -3,9 +3,23 @@
 {% load customtags %}
 
 {% if user.is_authenticated  %}
-
-<div style=" margin:auto; margin-top:120px;">
+ <header class="masthead  mastheadmedical_problems text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1   class="mb-5"></br>
+          {{m_problem.Title}}
+        </br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+<div style=" margin:auto;">
 {% if  user|is_admin %}
+
 <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">
