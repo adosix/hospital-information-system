@@ -1,0 +1,147 @@
+{% extends "hospital_is/base_wide.html" %}
+{% block content %}
+{% load customtags %}
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5"></br>404</br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+  
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+  <!-- Icons Grid -->
+  <section class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+             <img src="../../media/hospital-regular.svg" class=" text-primary info_icon" >
+            </div>
+            <h3>Real Care</h3>
+            <p class="lead mb-0">ER trained physicians
+            Licensed hospital by Oklahoma State Dept. of Health
+            Disaster management integration
+            ACLS, ATLS, PALS credentials
+            EMTALA compliant</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <img src="../../media/hand_cross.svg" class=" text-primary info_icon" >
+            </div>
+            <h3>Real Convenience</h3>
+            <p class="lead mb-0">Under 5 minute wait
+            Open 24/7, every day of the year
+            Full pharmacy
+            On-site laboratory
+            All records provided at discharge</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <img src="../../media/microscope.svg" class=" text-primary info_icon" >
+            </div>
+            <h3>Real Capabilities</h3>
+            <p class="lead mb-0">X-Rays
+          CT Scan
+          MRI Machine
+          Ultrasound
+          Asthma nebulizers
+          Overnight patient observation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../media/equipment.webp');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>TOP LEVEL EQUIPMENT</h2>
+          <p class="lead mb-0">
+          Oklahoma ER &amp; Hospital utilizes the same 
+          cutting edge equipment and technology found in a modern hospital,
+           including bedside ultrasound, digital radiology, CT scan, MRI,
+            and a comprehensive clinical laboratory.</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('../../media/skilled_doc.jpg');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2>SKILLED AND PROFESSIONAL DOCTORS AND STUFF</h2>
+          <p class="lead mb-0">You get an Expert Medical Opinion from one of our world-renowned specialists 
+          so you can have the answers and confidence to make informed decisions about your health with our assistance and supervision.</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../media/lab.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2>Hospital Randomo's Choice for ER Care</h2>
+          <p class="lead mb-0">
+          Hospital Randomo's is World’s 1st Micro Hospital.
+           Our physician owned hospital offers comprehensive care from 
+           illnesses to major trauma, even life-threatening conditions. 
+           Our facility is open 24/7, 365, featuring concierge-level care in a 
+           comfortable, upscale environment with no wait times and faster results 
+           for diagnostic imaging and lab tests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials text-center ">
+    <div class="container">
+      <h2 class="mb-5">What people are saying...</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="../../media/review_1.jpg" alt="">
+            <h5>Margaret E.</h5>
+            <p class="font-weight-light mb-0">"A very good experience from beginning to end.
+             Staff are friendly and welcoming. The hospital is spotlessly clean. Mr Akmal explained 
+             my issue and gave an option of treatments. "</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="../../media/review_3.jpg" alt="">
+            <h5>Fred S.</h5>
+            <p class="font-weight-light mb-0">"My family has had a great history by going here. I love it there. There is a fun slide for kids. "</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" src="../../media/review_2.jpg" alt="">
+            <h5>Sarah W.</h5>
+            <p class="font-weight-light mb-0">"I am so grateful for everyone at this amazing hospital. Everyone was in good spirits, even in these tough times. "</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- footer block-->
+{% endblock content %}
+
+

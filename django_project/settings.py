@@ -25,7 +25,7 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 USE_L10N =True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['213.181.147.71','192.168.1.178', 'localhost', '127.0.0.1']
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 TIME_ZONE = 'Europe/Prague'
 
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
