@@ -5,6 +5,7 @@
 {% if  user|is_doctor or user|is_admin%}
 
 <div style=" margin:auto; margin-top:120px;">
+      <form method="POST"  enctype="multipart/form-data">
     <div class="content-section">
         <form method="POST"  enctype="multipart/form-data">
           {% csrf_token %}
@@ -69,10 +70,11 @@
     {{ formset.management_form }}
         {% for form in formset %}
         {% if forloop.last %}
-        {{ form }}
-        {%else%}
+
         {{ form }}
 
+        {%else%}
+        {{ form }}
                       <div class="media">
                         <img id="{{ form.Image.value.url }}" alt="x-ray" onClick="on_click(this.id)" lass="rounded-circle account-img" src="{{ form.Image.value.url }}">
                       </div>

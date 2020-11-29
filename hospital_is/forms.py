@@ -8,13 +8,13 @@ from .models import Compensation_request
 from users.models import AuthUser
 from django.db import models
 from django.forms import formset_factory
-
+from django.forms.formsets import BaseFormSet
 
 class MedicalProblemUpdateForm(forms.ModelForm):
     Title = forms.CharField(max_length=150,
     widget=forms.TextInput(attrs={'style':'max-width: 24em'}),
     required=True)
-    image = forms.ImageField(required=False)
+    image = forms.ImageField(required=False,widget=forms.FileInput)
 
     class Meta:
         model = Medical_problem
@@ -70,7 +70,13 @@ class TicketForm(forms.ModelForm):
         fields = ['Operation','Description']
 class PictureForm(forms.ModelForm):
     Image = forms.ImageField(required=False, widget=forms.FileInput)
+
     class Meta:
         model=Picture
         fields = ['Image','id']
         widgets = {'id': forms.HiddenInput()}
+
+
+class BaseMyFormSet(BaseFormSet):
+    def add_fields(self, form, index):
+        pass
