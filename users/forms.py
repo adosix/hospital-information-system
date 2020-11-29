@@ -8,9 +8,9 @@ import datetime
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
+    email = forms.EmailField(max_length=254)
+    first_name = forms.CharField(required=True,max_length=150)
+    last_name = forms.CharField(required=True,max_length=150)
 
     class Meta:
         model = User

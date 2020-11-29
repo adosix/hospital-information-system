@@ -11,11 +11,13 @@ from django.forms import formset_factory
 from django.forms.formsets import BaseFormSet
 
 class MedicalProblemUpdateForm(forms.ModelForm):
-    Title = forms.CharField(max_length=150,
+    Title = forms.CharField(max_length=255,
     widget=forms.TextInput(attrs={'style':'max-width: 24em'}),
     required=True)
     image = forms.ImageField(required=False,widget=forms.FileInput)
-
+    Description = forms.CharField(max_length=1024,
+    widget=forms.Textarea,
+    required=True)
     class Meta:
         model = Medical_problem
         fields = ['Title', 'Description','image']
@@ -28,7 +30,13 @@ class Status(forms.Form):
         initial = '0',
         required = True,)
 class MedicalProblemCreate(forms.ModelForm):
-    image = forms.ImageField(required=False)
+    Title = forms.CharField(max_length=255,
+    widget=forms.TextInput(attrs={'style':'max-width: 24em'}),
+    required=True)
+    image = forms.ImageField(required=False,widget=forms.FileInput)
+    Description = forms.CharField(max_length=1024,
+    widget=forms.Textarea,
+    required=True)
     class Meta:
         model = Medical_problem
         fields = ['Title', 'Description', 'image']
@@ -49,22 +57,28 @@ class ChooseOperation(forms.Form):
            self.fields['Operation']=forms.ChoiceField(choices=choices, widget=forms.Select,required=False)
         Operation = forms.ChoiceField()
 class MakeCompensation(forms.ModelForm):
-    Operation_r = forms.CharField(required=False)
-    Description_r = forms.CharField(required=False)
+    Operation_r = forms.CharField(max_length=255,required=False)
+    Description_r = forms.CharField(max_length=255,required=False)
 
     class Meta:
         model = Compensation_request
         fields = ['Operation_r','Description_r' ]
 class CompensationOperationsCreate(forms.ModelForm):
+    Operation_r = forms.CharField(max_length=255)
+    Description_r = forms.CharField(max_length=1024)
+
     class Meta:
         model = Compensated_operations
         fields = ['Operation', 'Description']
 class Record(forms.ModelForm):
-
+    Title = forms.CharField(max_length=255)
+    Description = forms.CharField(max_length=255)
     class Meta:
         model = Medical_record
         fields = ['Title', 'Description']
 class TicketForm(forms.ModelForm):
+    Operation = forms.CharField(max_length=255)
+    Description = forms.CharField(max_length=1024)
     class Meta:
         model = Ticket
         fields = ['Operation','Description']

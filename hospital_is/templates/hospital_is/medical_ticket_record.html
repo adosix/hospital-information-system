@@ -3,7 +3,11 @@
 {% load customtags %}
 {% block content %}
 {% if  user|is_doctor or user|is_admin%}
-
+{% if form.errors %}
+    {% for field, errors in form.errors.items %}
+        {{ errors }}
+    {% endfor %}
+{% endif %}
 <div style=" margin:auto; margin-top:120px;">
       <form method="POST"  enctype="multipart/form-data">
     <div class="content-section">
@@ -106,7 +110,7 @@
 <script>
   function on_click(clicked_id)
   {
-      
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -126,10 +130,8 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-} 
+}
 
 }
 </script>
 {% endblock content %}
-
-
