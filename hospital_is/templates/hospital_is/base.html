@@ -44,41 +44,45 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'hospital_is-home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'hospital_is-contact' %}">Contact</a>
+              <a class="nav-item nav-link btn-secondary" href="{% url 'hospital_is-home' %}">Home</a>
+              <a class="nav-item nav-link btn-secondary" href="{% url 'hospital_is-contact' %}">Contact</a>
             </div>
             <div class="navbar-nav">
               {% if user.is_authenticated %}
                 {% if user|is_doctor %}
-                  <a class="nav-item nav-link" href="{% url 'users' %}">Users</a>
-                  <a class="nav-item nav-link" href="{% url 'tickets_doc' user.id %}">Tickets</a>
-                  <a class="nav-item nav-link" href="{% url 'medical_problems_doc' user.id %}">Med problems</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'users' %}">Users</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'tickets_doc' user.id %}">Tickets</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'medical_problems_doc' user.id %}">Med problems</a>
                 {% elif user|is_insurance_w%}
-                  <a class="nav-item nav-link" href="{% url 'compensation_request' %}">Compensation requests</a>
-                  <a class="nav-item nav-link" href="{% url 'compensation_operations' %}">Compensated operations</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'compensation_request' %}">Compensation requests</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'compensation_operations' %}">Compensated operations</a>
                 {% elif user|is_admin%}
-                  <a class="nav-item nav-link" href="{% url 'users' %}">Users</a>
-                  <a class="nav-item nav-link" href="{% url 'tickets_admin' %}">Tickets</a>
-                  <a class="nav-item nav-link" href="{% url 'medical_problems_admin' %}">Medical problems</a>
-                  <a class="nav-item nav-link" href="{% url 'compensation_request' %}">Compensation requests</a>
-                  <a class="nav-item nav-link" href="{% url 'compensation_operations' %}">Compensated operations</a>
-                  {% else %}
-                  <a class="nav-item nav-link" href="{% url 'tickets_pac' user.id %}">Tickets</a>
-                  <a class="nav-item nav-link" href="{% url 'medical_problems_pac' user.id %}">Med problems</a>
+                  <li><a class=" nav-link btn-secondary" href="{% url 'users' %}">Users</a></li>
+                  <li><a class="nav-item nav-link btn-secondary" href="{% url 'tickets_admin' %}">Tickets</a></li>
+                  <li><a class="nav-item nav-link btn-secondary" href="{% url 'medical_problems_admin' %}">Medical problems</a></li>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Compensations
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="nav-item nav-link btn-secondary" href="{% url 'compensation_request' %}">Compensation requests</a></li>
+                      <li><a class="nav-item nav-link btn-secondary" href="{% url 'compensation_operations' %}">Compensated operations</a></li>
+                    </div>
+                </div>
+                {% else %}
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'tickets_pac' user.id %}">Tickets</a>
+                  <a class="nav-item nav-link btn-secondary" href="{% url 'medical_problems_pac' user.id %}">Med problems</a>
                 {% endif %}
-                <a class="nav-item nav-link" href="{% url 'profile' user.id %}">Profile</a>
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-item nav-link btn-secondary" href="{% url 'profile' user.id %}">Profile</a>
+                <a class="nav-item nav-link btn-secondary" href="{% url 'logout' %}">Logout</a>
               {% else %}
-                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-
-
+                <a class="nav-item nav-link btn-secondary" href="{% url 'login' %}">Login</a>
               {% endif %}
             </div>
           </div>
         </div>
       </nav>
     </header>
-
     <main role="main" class="container">
 
           {% block content %}{% endblock %}
