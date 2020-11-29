@@ -7,6 +7,8 @@
 {% block content %}
 
 {% if user.is_authenticated  %}
+
+<div style=" margin:auto; margin-top:120px;">
     <div class="content-section">
         {% if  user|is_doctor %}
           {% for m in Medical_problem %}
@@ -28,15 +30,15 @@
               <div class="media">
                 <img class="rounded-circle account-img" src="{{ m_form.image.value.url }}">
               </div>
-              {%endif%}
+              {% endif %}
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Update</button>
                   <input type="submit" name="del" onclick="return confirm('Are you sure you want to delete this medical problem?')" value="Delete">
                 <h3>Medical records</h3>
-            {%for t in Ticket%}
-            {%if t.Medical_problem_ID == m.id %}
-            {%for r in Record%}
-            {%if r.Ticket_ID == t.id%}
+            {% for t in Ticket %}
+            {% if t.Medical_problem_ID == m.id %}
+            {% for r in Record %}
+            {% if r.Ticket_ID == t.id %}
             <h4>Author</h4>
             <p>{{t.Doctor_ID|get_username:AuthUser}}</p>
             <h4>Title</h4>
@@ -44,10 +46,10 @@
             <h4>Description</h4>
             <p>{{r.Description}}</p>
 
-            {%endif%}
-            {%endfor%}
-            {%endif%}
-            {%endfor%}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
               </div>
           </form>
           {% endif %}
@@ -85,14 +87,22 @@
               {% csrf_token %}
               <fieldset class="form-group">
 
-                  <legend class="border-bottom mb-4">Medical problem info</legend>
-                  <legend class="border-bottom mb-4">Username pacienta</legend>
-                  {{user.username}}
-                    <legend class="border-bottom mb-4">Username doktora</legend>
-                  <p>{{m.Doctor_ID|get_username:AuthUser}}<br>
-                    <legend class="border-bottom mb-4">TItle</legend>
+                    <legend class="border-bottom mb-4">Disease</legend>
+                    <h3>{{m.Title}}</h3>
+                    <legend class="border-bottom mb-4">Status</legend>
+                    <h3>
+                  {% if m.Status == 0 %}
+                    active
+                  {% elif m.Status == 1 %}
+                    waiting
+                  {% else %}
+                    finished
+                  {% endif %}</h3>
+                    <legend class="border-bottom mb-4">Name and username of doctor</legend>
+                  <h4>{{m.Doctor_ID|get_first_name:AuthUser}} {{m.Doctor_ID|get_last_name:AuthUser}}</h4>
+                    <h4>{{m.Doctor_ID|get_username:AuthUser}}</h4>
 
-                  {{m.Title}}<br>
+                  
                   <legend class="border-bottom mb-4">Description</legend>
 
                   {{m.Description}}<br>
@@ -100,20 +110,14 @@
                   <div class="media">
                     <img class="rounded-circle account-img" src="{{ m_form.image.value.url }}">
                   </div>
-                  {%endif%}
-                  {%if m.Status == 0%}
-                    active
-                  {%elif m.Status == 1%}
-                    waiting
-                  {%else %}
-                  finished
-                  {%endif%}<br></p>
+                  {% endif %}
+                  
               <div class="form-group">
                 <h3>Medical records</h3>
-            {%for t in Ticket%}
-            {%if t.Medical_problem_ID == m.id %}
-            {%for r in Record%}
-            {%if r.Ticket_ID == t.id%}
+            {% for t in Ticket %}
+            {% if t.Medical_problem_ID == m.id %}
+            {% for r in Record %}
+            {% if r.Ticket_ID == t.id %}
             <h4>Author</h4>
             <p>{{t.Doctor_ID|get_username:AuthUser}}</p>
             <h4>Title</h4>
@@ -121,32 +125,16 @@
             <h4>Description</h4>
             <p>{{r.Description}}</p>
 
-            {%endif%}
-            {%endfor%}
-            {%endif%}
-            {%endfor%}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
               </div>
           {% endif %}
         {% endfor %}
         {% endif %}
 
-	<!-- /Error messaging -->
-
-            <!---    <h1>Title: {{m.Title}} </h1>
-
-                <h3>patient: <br>
-                    username: {{ m.Patient_ID|get_username:AuthUser  }}<br>
-                    first_name: {{ m.Patient_ID|get_first_name:AuthUser  }}<br>
-                    last_name: {{ m.Patient_ID|get_last_name:AuthUser  }}
-                    </h3>
-                <h3>doctor: <br>
-                      username: {{ m.Doctor_ID|get_username:AuthUser  }}<br>
-                      first_name: {{ m.Doctor_ID|get_first_name:AuthUser  }}<br>
-                      last_name: {{ m.Doctor_ID|get_last_name:AuthUser  }}
-
-                </h3>
-                <p>Desription: <br> {{m.Description}}</p>
-                </p> -->
+    </div>
     </div>
     {% endif %}
 

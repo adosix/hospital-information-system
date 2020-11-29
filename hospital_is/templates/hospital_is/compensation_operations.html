@@ -5,7 +5,20 @@
 {% if user.is_authenticated  %}
 {% if user|is_admin or user|is_insurance_w %}
 
-<div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
+<header class="masthead  mastheadcompensated text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5"></br>Compensated operations</br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+
+<div class="table-responsive" style="width: 95%; margin:auto;">
 <a class="btn btn-outline-info add_new_btn" href="{% url 'compensation_operations_create' %}">Create compensated operation</a>
 <table id="search_table" class="table table-bordered " style="width:100%">
 

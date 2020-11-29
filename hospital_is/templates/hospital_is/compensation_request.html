@@ -1,9 +1,25 @@
-{% extends "hospital_is/base.html" %}
+{% extends "hospital_is/base_wide.html" %}
 {% block content %}
 {% load customtags %}
+ {% load multifor %}
 
 {% if user.is_authenticated  %}
 {% if user|is_admin or user|is_insurance_w %}
+
+ <header class="masthead  mastheadinsurance text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5"></br>Pending requests</br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+
+<div class="table-responsive" style="width: 95%; margin:auto; margin-top:25px;">
 <table id="search_table" class="table table-bordered " style="width:100%">
 
         <thead class="sorting">
@@ -14,9 +30,7 @@
         </thead>
           <tbody id="tablebody" >
             {% for m in Compensation_request %}
-            {%if m.status == 0%}
-
-
+            {% if m.status == 0%}
             <tr>
                 <td>{{ m.ticket_id|get_username_request:Ticket }}</td>
                 <td>{{ m.Operation_r }}</td>
@@ -27,7 +41,7 @@
                 <td><input type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to decline this request?')" value="Decline"><input type="submit" name="{{m.id}}" onclick="return confirm('Are you sure you want to accept this request?')" id="accept" value="Accept"></td>
                 </form>
             </tr>
-              {%endif%}
+              {% endif %}
           {% endfor %}
 
           </tbody>
@@ -36,9 +50,25 @@
         <th class="order">Operation</th>
         <th class="order">Description</th>
         <th class="order">edit</th>
-
+        </tfoot>
     </table>
-    <table id="search_table" class="table table-bordered " style="width:100%">
+  </div>
+
+    <header class="masthead  mastheadinsurance2 text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5"></br>Resolved requests</br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+<div class="table-responsive" style="width: 95%; margin:auto;">
+<div class="table-responsive" style="width: 95%;">
+    <table id="search_table2" class="table table-bordered " style="width:100%">
 
             <thead class="sorting">
                     <th >patient</th>
@@ -51,13 +81,13 @@
             </thead>
               <tbody id="tablebody" >
                 {% for m in Compensation_request %}
-                  {%if m.status != 0%}
+                  {% if m.status != 0 %}
 
                 <tr>
                     <td>{{ m.ticket_id|get_username_request:Ticket }}</td>
                     <td>{{ m.Operation_r }}</td>
                     <td>{{ m.Description_r }}</td>
-                    {%if m.status == 1%}
+                    {% if m.status == 1 %}
                     <td>accepted</td>
 
 
@@ -68,7 +98,7 @@
                   </form>
 
                     {% endif %}
-                    {%else%}
+                    {% else %}
                     <td>not accepted</td>
                     {% if user|is_admin %}
                     <form method="POST" enctype="multipart/form-data">
@@ -77,10 +107,10 @@
                     {% endif %}
                   </form>
 
-                    {%endif%}
+                    {% endif %}
                 </tr>
 
-                {%endif%}
+                {% endif %}
             {% endfor %}
               </tbody>
            <tfoot>
@@ -90,32 +120,38 @@
             <th class="order">status</th>
             {% if user|is_admin %}
             <th class="order">edit</th>
-            {%endif%}
+            {% endif %}
+            </tfoot>
         </table>
-
-    {% if is_paginated %}
-
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
-       {% endif %}
-
+</div>
+</div>
+</div>
 {% endif %}
 {% endif %}
 
+<script>
+$(document).ready(function() {
+  // Setup - add a text input to each footer cell
+  $('#search_table tfoot th').each( function () {
+    var title = $('#search_table thead th').eq( $(this).index() ).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } );
+    // DataTable
+    var table = $('#search_table').DataTable();
+    // Apply the search
+    table.columns().eq( 0 ).each( function ( colIdx )
+    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
+    { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
 
+$(document).ready(function() {
+  // Setup - add a text input to each footer cell
+  $('#search_table2 tfoot th').each( function () {
+    var title = $('#search_table2 thead th').eq( $(this).index() ).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } );
+    // DataTable
+    var table = $('#search_table2').DataTable();
+    // Apply the search
+    table.columns().eq( 0 ).each( function ( colIdx )
+    { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
+    { table .column( colIdx ) .search( this.value ) .draw(); } ); } ); } );
+</script>
 {% endblock content %}

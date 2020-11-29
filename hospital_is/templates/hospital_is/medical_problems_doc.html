@@ -4,8 +4,20 @@
 
 {% if user.is_authenticated  %}
 {% if user|is_doctor  %}
-
-<div style=" margin:auto; margin-top:120px;">
+ <header class="masthead  mastheadmedical_problems text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" >
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5"></br>Medical problems</br></br></br></h1>
+        </div >
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+  
+<div style=" margin:auto; ">
 <div class="table-responsive" style="width: 95%; margin:auto;margin-top:150px;">
 <a class="btn btn-outline-info add_new_btn" href="{% url 'medical_problem_create' %}">
 New medical problem 

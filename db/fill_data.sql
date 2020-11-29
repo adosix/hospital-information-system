@@ -57,54 +57,54 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "gunsandflowers","Vincent","Jarvis","krem.marek@gmail.com","0","1","2020-10-18 21:40:34.113892");
 
 --
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Jense0"),'2000-09-01');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Stout0"),'2000-09-01');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Rodri0"),'1990-09-01');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Ponce0"),'1995-09-01');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Mckeo0"),'1985-12-01');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Edge0"),'1965-11-07');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Cohen0"),'1945-02-28');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Firth0"),'1991-08-29');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Mcnal0"),'1981-08-29');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Pope0"),'1985-10-29');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Kouma0"),'1998-10-29');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "lostonyou"),'1988-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "starostaOravy"),'1969-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "hahahehe"),'2005-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "username"),'1958-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "troska_dlhsia_Pope0"),'1969-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojhopsa"),'1969-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojumacku"),'1969-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "skrecok"),'1978-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "deadpool"),'1989-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "ironman"),'1966-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "pursuitofhapiness"),'1969-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "linkinpark"),'1999-10-14');
-INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "gunsandflowers"),'2006-10-14');
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Jense0"),'2000-09-01',"../media/default_admin.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Stout0"),'2000-09-01',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Rodri0"),'1990-09-01',"../media/default_ins.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Ponce0"),'1995-09-01',"../media/default_ins.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Mckeo0"),'1985-12-01',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Edge0"),'1965-11-07',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Cohen0"),'1945-02-28',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Firth0"),'1991-08-29',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Mcnal0"),'1981-08-29',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Pope0"),'1985-10-29',"../media/default_doc.jpg");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Kouma0"),'1998-10-29',"../media/default_admin.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "lostonyou"),'1988-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "starostaOravy"),'1969-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "hahahehe"),'2005-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "username"),'1958-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "troska_dlhsia_Pope0"),'1969-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojhopsa"),'1969-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "mamradmojumacku"),'1969-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "skrecok"),'1978-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "deadpool"),'1989-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "ironman"),'1966-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "pursuitofhapiness"),'1969-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "linkinpark"),'1999-10-14',"../media/default_user.png");
+INSERT INTO users_profile( user_id,birth_date,image)
+VALUES((SELECT id    FROM  auth_user    WHERE username = "gunsandflowers"),'2006-10-14',"../media/default_user.png");
 --
 
 -- INSURANCE WORKER - 2
