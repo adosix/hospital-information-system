@@ -90,7 +90,11 @@
                   {{user.username}}
                     <legend class="border-bottom mb-4">Username doktora</legend>
                   <p>{{m.Doctor_ID|get_username:AuthUser}}<br>
+                    <legend class="border-bottom mb-4">TItle</legend>
+
                   {{m.Title}}<br>
+                  <legend class="border-bottom mb-4">Description</legend>
+
                   {{m.Description}}<br>
                   {% if m_form.image is not null%}
                   <div class="media">

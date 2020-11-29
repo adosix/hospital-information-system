@@ -162,8 +162,16 @@ def tickets_doc(request,pk):
         'Patient':  Patient.objects.all(),
         'Medical_problem':  Medical_problem.objects.all(),
     }
+def tickets_pac(request,pk):
 
-    return render(request, 'hospital_is/tickets_doc.html', context)
+    context = {
+        'pk': pk,
+        'Ticket': Ticket.objects.all(),
+        'AuthUser': AuthUser.objects.all(),
+        'Patient':  Patient.objects.all(),
+        'Medical_problem':  Medical_problem.objects.all(),
+    }
+    return render(request, 'hospital_is/tickets_pac.html', context)
 def tickets_admin(request):
     if request.method == 'POST':
         for name,value in request.POST.items():

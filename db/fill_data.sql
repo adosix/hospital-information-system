@@ -68,7 +68,7 @@ VALUES((SELECT id    FROM  auth_user    WHERE username = "Ponce0"),'1995-09-01')
 INSERT INTO users_profile( user_id,birth_date)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "Mckeo0"),'1985-12-01');
 INSERT INTO users_profile( user_id,birth_date)
-VALUES((SELECT id    FROM  auth_user    WHERE username = "Edge"),'1965-11-07');
+VALUES((SELECT id    FROM  auth_user    WHERE username = "Edge0"),'1965-11-07');
 INSERT INTO users_profile( user_id,birth_date)
 VALUES((SELECT id    FROM  auth_user    WHERE username = "Cohen0"),'1945-02-28');
 INSERT INTO users_profile( user_id,birth_date)
@@ -126,7 +126,7 @@ WHERE username = "Mckeo0";
 INSERT INTO hospital_is_doctor
 SELECT id
 FROM  auth_user
-WHERE username = "Edge";
+WHERE username = "Edge0";
 INSERT INTO hospital_is_doctor
 SELECT id
 FROM  auth_user
@@ -227,10 +227,10 @@ VALUES ("chirurgicke odstranenie slepeho creva","v pripade dlhsieho pobytu v nem
 
 -- MEDICAL PROBLEM
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("0",(SELECT id FROM auth_user  WHERE username = "lostonyou"),(SELECT id FROM  auth_user  WHERE username = "Edge"), "Stressful Ebola", "Blood in urine and feeling tired slowly increase in severity over several hours, but one symptom generally lags behind the other. After the initial onset, blood in urine generally fades away, only to return later.
+VALUES ("0",(SELECT id FROM auth_user  WHERE username = "lostonyou"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "Stressful Ebola", "Blood in urine and feeling tired slowly increase in severity over several hours, but one symptom generally lags behind the other. After the initial onset, blood in urine generally fades away, only to return later.
 The experience of ear pain is often experienced more severe due to the experience of feeling tired.");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("1",(SELECT id FROM auth_user  WHERE username = "starostaOravy"),(SELECT id FROM  auth_user  WHERE username = "Edge"), "Decaying Sleep Disorder", "tingling hands and constipation may start within a few days, but one symptom generally lags behind the other. After the initial onset, tingling hands often increases in intensity. Around this time eye discharge is experienced by the majority of people.
+VALUES ("1",(SELECT id FROM auth_user  WHERE username = "starostaOravy"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "Decaying Sleep Disorder", "tingling hands and constipation may start within a few days, but one symptom generally lags behind the other. After the initial onset, tingling hands often increases in intensity. Around this time eye discharge is experienced by the majority of people.
 The experience of eye discharge may be amplified by the experience of constipation.
 After a few more days delirium is experienced fairly often and is mostly experienced after eating.
 Throughout the course of the disease, a fever may be experienced, but only in a minority of people and can be experienced at extreme levels.");
@@ -283,6 +283,6 @@ VALUES ("1",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Stressful
 INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, description)
 VALUES ("2",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Crystal Blisters"),(SELECT id FROM  auth_user  WHERE username = "Pope0"), "X-ray", "X-ray of crystals formed due to disease");
 INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, description)
-VALUES ("4",(SELECT id FROM hospital_is_medical_problem  WHERE Title = "Incurable Rabies"),(SELECT id FROM  auth_user  WHERE username = "Edge"), "CT", "perform CT");
+VALUES ("4",(SELECT id FROM hospital_is_medical_problem  WHERE Title = "Incurable Rabies"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "CT", "perform CT");
 INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, description)
-VALUES ("5",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Lion Pox"),(SELECT id FROM  auth_user  WHERE username = "Edge"), "surface X-ray", "surface X-ray of subcutaneous glands");
+VALUES ("5",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Lion Pox"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "surface X-ray", "surface X-ray of subcutaneous glands");

@@ -57,7 +57,6 @@ def edit_profile(request, username_to_find):
 
             usr_tmp = u_form.save(commit=False)
             messages.success(request, f'An account has been updated!')
-            usr_tmp = u_form.save(commit=False)
             if usr_tmp.password != '':
                 usr_tmp.password = make_password(usr_tmp.password)
             else:
@@ -144,7 +143,7 @@ def register(request):
 
             user = u_form.save(commit=False)
             profile=p_form.save(commit=False)
-            
+
             #getting username
             while True:
                 i = 0
