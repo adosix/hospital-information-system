@@ -32,7 +32,7 @@ from .models import Patient
 from .models import Compensated_operations
 from .models import Compensation_request
 from .models import Ticket,Picture
-from .forms import MedicalProblemUpdateForm, MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
+from .forms import MedicalProblemUpdateForm, BaseMyFormSet,MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
 from django.forms import modelformset_factory
 
 def default(request):
@@ -319,9 +319,7 @@ def medical_ticket_record(request, pk):
             record_f = Record(request.POST,instance=record)
         except:
             record_f = Record(request.POST,request.FILES)
-        print(formset)
         formset=PictureFormSet(request.POST,request.FILES)
-        print(formset)
         ticket = get_object_or_404(Ticket, id=pk)
         if(request.user.id != ticket.Doctor_ID and(not request.user.is_superuser and not request.user.is_staff)):
             messages.warning(request, f'You dont have permissions to update this file')
@@ -353,25 +351,47 @@ def medical_ticket_record(request, pk):
                     id = 0
                 record.id = id
                 r=record.save()
-
             instance =formset.save(commit=False)
-            for p in instance:
-                try:
-                    obj = get_object_or_404(Picture, Image=p.Image,r_id=id)
-                    obj.Image = p.Image
-                    obj.save()
-                except:
 
+            initial=[{'Image': x.Image,'id': x.id}  for x in Picture.objects.all() if x.r_id == id ]
+            leno = len(initial)
+            if leno == 0:
+                for p in instance:
                     p.r_id= id
                     tmp =Picture.objects.all()
                     try:
                         tmp = tmp[len(tmp)-1]
-                        id = tmp.id+1
+                        id_p = tmp.id+1
                     except:
-                        id = 0
-                    p.id=id
+                        id_p = 0
+                    p.id=id_p
                     if(p.Image != ''):
                         p.save()
+            else:
+                l=[key[5:6] for key in request.FILES.keys()]
+                if len(l) > 0 :
+                    tmp = 0
+                    instance_c=0
+                    for x in Picture.objects.all():
+                        if x.r_id != record.id :
+                            continue
+                        if(tmp == int(l[instance_c]) and tmp < leno):
+                            x.Image=instance[instance_c].Image
+                            instance_c+=1
+                            x.save()
+                        tmp += 1
+
+                    if int(l[-1]) == leno:
+                        instance[instance_c].r_id=id
+                        tmp =Picture.objects.all()
+                        try:
+                            tmp = tmp[len(tmp)-1]
+                            id_p = tmp.id+1
+                        except:
+                            id_p = 0
+                        instance[instance_c].id=id_p
+                        if(instance[instance_c].Image != ''):
+                            instance[instance_c].save()
             initial=[{'Image': x.Image}  for x in Picture.objects.all() if x.r_id == record.id ]
             formset=PictureFormSet(queryset=Picture.objects.none(),initial=initial)
             formset.extra = len(initial)+1
@@ -454,6 +474,8 @@ def medical_problem_edit(request, pk):
         'AuthUser': AuthUser.objects.all(),
         'Doctor': Doctor.objects.all(),
         'Ticket': Ticket.objects.all(),
+                'Picture' :Picture.objects.all(),
+
     }
 
     return render(request, 'hospital_is/medical_problem_edit.html', context)

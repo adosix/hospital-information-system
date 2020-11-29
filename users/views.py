@@ -177,25 +177,34 @@ def register(request):
                     user.is_staff = True
                     user.save()
                     Admin.objects.create(id = user.id)
+                    if profile.image == "default.jpg":
+                        profile.image = "default_admin.png"
                 elif(role_form == '1'):
                     user.is_superuser = False
                     user.is_staff = False
                     user.save()
                     Patient.objects.create(id = user.id)
-
+                    if profile.image == "default.jpg":
+                        profile.image = "default_user.png"
                 elif(role_form == '2'):
                     user.is_superuser = True
                     user.is_staff = False
                     user.save()
                     Insurance_worker.objects.create(id = user.id)
+                    if profile.image == "default.jpg":
+                        profile.image = "default_ins.png"
                 else:
                     user.is_superuser = False
                     user.is_staff = True
                     user.save()
                     Doctor.objects.create(id = user.id)
+                    if profile.image == "default.jpg":
+                        profile.image = "default_doc.jpg"
             else:
                 user.save()
                 Patient.objects.create(id = user.id)
+                if profile.image == "default.jpg":
+                    profile.image = "default_user.png"
             created_row = get_object_or_404(Profile, user_id= user.id)
             created_row.birth_date = profile.birth_date
             created_row.image = profile.image
@@ -204,7 +213,7 @@ def register(request):
             #TOGO
             username = u_form.cleaned_data.get('username')
             messages.success(request, f'Account has been created')
-            return redirect('hospital_is-home')
+            return redirect('/users/')
         else:
             messages.warning(request, f'Your account wasnt created!')
             u_form = UserRegisterForm()
