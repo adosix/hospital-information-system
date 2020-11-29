@@ -3,11 +3,7 @@
 {% load customtags %}
 {% block content %}
 {% if  user|is_doctor or user|is_admin%}
-{% if form.errors %}
-    {% for field, errors in form.errors.items %}
-        {{ errors }}
-    {% endfor %}
-{% endif %}
+
 <div style=" margin:auto; margin-top:120px;">
 {% if messages %}
             {% for message in messages %}
@@ -29,14 +25,19 @@
               <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
 
               {{ record_f|crispy }}
-              {%for p in Picture %}
-              {%if pk == p.r_id %}
-              <div class="media">
-                <img class="rounded-circle account-img" src="{{ p.image.value.url }}">
-              </div>
-              {%endif%}
-              {%endfor%}
-              {{ picture_form|crispy }}
+              {{ formset.management_form }}
+                  {% for form in formset %}
+                  {% if forloop.last %}
+
+                  {{ form }}
+
+                  {%else%}
+                  {{ form }}
+                                <div class="media">
+                                  <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" lass="rounded-circle account-img" src="{{ form.Image.value.url }}">
+                                </div>
+                  {%endif%}
+                  {% endfor %}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Update</button>
@@ -48,20 +49,19 @@
               <legend class="border-bottom mb-4">Medical Record for Ticket </legend>
 
               {{ record_f|crispy }}
-              {%for m in Medical_record%}
-              {%if pk == m.Ticket_ID %}
-              {%for p in Picture%}
+              {{ formset.management_form }}
+                  {% for form in formset %}
+                  {% if forloop.last %}
 
-              {%if m.id == p.r_id %}
+                  {{ form }}
 
-              <div class="media">
-                <img class="rounded-circle account-img" src="{{ p.Image.url }}">
-              </div>
-              {%endif%}
-              {%endfor%}
-              {%endif%}
-              {%endfor%}
-              {{ picture_form|crispy }}
+                  {%else%}
+                  {{ form }}
+                                <div class="media">
+                                  <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" lass="rounded-circle account-img" src="{{ form.Image.value.url }}">
+                                </div>
+                  {%endif%}
+                  {% endfor %}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Post</button>
