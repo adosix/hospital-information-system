@@ -253,14 +253,19 @@ def medical_problem_tickets(request, pk):
                         if t.Medical_problem_ID == medical_problem.id and t.Status == 0:
                             medical_problem.Status = 1
                     medical_problem.save()
+                    messages.success(request, f'Medical ticket deleted.')
+
                     return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
                 else :
                     messages.warning(request, f'Can not delete opened ticket.')
                     return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
+        ticket = get_object_or_404(Ticket, id = key)
         medical_problem = get_object_or_404(Medical_problem, id = ticket.Medical_problem_ID)
-
-
+        if(request.user.id != ticket.Doctor_ID and not request.user.is_superuser ):
+            messages.warning(request, f'You dont have permissions to update this file')
+            return HttpResponseRedirect("/medical_problem_tickets/" + str(pk))
         if(status == "opened"):
+
             tmp = False
             for r in Medical_record.objects.all():
                 if ticket.id == r.Ticket_ID:
@@ -276,12 +281,14 @@ def medical_problem_tickets(request, pk):
                     medical_problem.Status = 1
             medical_problem.updated=ticket.updated
             medical_problem.save()
+            messages.success(request, f'Medical ticket closed.')
         else:
             ticket.Status = 0
             ticket.save()
             medical_problem.Status = 1
             medical_problem.updated=ticket.updated
             medical_problem.save()
+            messages.success(request, f'Medical ticket opened.')
     context = {
         'Medical_problem': Medical_problem.objects.all(),
         'm_problem': get_object_or_404(Medical_problem, id =pk),
@@ -436,7 +443,7 @@ def medical_problem_edit(request, pk):
                         messages.warning(request, f'All tickets have to be done before closing medical problem.')
                         return HttpResponseRedirect("/medical_problem_edit/" + str(pk))
                 medical_problem.Status = 2;
-
+            medical_problem.Status=status_f
             pac = get_object_or_404(AuthUser, username = pac)
             doc = get_object_or_404(AuthUser, username = doc)
 
@@ -528,7 +535,10 @@ def medical_ticket_create(request,pk):
         medical_problem = get_object_or_404(Medical_problem, id=pk)
         if(medical_problem.Status == 2):
             messages.warning(request, f'Ticket   can not be updated when the med problem is finished.')
-            return HttpResponseRedirect("/medical_problems_admin/" )
+            if request.user.is_superuser:
+                return HttpResponseRedirect("/medical_problems_admin/")
+            else:
+                return HttpResponseRedirect("/medical_problems_doc/" + str(request.user.id))
         t_form = TicketForm(request.POST)
         user_f = request.POST['Doctor']
         if(t_form.is_valid() ):

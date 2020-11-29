@@ -3,6 +3,7 @@
 {% load customtags %}
 
 {% if user.is_authenticated  %}
+
  <header class="masthead  mastheadtickets text-white text-center">
     <div class="overlay"></div>
     <div class="container">
@@ -18,14 +19,15 @@
     </div>
   </header>
 <div style=" margin:auto;">
+  {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
 {% if  user|is_admin %}
-{% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
+
 <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">
@@ -106,10 +108,10 @@
                   {% csrf_token %}
                   <td><a style="width:100%;" class="btn btn-outline-info" href="#">
                   {% if m.Status == 1%}
-                    closed
+                    <input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to open this ticket?')" value="closed" label = "del" >
 
                   {% elif m.Status == 0 %}
-                    open
+                  <input  style="width:100%;" class="btn btn-outline-info" type="submit" name={{m.id}} onclick="return confirm('Are you sure you want to close this ticket?')" value="opened" label="open">
 
                   {% else %}
                     Doctor neexistuje
