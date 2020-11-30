@@ -35,6 +35,12 @@ from .models import Ticket,Picture
 from .forms import MedicalProblemUpdateForm, BaseMyFormSet,MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
 from django.forms import modelformset_factory
 
+def handler404(request, *args, **argv):
+    context = {}
+    response = render(request, "hospital_is/404.html", context=context)
+    response.status_code = 404
+    return response
+
 def default(request):
     context = {
         'Medical_problem': Medical_problem.objects.all(),
@@ -385,7 +391,7 @@ def medical_ticket_record(request, pk):
                     for x in Picture.objects.all():
                         if x.r_id != record.id :
                             continue
-                        if(tmp == int(l[instance_c]) and tmp < leno):
+                        if( tmp < len(l) and tmp == int(l[instance_c])):
                             x.Image=instance[instance_c].Image
                             instance_c+=1
                             x.save()

@@ -10,8 +10,12 @@ from .views import (
     compensation_operations,
     compensation_operations_create,
     compensation_operations_edit,
+    handler404,
 )
 from . import views
+
+from django.urls import re_path
+
 
 urlpatterns = [
     path('', views.default, name='hospital_is-home'),
@@ -35,6 +39,9 @@ urlpatterns = [
     path('compensation_operations_edit/<str:pk>/', views.compensation_operations_edit, name='compensation_operations_edit'),
     path('tickets_admin/', views.tickets_admin, name='tickets_admin'),
     path('contact/', views.contact, name='hospital_is-contact'),
+
+    
+        re_path(r'.*',  views.handler404),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
