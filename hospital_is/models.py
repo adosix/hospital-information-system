@@ -24,7 +24,7 @@ class Medical_problem(models.Model):
     Doctor_ID = models.IntegerField()
     Title = models.TextField()
     Description = models.TextField()
-    image = models.ImageField(default='default.jpg',upload_to='medical_problems_media')
+    image = models.ImageField(default='cross.png',upload_to='medical_problems_media')
     Status = models.IntegerField(default=0)
     created =models.DateTimeField(default=datetime.now())
     updated =models.DateTimeField(default=datetime.now())
