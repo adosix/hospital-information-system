@@ -58,7 +58,7 @@
                   {%else%}
                   {{ form }}
                                 <div class="media">
-                                  <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" lass="rounded-circle account-img" src="{{ form.Image.value.url }}">
+                                  <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" src="{{ form.Image.value.url }}">
                                 </div>
                   {%endif%}
                   {% endfor %}
@@ -84,18 +84,18 @@
 
         {{ form }}
 
-        {%else%}
+        {% else %}
         {{ form }}
                       <div class="media">
-                        <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" lass="rounded-circle account-img" src="{{ form.Image.value.url }}">
+                        <img id="{{ form.Image.value.url }}" onClick="on_click(this.id)" src="{{ form.Image.value.url }}">
                       </div>
-        {%endif%}
+        {% endif %}
         {% endfor %}
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit" >Update</button>
           </div>
-          {%endif%}
+          {% endif %}
 
         </form>
     </div>

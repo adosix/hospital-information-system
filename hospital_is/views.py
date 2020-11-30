@@ -24,7 +24,7 @@ from .models import Medical_record
 from users.models import AuthUser
 from users.models import Profile
 from users.forms import ChooseDoctor
-from users.forms import ChoosePacient
+from users.forms import ChoosePatient
 from users.forms import ChooseInsurance_worker
 from .models import Doctor
 from .models import Admin
@@ -496,11 +496,11 @@ def medical_problem_edit(request, pk):
     medical_problem = get_object_or_404(Medical_problem, id=pk)
     patient = get_object_or_404(AuthUser, id = medical_problem.Patient_ID)
     doctor= get_object_or_404(AuthUser, id = medical_problem.Doctor_ID)
-    tmp = ChoosePacient(-1, patient.username)
+    tmp = ChoosePatient(-1, patient.username)
     tmp2 = ChooseDoctor(-1,doctor.username)
     if request.method == 'POST':
         status_f = request.POST['Status']
-        pac = request.POST['Pacient']
+        pac = request.POST['Patient']
         doc = request.POST['Doctor']
         m_form = MedicalProblemUpdateForm(request.POST, request.FILES, instance=medical_problem)
         if m_form.is_valid() :
@@ -560,7 +560,7 @@ def medical_problem_edit(request, pk):
 def medical_problem_create(request):
     if (request.user.is_staff == False):
         return render(request, 'hospital_is/405.html', {})
-    tmp = ChoosePacient(-1,'')
+    tmp = ChoosePatient(-1,'')
     tmp2 = ChooseDoctor(-1,request.user.username)
     m_form = MedicalProblemCreate()
 
@@ -568,7 +568,7 @@ def medical_problem_create(request):
         m_form = MedicalProblemCreate(request.POST, request.FILES)
         if m_form.is_valid():
             medical_problem = m_form.save(commit=False)
-            pac = request.POST['Pacient']
+            pac = request.POST['Patient']
             doc = request.POST['Doctor']
             pac = get_object_or_404(AuthUser, username = pac)
             doc = get_object_or_404(AuthUser, username = doc)

@@ -52,17 +52,17 @@ class ChooseDoctor(forms.Form):
         self.fields['Doctor']=forms.ChoiceField(choices=choices, widget=forms.Select)
         self.fields['Doctor'].initial = initial
      Doctor = forms.ChoiceField()
-class ChoosePacient(forms.Form):
+class ChoosePatient(forms.Form):
 
      def __init__(self,pk,initial,*args,**kwargs):
-        super(ChoosePacient, self).__init__(*args, **kwargs)
+        super(ChoosePatient, self).__init__(*args, **kwargs)
         choices = []
         for u  in AuthUser.objects.all():
             if not u.is_staff and not u.is_superuser and not u.id==pk :
                 choices.append([u.username,u.username])
-        self.fields['Pacient']=forms.ChoiceField(choices=choices, widget=forms.Select)
-        self.fields['Pacient'].initial = initial
-     Pacient = forms.ChoiceField()
+        self.fields['Patient']=forms.ChoiceField(choices=choices, widget=forms.Select)
+        self.fields['Patient'].initial = initial
+     Patient = forms.ChoiceField()
 class ChooseInsurance_worker(forms.Form):
 
      def __init__(self,pk,initial,*args,**kwargs):
@@ -84,7 +84,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class UserRoleForm(forms.Form):
 
     Role = forms.TypedChoiceField(label = "Choose role",
-        choices = ((1, "Pacient"), (0, "Admin"),(2,"Insurance_worker"),(3,"Doctor")),
+        choices = ((1, "Patient"), (0, "Admin"),(2,"Insurance_worker"),(3,"Doctor")),
         coerce = lambda x: bool(int(x)),
         widget = forms.RadioSelect,
         initial = '1',
