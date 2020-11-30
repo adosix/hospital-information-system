@@ -20,8 +20,13 @@ from django.contrib.auth.hashers import make_password
 from datetime import datetime
 
 def edit_profile(request, username_to_find):
+    if (request.user.is_staff == False or request.user.is_superuser == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        usr = get_object_or_404(AuthUser, username= username_to_find)
+    except:
+        return render(request, 'hospital_is/404.html', {})
 
-    usr = get_object_or_404(AuthUser, username= username_to_find)
     role_form = UserRoleForm()
     if usr.is_staff and usr.is_superuser:
         role_form.fields['Role'].initial=[0]
@@ -105,6 +110,13 @@ def edit_profile(request, username_to_find):
 
     return render(request, 'users/edit_profile.html', context)
 def move_medical_problems(request,pk):
+    if request.user.is_staff == False or request.user.is_superuser == False:
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        usr = get_object_or_404(AuthUser, id=pk)
+        doc = get_object_or_404(Doctor, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
     u_form = ChooseDoctor(pk,'')
     if request.method == 'POST':
         usr = request.POST['Doctor']
@@ -130,6 +142,8 @@ def move_medical_problems(request,pk):
     return render(request, 'users/move_medical_problems.html', context)
 
 def register(request):
+    if  request.user.is_staff == False :
+        return render(request, 'hospital_is/405.html', {})
     role_form = UserRoleForm()
     if request.method == 'POST':
         u_form = UserRegisterForm(request.POST)
@@ -234,7 +248,13 @@ def register(request):
 
 @login_required
 def profile(request,pk):
-    usr = get_object_or_404(AuthUser, id=pk)
+    try:
+
+        usr = get_object_or_404(AuthUser, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if request.user.id != pk:
+        return render(request, 'hospital_is/405.html', {})
     pass_tmp = usr.password
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=usr)

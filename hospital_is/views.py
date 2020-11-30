@@ -35,11 +35,12 @@ from .models import Ticket,Picture
 from .forms import MedicalProblemUpdateForm, BaseMyFormSet,MedicalProblemUsers, MedicalProblemCreate, CompensationOperationsCreate,UsersCompensation,Status,Record,TicketForm,MakeCompensation,ChooseOperation,PictureForm
 from django.forms import modelformset_factory
 
-def handler404(request, *args, **argv):
-    context = {}
-    response = render(request, "hospital_is/404.html", context=context)
-    response.status_code = 404
-    return response
+def handler40(request):
+    context = {
+        'Medical_problem': Medical_problem.objects.all(),
+        'doctor': Doctor.objects.all()
+    }
+    return render(request, "hospital_is/404.html",context)
 
 def default(request):
     context = {
@@ -56,13 +57,16 @@ def contact(request):
     return render(request, 'hospital_is/contact.html', context)
 
 def users(request):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
     context = {
         'AuthUser': AuthUser.objects.all(),
         'Profiles': Profile.objects.all()
     }
     return render(request, 'hospital_is/users.html', context)
 def compensation_request(request):
-
+    if (request.user.is_superuser == False):
+        return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
         for name,value in request.POST.items():
             if value == "Decline" or value == "Accept" or value == 'Pending':
@@ -85,6 +89,14 @@ def compensation_request(request):
     }
     return render(request, 'hospital_is/compensation_request.html', context)
 def make_compensation(request, pk):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        tick = get_object_or_404(Ticket, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.is_superuser== False and (request.user.id != tick.Doctor_ID)):
+        return render(request, 'hospital_is/405.html', {})
     m_form = MakeCompensation()
     c_form = ChooseOperation(-1,'')
     if request.method == 'POST':
@@ -123,6 +135,8 @@ def make_compensation(request, pk):
     return render(request, 'hospital_is/make_compensation.html', context)
 
 def medical_problems_admin(request):
+    if request.user.is_staff == False or request.user.is_superuser == False:
+        return render(request, 'hospital_is/405.html', {})
     context = {
         'Medical_problem': Medical_problem.objects.all(),
         'AuthUser': AuthUser.objects.all()
@@ -130,6 +144,15 @@ def medical_problems_admin(request):
     return render(request, 'hospital_is/medical_problems_admin.html', context)
 
 def medical_problems_pac(request,pk):
+    if (request.user.is_staff == True or request.user.is_superuser == True):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        usr = get_object_or_404(AuthUser, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.id != pk):
+        return render(request, 'hospital_is/405.html', {})
+
     context = {
         'pk':pk,
         'AuthUser': AuthUser.objects.all(),
@@ -138,6 +161,14 @@ def medical_problems_pac(request,pk):
     return render(request, 'hospital_is/medical_problems_pac.html',context)
 
 def tickets_doc(request,pk):
+    if (request.user.is_staff ==False or request.user.is_superuser == True):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        usr = get_object_or_404(AuthUser, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.id != pk):
+        return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
         for name,value in request.POST.items():
             if value == "opened" or value == "closed":
@@ -175,7 +206,14 @@ def tickets_doc(request,pk):
     return render(request, 'hospital_is/tickets_doc.html', context)
 
 def tickets_pac(request,pk):
-
+    if (request.user.is_staff == True or request.user.is_superuser == True):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        usr = get_object_or_404(AuthUser, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.id != pk):
+        return render(request, 'hospital_is/405.html', {})
     context = {
         'pk': pk,
         'Ticket': Ticket.objects.all(),
@@ -185,6 +223,8 @@ def tickets_pac(request,pk):
     }
     return render(request, 'hospital_is/tickets_pac.html', context)
 def tickets_admin(request):
+    if request.user.is_staff == False or request.user.is_superuser == False:
+        return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
         for name,value in request.POST.items():
             if value == "opened" or value == "closed":
@@ -223,6 +263,14 @@ def tickets_admin(request):
 
     return render(request, 'hospital_is/tickets_admin.html', context)
 def medical_problem_tickets(request, pk):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        m = get_object_or_404(Medical_problem, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.is_superuser== False and (request.user.id != m.Doctor_ID)):
+        return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
 
         for name,value in request.POST.items():
@@ -305,17 +353,17 @@ def medical_problem_tickets(request, pk):
         'doctor': Doctor.objects.all()
     }
     return render(request, 'hospital_is/medical_problem_tickets.html', context)
-def medical_ticket_edit(request, pk):
-    context = {
-        'Medical_problem': Medical_problem.objects.all(),
-        'Ticket' : Ticket.objects.all(),
-        'pk':pk,
-        'AuthUser': AuthUser.objects.all(),
-        'Record': Medical_record.objects.all(),
-        'doctor': Doctor.objects.all()
-    }
-    return render(request, 'hospital_is/medical_problem_tickets.html', context)
+
 def medical_ticket_record(request, pk):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        tick = get_object_or_404(Ticket, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    m=get_object_or_404(Medical_problem, id=tick.Medical_problem_ID)
+    if (request.user.is_superuser== False and (request.user.id != tick.Doctor_ID and request.user.id != m.Doctor_ID)):
+        return render(request, 'hospital_is/405.html', {})
     try:
         record = get_object_or_404(Medical_record, Ticket_ID=pk)
         record_f = Record(instance=record)
@@ -429,6 +477,14 @@ def medical_ticket_record(request, pk):
     return render(request, 'hospital_is/medical_ticket_record.html', context)
 
 def medical_problem_edit(request, pk):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        dpc= get_object_or_404(Medical_problem, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.is_superuser== False and request.user.id != dpc.Doctor_ID):
+        return render(request, 'hospital_is/405.html', {})
     status_f = Status()
 
     m_form = MedicalProblemCreate()
@@ -497,6 +553,8 @@ def medical_problem_edit(request, pk):
     return render(request, 'hospital_is/medical_problem_edit.html', context)
 
 def medical_problem_create(request):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
     tmp = ChoosePacient(-1,'')
     tmp2 = ChooseDoctor(-1,request.user.username)
     m_form = MedicalProblemCreate()
@@ -534,7 +592,15 @@ def medical_problem_create(request):
     return render(request, 'hospital_is/medical_problem_create.html', context)
 
 def medical_ticket_create(request,pk):
+    if (request.user.is_staff == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
 
+        usr = get_object_or_404(Medical_problem, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+    if (request.user.is_superuser== False and request.user.id != usr.Doctor_ID):
+        return render(request, 'hospital_is/405.html', {})
     t_form = TicketForm()
     user_f = ChooseDoctor(-1,'')
     if request.method == 'POST':
@@ -575,6 +641,15 @@ def medical_ticket_create(request,pk):
     return render(request, 'hospital_is/medical_ticket_create.html', context)
 
 def medical_problems_doc(request,pk):
+    if ( request.user.is_superuser == True or request.user.is_staff ==False ):
+        return render(request, 'hospital_is/405.html', {})
+    if request.user.id != pk:
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        dpc= get_object_or_404(Doctor, id=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+
     context = {
         'pk':pk,
         'AuthUser': AuthUser.objects.all(),
@@ -583,12 +658,16 @@ def medical_problems_doc(request,pk):
     return render(request, 'hospital_is/medical_problems_doc.html',context)
 
 def compensation_operations(request):
+    if ( request.user.is_superuser == False):
+        return render(request, 'hospital_is/405.html', {})
     context = {
         'Compensated_operations':  Compensated_operations.objects.all(),
     }
     return render(request, 'hospital_is/compensation_operations.html', context)
 
 def compensation_operations_create(request):
+    if (request.user.is_superuser == False):
+        return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
         c_form = CompensationOperationsCreate(request.POST)
 
@@ -617,7 +696,13 @@ def compensation_operations_create(request):
     return render(request, 'hospital_is/compensation_operations_create.html', context)
 
 def compensation_operations_edit(request,pk):
-    compensated_operation = get_object_or_404(Compensated_operations, Operation=pk)
+    if (request.user.is_superuser == False):
+        return render(request, 'hospital_is/405.html', {})
+    try:
+        compensated_operation = get_object_or_404(Compensated_operations, Operation=pk)
+    except:
+        return render(request, 'hospital_is/404.html', {})
+
     if request.method == 'POST':
                 c_form = CompensationOperationsCreate(request.POST,instance=compensated_operation)
                 compensated_operation.delete()
