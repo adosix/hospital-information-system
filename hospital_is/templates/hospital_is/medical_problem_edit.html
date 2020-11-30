@@ -35,7 +35,7 @@
               </fieldset>
               {% if m_form.image is not null%}
               <div class="media">
-                <img  id="{{ p.Image.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_p.Image.url }}">
+                <img  id="{{ form.Image.value.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_form.image.value.url }}">
               </div>
               {% endif %}
               <div class="form-group">
@@ -85,7 +85,7 @@
                     <div class="form-group">
                       {% if m_form.image is not None%}
                       <div class="media">
-                        <img  id="{{ p.Image.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_p.Image.url }}">
+                        <img  id="{{ form.Image.value.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_form.image.value.url }}">
                       </div>
                       {% endif %}
                         <button class="btn btn-outline-info" type="submit">Update</button>
@@ -146,7 +146,7 @@
                   {{m.Description}}<br>
                   {% if m_form.image is not null%}
                   <div class="media">
-                    <img  id="{{ p.Image.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_p.Image.url }}">
+                    <img  id="{{ form.Image.value.url }}" onClick="on_click(this.id)" class="rounded-circle account-img" src="{{ m_form.image.value.url }}">
                   </div>
                   {% endif %}
 
@@ -165,7 +165,7 @@
             {% for p in Picture %}
             {% if r.id == p.r_id %}
             <div class="media">
-              <img  id="{{ p.Image.url }}" onClick="on_click(this.id)" src="{{ p.Image.url }}">
+              <img  id="{{ p.Image.url}}" onClick="on_click(this.id)" src="{{ p.Image.url }}">
             </div>
             {% endif %}
             {% endfor %}
