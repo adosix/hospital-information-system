@@ -33,7 +33,7 @@
           <th>status</th>
           <th>update_date</th>
           <th>view more</th>
-          <th>view tickets</th>
+          <th>view examinations</th>
         </thead>
           <tbody id="tablebody" >
 
@@ -52,7 +52,7 @@
               {% endif %}
                   <td>{{m.updated}}</td>
               <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
-              <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
+              <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_tickets' m.id %}">examinations</a></td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -64,7 +64,7 @@
          <th>status</th>
          <th>update_date</th>
          <th>view more</th>
-         <th>view tickets</th>
+         <th>view examinations</th>
         </tfoot>
     </table>  
 {% endif %}
