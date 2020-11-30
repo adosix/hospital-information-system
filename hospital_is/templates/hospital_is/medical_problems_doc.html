@@ -36,7 +36,7 @@ New medical problem
           <th>create date</th>
           <th>status</th>
           <th>update date</th>
-          <th>edit</th>
+          <th>edit/view</th>
           <th>view tickets</th>
         </thead>
           <tbody id="tablebody" >
@@ -57,7 +57,7 @@ New medical problem
               {% endif %}
               </td>
               <td>{{ m.updated.year}}-{{m.updated.month}}-{{m.updated.day}} - {{m.updated.time}}</td>
-              <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_edit' m.id %}">edit</a></td>
+              <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_edit' m.id %}">edit/view</a></td>
               <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
           </tr>
           {% endif %}
@@ -69,7 +69,7 @@ New medical problem
          <th>create_date</th>
          <th>status</th>
          <th>update_date</th>
-         <th>edit</th>
+         <th>edit/view</th>
          <th>view tickets</th>
         </tfoot>
     </table>

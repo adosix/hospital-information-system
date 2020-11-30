@@ -31,7 +31,7 @@
         <thead class="sorting">
                 <th >Operation</th>
                 <th>Description</th>
-                <th class="order" >more</th>
+                <th>view/edit/delete</th>
         </thead>
           <tbody id="tablebody" >
 
@@ -39,7 +39,7 @@
             <tr>
                 <td>{{m.Operation}}</td>
                 <td>{{m.Description}}</td>
-                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'compensation_operations_edit' m.Operation %}">view more</a></td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'compensation_operations_edit' m.Operation %}">view/edit/delete</a></td>
             </tr>
           {% endfor %}
 
@@ -47,7 +47,7 @@
        <tfoot>
          <th >Operation</th>
          <th>Description</th>
-        <th class="order" >more</th>
+        <th>view/edit/delete</th>
       </foot>
     </table>  
 

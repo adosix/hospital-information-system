@@ -32,13 +32,11 @@
 <p>Nižšie sú uvedení zástupcovia <strong>všetkých rolí uživateľov</strong>.</p>
 <table>
 <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
-<tr><td>jurvica00</td><td>dokto123</td><td>Doktor</td></tr>
-<tr><td>dobrym00</td><td>patie123</td><td>Pacient</td></tr>
-<tr><td>slivkaj00</td><td>insur123</td><td>Pracovník poisťovne</td></tr>
+<tr><td>Kouma0</td><td>axinko123</td><td>Administrátor</td></tr>
+<tr><td>Edge0</td><td>axinko123</td><td>Doktor</td></tr>
+<tr><td>Needh0</td><td>axinko123</td><td>Pacient</td></tr>
+<tr><td>Rodri0</td><td>axinko123</td><td>Pracovník poisťovne</td></tr>
 </table>
-
-
 <h2>Implementace</h2>
 <h3>Backend</h3>
 <p>
@@ -62,11 +60,16 @@
 	K dátam z databázy mapujeme pomocou modelov do objektov pomocou, ktorých zobrazujeme užívateľom pre nich dôležité dáta.
 </p>
 
-<h3>Frontend</h3>
+<h3>Používateľské rozhranie</h3>
+<img src="use-case.png" style="width:1000px;" alt="use-case diagram">
 <p>
-	Je implementovaný v jazyku html,css a javascript s použitím html tagov poskytovaných Djangom, <br>
+	Je implementované v jazyku html,css a javascript s použitím html tagov poskytovaných Djangom<br>
 	taktiež CSS framoworku Bootstrap ale taktiež javascript frameworkom jquery.
 </p>
+<h4>Používateľské rozhranie</h4>
+<p>
+	
+<p>
 
 <h3>Databáze</h3>
 
@@ -84,7 +87,7 @@ Stručně popište:
 	Nainštalujeme django a do neho inštalujeme django-multiforloop a django-multiforloop.<br>
 
 	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie <br>
-	a spustí sa server na porte 8080<br>
+	a spustí sa server na porte 8000<br>
 	</p>
 
 <li>softwarové požadavky (verze PHP apod.),</li>
@@ -98,7 +101,9 @@ Stručně popište:
 
 <li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
 	<p>
-	Inicializujeme databázu tak, že z priečinku db zavoláme skript db_setup.sh.
+	Databázu inicializujeme tak, že z koreňového adresára projektu, <br>
+	kde sa nachádza skript start.sh ho spusime s parametrom dbinit "./start.sh dbinit".
+
 	</p>
 </ul>
 
