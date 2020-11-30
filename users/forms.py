@@ -18,6 +18,8 @@ class UserRegisterForm(UserCreationForm):
 class DateInput(forms.DateInput):
     input_type= 'date'
 class ProfileRegisterForm(forms.ModelForm):
+    image = forms.ImageField(required=False, widget=forms.FileInput)
+
     class Meta:
         model = Profile
         widgets= {'birth_date' : DateInput()
