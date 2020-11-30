@@ -48,10 +48,14 @@
 	<br>
 	Odpovede serveru na požiadavky sme riešili v súboroch views.py kde je každá požiadavka na server spracovaná <br>
 	odpovedajúcou metódou a následne je odpoveď zaslaná odpoveď klientovi.
+	<br>
+	<h4>Správy o vykonaní zmeny</h4>
+	<p>Správnosť vyplnenia dotazníka alebo inej zmeny po následnom poslaní na server skontrolujeme v danej funkcí vo views.py kde<br>
+		je užívateľ následne upozornení o správnom vykonaní alebo probléme ktorý pri spracovaní nastal. Na zobrazenie týchto správ používame "django messages"</p>
 </p>
 <h4>Užívatelia</h4>
 <p>
-	heslá su zahashované v databáze kôli bezpečnosti a teda administrátor môže heslo iba zmeniť ale nemôže ho vidieť.
+	heslá su zahashované v databáze kôli bezpečnosti a teda administrátor alebo daný používateľ môže heslo iba zmeniť ale nemôže ho vidieť.
 </p>
 <h4> Databáza a Modely </h4>
 <p>
@@ -66,14 +70,10 @@
 	Je implementované v jazyku html,css a javascript s použitím html tagov poskytovaných Djangom<br>
 	taktiež CSS framoworku Bootstrap ale taktiež javascript frameworkom jquery.
 </p>
-<h4>Používateľské rozhranie</h4>
-<p>
-	
-<p>
 
 <h3>Databáze</h3>
 
-Zde vložte grafické schéma relační databáze (tabulek v databázi).
+<img src="db.png" style="width:1000px;" alt="use-case diagram">
 
 <h2>Instalace</h2>
 
@@ -84,10 +84,13 @@ Stručně popište:
 	Vytvoríme virtuálne prostredie python3. Aktivujeme virtuálne prostredie.<br>
 	Nainštalujeme mysqlclienta a prihlásime sa do mysql ako root. Vytvoríme databázu "hospital_data".<br>
 	Vytvoríme používateľa "djangouser" s heslom "password". Dáme mu všetky práva na databázu "hospital_data".<br>
-	Nainštalujeme django a do neho inštalujeme django-multiforloop a django-multiforloop.<br>
+	Nainštalujeme django a do neho inštalujeme django-multiforloop, django-multiforloop, crispy-forms, whitenoise.<br>
 
 	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie <br>
 	a spustí sa server na porte 8000<br>
+
+	Pri pri presmerovaní von zo siete bude potrebné pridať v setting.py do ALLOWED_HOSTS zariadenie ktoré <br>
+	bude k aplikácií presmerovavávať užívateľov našom prípade router.  
 	</p>
 
 <li>softwarové požadavky (verze PHP apod.),</li>
@@ -103,7 +106,7 @@ Stručně popište:
 	<p>
 	Databázu inicializujeme tak, že z koreňového adresára projektu, <br>
 	kde sa nachádza skript start.sh ho spusime s parametrom dbinit "./start.sh dbinit".
-
+	Prvé heslo bude užívateľa root a nasledujúce budú "password" a teda heslo používateľa djangouser.
 	</p>
 </ul>
 
