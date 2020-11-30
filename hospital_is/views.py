@@ -264,12 +264,13 @@ def tickets_admin(request):
     return render(request, 'hospital_is/tickets_admin.html', context)
 def medical_problem_tickets(request, pk):
     if (request.user.is_staff == False):
-        return render(request, 'hospital_is/405.html', {})
+        if(request.user.is_superuser == True):
+            return render(request, 'hospital_is/405.html', {})
     try:
         m = get_object_or_404(Medical_problem, id=pk)
     except:
         return render(request, 'hospital_is/404.html', {})
-    if (request.user.is_superuser== False and (request.user.id != m.Doctor_ID)):
+    if (request.user.is_superuser== False and (request.user.id != m.Doctor_ID and request.user.id != m.Patient_ID)):
         return render(request, 'hospital_is/405.html', {})
     if request.method == 'POST':
 
@@ -478,12 +479,13 @@ def medical_ticket_record(request, pk):
 
 def medical_problem_edit(request, pk):
     if (request.user.is_staff == False):
-        return render(request, 'hospital_is/405.html', {})
+        if(request.user.is_superuser == True):
+            return render(request, 'hospital_is/405.html', {})
     try:
-        dpc= get_object_or_404(Medical_problem, id=pk)
+        m= get_object_or_404(Medical_problem, id=pk)
     except:
         return render(request, 'hospital_is/404.html', {})
-    if (request.user.is_superuser== False and request.user.id != dpc.Doctor_ID):
+    if (request.user.is_superuser== False and (request.user.id != m.Doctor_ID and request.user.id != m.Patient_ID)):
         return render(request, 'hospital_is/405.html', {})
     status_f = Status()
 

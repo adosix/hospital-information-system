@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row" >
         <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5"></br>Medical problems</br></br></br></h1>
+          <h1 class="mb-5"></br>Tickets</br></br></br></h1>
         </div >
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
         </div>
@@ -62,7 +62,7 @@
               {%endif%}
               </form>
               <td>{{m.Description}}</td>
-              <td>{{m.created}}</td>
+              <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
               <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
               <td><a  class="btn btn-outline-info" style="width:100%"  href="{% url 'make_compensation' m.id %}">request</a></td>
 

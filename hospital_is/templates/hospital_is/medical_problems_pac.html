@@ -42,7 +42,7 @@
           <tr>
               <td>{{ m.Doctor_ID|get_username:AuthUser  }}</td>
               <td>{{ m.Title }}</td>
-              <td>{{ m.created }}</td>
+              <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
               {% if m.Status == 0  %}
                 <td>active</td>
               {% elif m.Status == 1 %}
@@ -50,7 +50,7 @@
               {% else %}
                 <td>finished</td>
               {% endif %}
-                  <td>{{m.updated}}</td>
+                <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
               <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_edit' m.id %}">view more</a></td>
               <td><a class="btn btn-outline-info" style="width:100%" href="{% url 'medical_problem_tickets' m.id %}">examinations</a></td>
           </tr>
@@ -66,7 +66,7 @@
          <th>view more</th>
          <th>view examinations</th>
         </tfoot>
-    </table>  
+    </table>
 {% endif %}
 {% endif %}
 </div>

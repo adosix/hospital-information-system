@@ -52,7 +52,7 @@
                   finished
                 {% endif %}
                 </td>
-                    <td>{{m.updated}}</td>
+                    <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
                 <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_problem_edit' m.id %}">edit/view</a></td>
                 <td><a style="width:100%;"class="btn btn-outline-info" href="{% url 'medical_problem_tickets' m.id %}">tickets</a></td>
             </tr>
