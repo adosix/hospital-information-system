@@ -355,7 +355,8 @@ def medical_problem_tickets(request, pk):
     }
     return render(request, 'hospital_is/medical_problem_tickets.html', context)
 
-def medical_ticket_record(request, pk):
+def medical_ticket_record(request, pk,pa):
+
     if (request.user.is_staff == False):
         return render(request, 'hospital_is/405.html', {})
     try:
@@ -461,8 +462,10 @@ def medical_ticket_record(request, pk):
             formset=PictureFormSet(queryset=Picture.objects.none(),initial=initial)
             formset.extra = len(initial)+1
             messages.success(request, f'Medical record updated.')
+            return HttpResponseRedirect(pa)
         else :
             messages.warning(request, f'Medical record not updated.')
+            return HttpResponseRedirect(pa)
     context = {
         'formset':formset,
         'record_f':record_f,

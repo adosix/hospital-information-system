@@ -63,7 +63,7 @@
               </form>
               <td>{{m.Description}}</td>
               <td>{{ m.created.year}}-{{m.created.month}}-{{m.created.day}}</td>
-              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id %}">fill data</a></td>
+              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record' m.id request.path %}">fill data</a></td>
               <td><a  class="btn btn-outline-info" style="width:100%"  href="{% url 'make_compensation' m.id %}">request</a></td>
 
           </tr>

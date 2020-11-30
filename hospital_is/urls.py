@@ -22,7 +22,7 @@ urlpatterns = [
 
     path('', views.default, name='hospital_is-home'),
      path('medical_problem_edit/<int:pk>/', views.medical_problem_edit, name='medical_problem_edit'),
-     path('medical_ticket_record/<int:pk>/', views.medical_ticket_record, name='medical_ticket_record'),
+     path('medical_ticket_record/<int:pk>/<path:pa>/', views.medical_ticket_record, name='medical_ticket_record'),
      path('medical_problem_tickets/<int:pk>/', views.medical_problem_tickets, name='medical_problem_tickets'),
     #path('post/<int:pk>/',Medical_problem_DetailView.as_view(), name='post-detail'),
     path('medical_problem_create/', views.medical_problem_create, name='medical_problem_create'),
