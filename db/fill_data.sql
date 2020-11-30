@@ -25,7 +25,7 @@ INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last
                 VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "0", "doc do not exist","doc","doc","doc@gmail.sk","1","1","2020-10-18 21:40:34.113892");
 
 INSERT INTO auth_user(password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
-    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Jense0","River","Jensen","lucinqa@gmail.com","1","1","2020-10-18 21:40:34.113892");
+    VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Jense0","River","Jensen","riverflows@gmail.com","1","1","2020-10-18 21:40:34.113892");
 INSERT INTO auth_user (password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined)
     VALUES("pbkdf2_sha256$216000$gnBtZDycJSVv$OfH0fE7/8AWg8TocXXG0Rd9/P6UWuk2q0gyrn60lt7U=","2020-10-18 21:40:34.113892", "1", "Kouma0","Jasmin","Kouma","hater85@gmail.com","1","1","2020-10-18 21:40:34.113892");
 
