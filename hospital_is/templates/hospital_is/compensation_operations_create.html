@@ -19,12 +19,12 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Create new compensated operation</legend>
                 {{ c_form|crispy }}
-                {%if user|is_admin%}
+                {% if user|is_admin %}
                 {{ p_form|crispy }}
-                {%endif%}
+                {% endif %}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+                <button class="btn btn-outline-info" type="submit">Create</button>
             </div>
         </form>
     </div>

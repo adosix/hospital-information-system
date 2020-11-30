@@ -64,8 +64,8 @@ class MakeCompensation(forms.ModelForm):
         model = Compensation_request
         fields = ['Operation_r','Description_r' ]
 class CompensationOperationsCreate(forms.ModelForm):
-    Operation_r = forms.CharField(max_length=255)
-    Description_r = forms.CharField(max_length=1024)
+    Operation = forms.CharField(max_length=255)
+    Description = forms.CharField(max_length=1024)
 
     class Meta:
         model = Compensated_operations
