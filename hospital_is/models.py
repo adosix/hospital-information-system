@@ -143,7 +143,8 @@ class Doctor(models.Model):
 
     def get_absolute_url(self):
         return reverse('doctor', kwargs={'pk': self.pk})
-
+    def whoami(self):
+        return "Doc"
     class Meta:
         ordering = ['id']
 
@@ -154,13 +155,15 @@ class Doctor(models.Model):
             raise RelatedRecordsExist("SomeModel has child records!")
 class Patient(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
-
+    height =models.FloatField()
+    weight =models.FloatField()
     def get_absolute_url(self):
         return reverse('Patient', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['id']
-
+    def whoami(self):
+        return "Patient"
     def __unicode__(self):
         return self.id
     def delete(self,a=0):
@@ -174,7 +177,8 @@ class Admin(models.Model):
 
     class Meta:
         ordering = ['id']
-
+    def whoami(self):
+        return "Doc"
     def __unicode__(self):
         return self.id
     def delete(self,a=0):
@@ -188,7 +192,8 @@ class Insurance_worker(models.Model):
 
     class Meta:
         ordering = ['id']
-
+    def whoami(self):
+        return "Doc"
     def __unicode__(self):
         return self.id
     def delete(self,a=0):

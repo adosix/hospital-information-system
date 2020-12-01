@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if user.is_authenticated  %}
-{% if user|is_admin  %}
+{% if user|is_admin  or user|is_doctor %}
 
 <div style=" margin:auto; margin-top:120px;">
 {% if messages %}
@@ -17,6 +17,7 @@
               </div>
             {% endfor %}
           {% endif %}
+    {% if user|is_admin %}
     <div class="content-section">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ pic_form }}">
@@ -30,6 +31,12 @@
               <legend class="border-bottom mb-4">Profile Info</legend>
               {{ u_form|crispy }}
               {{ p_form|crispy }}
+              {% for p in Patient %}
+              {% if p.id == u_id %}
+              {{hw_form|crispy}}
+              {% endif %}
+              {% endfor %}
+
           </fieldset>
           <div class="form-group">
               <button class="btn btn-outline-info" type="submit">Update</button>
@@ -43,5 +50,35 @@
     </div>
     </div>
     {% endif %}
-    {% endif %}
+      {% if user|is_doctor %}
+      <div class="content-section">
+        <div class="media">
+          <img class="rounded-circle account-img" src="{{ pic_form }}">
+          <div class="media-body">
+            <h2 class="account-heading">{{ username }}</h2>
+          </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form.first_name }}
+                  {{ u_form.last_name }}
+                {{ p_form|crispy }}
+                {% for p in Patient %}
+                {% if p.id == u_id %}
+                {{hw_form|crispy}}
+                {% endif %}
+                {% endfor %}
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+      </div>
+      </div>
+      {% endif %}
+  {% endif %}
+{% endif %}
 {% endblock content %}

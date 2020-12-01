@@ -45,6 +45,8 @@ CREATE TABLE users_profile (
  );
  CREATE TABLE hospital_is_patient(
      id INTEGER NOT NULL PRIMARY KEY REFERENCES auth_user(id),
+     height FLOAT,
+     weight FLOAT,
      CONSTRAINT usr1 FOREIGN KEY (id) REFERENCES auth_user(id) ON DELETE CASCADE
  );
  CREATE TABLE hospital_is_doctor(
