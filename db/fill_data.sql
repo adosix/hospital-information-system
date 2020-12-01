@@ -168,55 +168,55 @@ WHERE username = "Jense0";
 
 -- PATIENT 13
 
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Needh0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Rubio0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Simmo0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Humph0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Walms0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Swift0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Worma0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Hampt0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Page0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Koch";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Lara0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "Ahmad0";
-INSERT INTO hospital_is_patient
+INSERT INTO hospital_is_patient(id)
 SELECT id
 FROM  auth_user
 WHERE username = "gunsandflowers";

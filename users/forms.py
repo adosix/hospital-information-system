@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from .models import Profile
+from hospital_is.models import Patient
 from .models import AuthUser
 from django.forms import HiddenInput
 import datetime
@@ -32,14 +33,14 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = AuthUser
-        fields = ['username', 'email','first_name', 'last_name', 'password']
+        fields = [ 'email','first_name', 'last_name', 'password']
 class AdminUserUpdateForm(forms.ModelForm):
     email = forms.EmailField(),
     password = forms.CharField(widget=forms.PasswordInput, required=False)
 
     class Meta:
         model = AuthUser
-        fields = ['username', 'email','first_name', 'last_name', 'is_active', 'password']
+        fields = ['email','first_name', 'last_name', 'is_active', 'password']
 
 class ChooseDoctor(forms.Form):
 
@@ -89,3 +90,9 @@ class UserRoleForm(forms.Form):
         widget = forms.RadioSelect,
         initial = '1',
         required = True,)
+class PatientWH(forms.ModelForm):
+    height = forms.FloatField(required=False, label="Height [cm]")
+    weight = forms.FloatField(required=False, label="Weight [kg]")
+    class Meta:
+        model = Patient
+        fields = ['height','weight']
