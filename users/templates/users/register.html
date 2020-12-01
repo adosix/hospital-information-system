@@ -18,6 +18,7 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
+                
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
                 {% if user|is_admin  %}
