@@ -24,7 +24,7 @@ from django.contrib.auth.hashers import make_password
 from datetime import datetime
 
 def logoutexp(request):
-
+    print("hhh")
     messages.warning(request, f'Your session has expired after 20 min of inactivity ')
     return render(request, 'users/logout.html', {})
 
