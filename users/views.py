@@ -23,6 +23,11 @@ from hospital_is.models import Insurance_worker
 from django.contrib.auth.hashers import make_password
 from datetime import datetime
 
+def logoutexp(request):
+
+    messages.warning(request, f'Your session has expired after 20 min of inactivity ')
+    return render(request, 'users/logout.html', {})
+
 def edit_profile(request, username_to_find):
     if (request.user.is_staff == False):
         return render(request, 'hospital_is/405.html', {})

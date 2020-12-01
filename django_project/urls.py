@@ -28,6 +28,7 @@ urlpatterns = [
     path('move_medical_problems/<int:pk>/', user_views.move_medical_problems, name='move_medical_problems'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logoutexp/',  user_views.logoutexp, name='logoutexp'),
     path('', include('hospital_is.urls')),
 ]
 
