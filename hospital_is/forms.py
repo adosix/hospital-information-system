@@ -87,8 +87,8 @@ class PictureForm(forms.ModelForm):
 
     class Meta:
         model=Picture
-        fields = ['Image','id']
-        widgets = {'id': forms.HiddenInput()}
+        fields = ['Image']
+
 
 
 class BaseMyFormSet(BaseFormSet):

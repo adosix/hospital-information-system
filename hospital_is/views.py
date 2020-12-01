@@ -191,7 +191,9 @@ def tickets_doc(request,pk):
                 if t.Medical_problem_ID == medical_problem.id and t.Status == 0:
                     medical_problem.Status = 1
             medical_problem.save()
+            messages.success(request, f'Ticket closed')
         else:
+            messages.success(request, f'Ticket opened')
             ticket.Status = 0
             ticket.save()
             medical_problem.Status = 1
@@ -384,7 +386,7 @@ def medical_ticket_record(request, pk,pa):
             record = get_object_or_404(Medical_record, Ticket_ID=pk)
             record_f = Record(request.POST,instance=record)
         except:
-            record_f = Record(request.POST,request.FILES)
+            record_f = Record(request.POST)
         formset=PictureFormSet(request.POST,request.FILES)
         ticket = get_object_or_404(Ticket, id=pk)
         if(request.user.id != ticket.Doctor_ID and not request.user.is_superuser ):
@@ -417,8 +419,8 @@ def medical_ticket_record(request, pk,pa):
                     id = 0
                 record.id = id
                 r=record.save()
-            instance =formset.save(commit=False)
 
+            instance =formset.save(commit=False)
             initial=[{'Image': x.Image,'id': x.id}  for x in Picture.objects.all() if x.r_id == id ]
             leno = len(initial)
             if leno == 0:
@@ -442,22 +444,23 @@ def medical_ticket_record(request, pk,pa):
                         if x.r_id != record.id :
                             continue
                         if( tmp < len(l) and tmp == int(l[instance_c])):
-                            x.Image=instance[instance_c].Image
+                            x.Image=instance[int(l[instance_c])].Image
                             instance_c+=1
                             x.save()
                         tmp += 1
 
                     if int(l[-1]) == leno:
-                        instance[instance_c].r_id=id
+                        instance[int(l[instance_c])].r_id=id
                         tmp =Picture.objects.all()
                         try:
                             tmp = tmp[len(tmp)-1]
                             id_p = tmp.id+1
                         except:
                             id_p = 0
-                        instance[instance_c].id=id_p
-                        if(instance[instance_c].Image != ''):
-                            instance[instance_c].save()
+                        instance[int(l[instance_c])].id=id_p
+                        if(instance[int(l[instance_c])].Image != ''):
+                            instance[int(l[instance_c])].save()
+
             initial=[{'Image': x.Image}  for x in Picture.objects.all() if x.r_id == record.id ]
             formset=PictureFormSet(queryset=Picture.objects.none(),initial=initial)
             formset.extra = len(initial)+1

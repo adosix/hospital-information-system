@@ -251,8 +251,8 @@ VALUES ("3",(SELECT id FROM auth_user  WHERE username = "Humph0"),(SELECT id FRO
 - sleeping difficulty
 - dizziness
 - constipation ");
-INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Title,Description)
-VALUES ("4",(SELECT id FROM auth_user  WHERE username = "Walms0"),(SELECT id FROM  auth_user  WHERE username = "Cohen0"), "Rabid Acne", "- hyperactivity
+INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
+VALUES ("4",(SELECT id FROM auth_user  WHERE username = "Needh0"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "2","Rabid Acne", "- hyperactivity
 - weight gain
 - walking difficulty
 - arm pain ");
@@ -272,7 +272,7 @@ VALUES ("7",(SELECT id FROM auth_user  WHERE username = "Worma0"),(SELECT id FRO
 - feeling sleepy
 - neck pain");
 INSERT INTO hospital_is_medical_problem(id,Patient_ID,Doctor_ID,Status,Title,Description)
-VALUES ("8",(SELECT id FROM auth_user  WHERE username = "Worma0"),(SELECT id FROM  auth_user  WHERE username = "Firth0"),"1", "Lion Pox", "- feeling sick
+VALUES ("8",(SELECT id FROM auth_user  WHERE username = "Needh0"),(SELECT id FROM  auth_user  WHERE username = "Edge0"),"1", "Lion Pox", "- feeling sick
 - a sore tongue
 - leg swelling
 - sleeping difficulty");
@@ -293,3 +293,36 @@ INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, des
 VALUES ("4",(SELECT id FROM hospital_is_medical_problem  WHERE Title = "Incurable Rabies"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "CT", "perform CT");
 INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, description)
 VALUES ("5",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Lion Pox"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "surface X-ray", "surface X-ray of subcutaneous glands");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation, Status,description)
+VALUES ("6",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Rabid Acne"),(SELECT id FROM  auth_user  WHERE username = "Firth0"), "vaccinate","1", "vaccinate against rabi acne");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation,Status, description)
+VALUES ("7",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Rabid Acne"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "examination","1", "examinate patient");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation,Status ,description)
+VALUES ("8",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Lion Pox"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "perform an anti-stress examination","0" ,"none");
+INSERT INTO hospital_is_ticket(id, Medical_Problem_ID, Doctor_ID, Operation,Status, description)
+VALUES ("9",(SELECT id FROM hospital_is_medical_problem WHERE Title = "Lion Pox"),(SELECT id FROM  auth_user  WHERE username = "Edge0"), "perform sleeping exercise", "1","focus on dreaming part");
+-- MEDICAL RECORD
+INSERT INTO hospital_is_medical_record(id,Ticket_ID, Title, description)
+VALUES ("0",(SELECT id FROM hospital_is_ticket WHERE id = "6"), "vaccination", "Vaccination was successfull");
+INSERT INTO hospital_is_medical_record(id,Ticket_ID, Title, description)
+VALUES ("1",(SELECT id FROM hospital_is_ticket WHERE id = "7"), "exmaination", "Found several problems during examination");
+INSERT INTO hospital_is_medical_record(id,Ticket_ID, Title, description)
+VALUES ("2",(SELECT id FROM hospital_is_ticket WHERE id = "8"), "anti-stress examination", "Anti stress examination was successfull");
+INSERT INTO hospital_is_medical_record(id,Ticket_ID, Title, description)
+VALUES ("3",(SELECT id FROM hospital_is_ticket WHERE id = "9"), "sleeping exercise", "Patient fell asleep");
+-- _compensation_request
+INSERT INTO hospital_is_compensation_request(id,ticket_id, Operation_r, Description_r,status)
+VALUES ("0",(SELECT id FROM hospital_is_ticket WHERE id = "6"), "vaccination", "Vaccination for rabid acne","0");
+INSERT INTO hospital_is_compensation_request(id,ticket_id, Operation_r, Description_r,status)
+VALUES ("1",(SELECT id FROM hospital_is_ticket WHERE id = "7"), "exmaination of infectious patient", "3 protective suits used","2");
+INSERT INTO hospital_is_compensation_request(id,ticket_id, Operation_r, Description_r,status)
+VALUES ("2",(SELECT id FROM hospital_is_ticket WHERE id = "8"), "anti-stress examination", "Playing ball damaged","1");
+INSERT INTO hospital_is_compensation_request(id,ticket_id, Operation_r, Description_r,status)
+VALUES ("3",(SELECT id FROM hospital_is_ticket WHERE id = "9"), "sleeping exercise", "Night in the hospital","0");
+-- Picture
+INSERT INTO hospital_is_picture(id, Image, r_id)
+Values("0","medical_records_media/xray00023_GnxjKda_VmdapG2.jpg",(SELECT id FROM hospital_is_medical_record WHERE id = "1"));
+INSERT INTO hospital_is_picture(id, Image , r_id)
+Values("1","medical_records_media/xray00023_lUshJ49_Ln4v8EG.jpg",(SELECT id FROM hospital_is_medical_record WHERE id = "1"));
+INSERT INTO hospital_is_picture(id, Image , r_id)
+Values("2","medical_records_media/xray00023_GnxjKda_VmdapG2.jpg",(SELECT id FROM hospital_is_medical_record WHERE id = "0"));

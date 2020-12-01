@@ -108,8 +108,8 @@ CREATE TABLE users_profile (
     status INTEGER NOT NULL DEFAULT 0
  );
  CREATE TABLE hospital_is_picture(
-   id INTEGER not null primary key ,
+    id INTEGER not null primary key ,
     Image varchar(255) NOT NULL,
     r_id  INTEGER NOT NULL ,
-  CONSTRAINT pictureid FOREIGN KEY (r_id) REFERENCES hospital_is_medical_record(id) ON DELETE CASCADE
+    CONSTRAINT pictureid FOREIGN KEY (r_id) REFERENCES hospital_is_medical_record(id) ON DELETE CASCADE
 );
