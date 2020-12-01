@@ -86,7 +86,7 @@
 
       <a  class="btn btn-outline-info add_new_btn"  href="{% url 'register' %}">Register patient</a>
         <thead class="sorting">
-          <th>edit</th>
+          <th>edit/view</th>
             <th>username</th>
             <th>first name</th>
             <th>last name</th>
@@ -101,7 +101,7 @@
           {% if u|is_doctor%}
               <td></td>
           {% else %}
-              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
+              <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit/view</a></td>
           {% endif %}
 
                 <td>{{ u.username }}</td>
@@ -121,13 +121,13 @@
 
           </tbody>
       <tfoot>
+                <th>edit/view</th>
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
                 <th>email</th>
                 <th>role</th>
                 <th>birth date</th>
-                <th>edit</th>
         </tfoot>
 {% endif %}
 
