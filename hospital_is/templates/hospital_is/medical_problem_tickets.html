@@ -29,6 +29,7 @@
 {% if  user|is_admin %}
 
 <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
+<div class="table-responsive" style="width: 95%; margin:auto;">
 <table id="search_table" class="table table-bordered " style="width:100%">
         <thead class="sorting">
               <th >Patient</th>
@@ -81,11 +82,13 @@
         <th class="order" >delete</th>
       </tfoot>
     </table>
+    </div>
 {% elif  user|is_doctor %}
   {% for j in Medical_problem %}
   {% if  j.Doctor_ID == user.id and j.id == pk%}
   <td><a class="btn btn-outline-info add_new_btn" href="{% url 'medical_ticket_create' pk %}">create new ticket</a></td>
-  <table id="search_table" class="table table-bordered " style="width:100%">
+  <div class="table-responsive" style="width: 95%; margin:auto;">
+  <table id="search_table" class="table table-striped table-bordered dt-responsive nowrap ">
           <thead class="sorting">
                   <th >Patient</th>
                   <th >Doctor</th>
@@ -93,8 +96,8 @@
                   <th>Status</th>
                   <th>Description</th>
                   <th>create_date</th>
-                  <th class="order" >edit</th>
-                  <th class="order" >delete</th>
+                  <th>edit</th>
+                  <th>delete</th>
           </thead>
             <tbody id="tablebody" >
 
@@ -120,8 +123,8 @@
                   </a></td>
                   <td>{{m.Description}}</td>
                   <td>{{m.created}}</td>
-                  <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record'  m.id request.path %}">fill data</a></td>
-                  <td><input type="submit"  class="btn btn-outline-info" name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete" ></td>
+                  <td><a style="width:100%; height:100%;" class="btn btn-outline-info" href="{% url 'medical_ticket_record'  m.id request.path %}">fill data</a></td>
+                  <td><input type="submit" style="width:100%;height:100%;"   class="btn btn-outline-info" name={{m.id}} onclick="return confirm('Are you sure you want to delete this ticket?')" label="Delete" value="Delete" ></td>
                   </form>
               </tr>
               {% endif %}
@@ -139,11 +142,13 @@
           <th class="order" >delete</th>
         </tfoot>
       </table>
-      {% endif %}
+      </div>
+    {% endif %}
   {% endfor %}
   {% elif  user|is_patient %}
     {% for j in Medical_problem %}
     {% if  j.Patient_ID == user.id and j.id == pk%}
+    <div class="table-responsive" style="width: 95%; margin:auto;">
     <table id="search_table" class="table table-bordered " style="width:100%">
             <thead class="sorting">
                     <th >Doctor</th>
@@ -187,6 +192,7 @@
              <th>created</th>
           </tfoot>
         </table>
+        </div>
         {% endif %}
     {% endfor %}
 {% endif %}
@@ -200,9 +206,9 @@ $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table tfoot th').each( function () {
     var title = $('#search_table thead th').eq( $(this).index() ).text();
-    $(this).html( '<input type="text" placeholder="Search '+title+'" />' ); } );
+    $(this).html( '<input style="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
     // DataTable
-    var table = $('#search_table').DataTable();
+    var table = $('#search_table').DataTable( { "scrollX": true  } );
     // Apply the search
     table.columns().eq( 0 ).each( function ( colIdx )
     { $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function ()
