@@ -141,7 +141,7 @@ $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table tfoot th').each( function () {
     var title = $('#search_table thead th').eq( $(this).index() ).text();
-    $(this).html( '<inputstyle="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
+    $(this).html( '<input style="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
     // DataTable
      var table = $('#search_table').DataTable( { "scrollX": true  } );
     // Apply the search
@@ -153,7 +153,7 @@ $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table2 tfoot th').each( function () {
     var title = $('#search_table2 thead th').eq( $(this).index() ).text();
-    $(this).html( '<inputstyle="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
+    $(this).html( '<input style="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
     // DataTable
     var table = $('#search_table2').DataTable();
     // Apply the search

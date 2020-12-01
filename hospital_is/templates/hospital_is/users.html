@@ -32,7 +32,7 @@
 {% if user|is_admin  %}
       <a  class="btn btn-outline-info add_new_btn" href="{% url 'register' %}">Register user</a>
         <thead  class="sorting">
-                <th>edit</th>
+                <th>view/edit</th>
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
@@ -44,7 +44,7 @@
           <tbody id="tablebody" >
 
           {% for u in AuthUser ; p in Profiles %}
-                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">edit</a></td>
+                <td><a style="width:100%;" class="btn btn-outline-info" href="{% url 'edit_profile' u.username %}">view/edit</a></td>
                 <td>{{ u.username }}</td>
                 <td>{{ u.first_name }}</td>
                 <td>{{ u.last_name }}</td>
@@ -71,7 +71,7 @@
 
           </tbody>
       <tfoot>
-                <th>edit</th>
+                <th>view/edit</th>
                 <th>username</th>
                 <th>first name</th>
                 <th>last name</th>
@@ -90,7 +90,6 @@
             <th>first name</th>
             <th>last name</th>
             <th>email</th>
-            <th>banned</th>
             <th>role</th>
             <th>birth date</th>
         </thead>
@@ -102,11 +101,6 @@
                 <td>{{ u.first_name }}</td>
                 <td>{{ u.last_name }}</td>
                 <td>{{ u.email }}</td>
-                {% if u.is_active %}
-                    <td>no</td>
-                {% else %}
-                    <td>yes</td>
-                {% endif %}
                 {% if u|is_doctor%}
                     <td>doctor</td>
                     <td></td>
@@ -124,7 +118,6 @@
                 <th>first name</th>
                 <th>last name</th>
                 <th>email</th>
-                <th>banned</th>
                 <th>role</th>
                 <th>birth date</th>
         </tfoot>
@@ -140,7 +133,7 @@ $(document).ready(function() {
   // Setup - add a text input to each footer cell
   $('#search_table tfoot th').each( function () {
     var title = $('#search_table thead th').eq( $(this).index() ).text();
-    $(this).html( '<inputstyle="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
+    $(this).html( '<input style="width:95%;" type="text" placeholder="Search '+title+'" />' ); } );
     // DataTable
      var table = $('#search_table').DataTable( { "scrollX": true  } );
     // Apply the search
