@@ -70,7 +70,8 @@
 <img src="use-case.png" style="width:1000px;" alt="use-case diagram">
 <p>
 	Je implementované v jazyku html,css a javascript s použitím html tagov poskytovaných Djangom<br>
-	taktiež CSS framoworku Bootstrap ale taktiež javascript frameworkom jquery.
+	taktiež CSS framoworku Bootstrap ale taktiež javascript frameworkom jquery.<br>
+	Užívateľ bude po 20 minutách neauktivity odhlásený.<br>
 </p>
 <p>Kažý používateľ má v hlavnom menu možnosť si pozrieť a upraviť svoj profil.</p>
 <p>Po dvojkliku na fotku priloženú v lekárskej správne (medical record) sa fotka zvačší, pre zavretie zoomu používateľ klikne na X v pravom hornom rohu</p> 
@@ -87,8 +88,11 @@
 	Na stránke Medical problems vidí zdravotné problémy ktoré spravuje ale taktiež môže vytvoriť nový zdravotný problém. <br>
 	Z tejto stránky sa môže dostať na stránku ticketov ku konkrétnemu zdravotnému problému kde mu môže pridat ticket alebo 
 <h4>Pracovník poisťovne</h4>
+	Má dve hlavné stránky, ktorými sú stránka pre spracovanie požiadaviek na kompenzáciu (Compensation requests) a základné kompenzačné operácie,<br>
+	 ktoré su automaticky poskytnuté doktorom na vybranie "Compensated operations" môže tu pridávať nové alebo odoberať aktuálne.
 <h4>Admin</h4>
-
+	Administrátor môže vykonávať všetky úkony ako predchádzajúci používatelia ale taktiež môže mazať užívateľov a už spracované <br>
+	požiadavky na kompenzáciu vrátiť do stavu nespracovaných alebo ich v stave spracovanej rovno zmeniť.
 <h3>Databáze</h3>
 
 <img src="db.png" style="width:1000px;" alt="use-case diagram">
@@ -99,13 +103,14 @@ Stručně popište:
 <ul>
 <li>postup instalace na server,</li>
 	<p>
+	Pred spúšťaním je potrebné siathnuť priečinok media a umiestniť ho do koreňového priečinka projketu<br>
 	Vytvoríme virtuálne prostredie python3. Aktivujeme virtuálne prostredie.<br>
 	Nainštalujeme mysqlclienta a prihlásime sa do mysql ako root. Vytvoríme databázu "hospital_data" pomocou príkazu 
 	<br>"create database hospital_data;".<br>
 	Vytvoríme používateľa "djangouser" s heslom "password" pomocou príkazu
 	<br>"CREATE USER 'djangouser'@'localhost' IDENTIFIED BY 'password' ;". <br>
 	Dáme mu všetky práva na databázu "hospital_data".
-	Nainštalujeme django a do neho inštalujeme django-multiforloop, crispy-forms.<br>
+	Nainštalujeme django a do neho inštalujeme django-multiforloop, crispy-forms, django-session-timeout.<br>
 
 	presunieme sa do priecinku kde sa nachádza skript start.sh a spustíme ho, týmo sa vykonajú migrácie <br>
 	a spustí sa server na porte 8000<br>
