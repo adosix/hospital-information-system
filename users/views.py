@@ -62,7 +62,7 @@ def edit_profile(request, username_to_find):
                                    instance=profile)
         if tmp.whoami() == "Patient" :
             hw_form = PatientWH(request.POST,instance=tmp)
-        if u_form.is_valid() and p_form.is_valid():
+        if ((u_form.is_valid() and p_form.is_valid()) or request.user.is_superuser == False):
 
             if 'del' in request.POST:
                 usr = u_form.save(commit=False)
@@ -105,13 +105,9 @@ def edit_profile(request, username_to_find):
                 pat.weight = hw_form.weight
 
                 pat.save()
-            usr_tmp = u_form.save(commit=False)
 
-            if usr_tmp.password != '':
-                usr_tmp.password = make_password(usr_tmp.password)
-            else:
-                usr_tmp.password = pass_tmp
-            usr_tmp.save()
+
+
             p=p_form.save(commit=False)
             max = datetime.now().date()
             min = datetime(1900,1,1).date()
@@ -135,6 +131,14 @@ def edit_profile(request, username_to_find):
 
             p.save()
             messages.success(request, f'An account has been updated!')
+            if request.user.is_superuser == True :
+                usr_tmp = u_form.save(commit=False)
+
+                if usr_tmp.password != '':
+                    usr_tmp.password = make_password(usr_tmp.password)
+                else:
+                    usr_tmp.password = pass_tmp
+                usr_tmp.save()
         else:
             messages.warning(request, f'An account hasn\'t been updated!')
             usr = get_object_or_404(AuthUser, username= username_to_find)

@@ -63,7 +63,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Profile Info</legend>
                 {{ u_form.first_name }}
-                  {{ u_form.last_name }}
+                {{ u_form.last_name }}
                 {{ p_form|crispy }}
                 {% for p in Patient %}
                 {% if p.id == u_id %}
