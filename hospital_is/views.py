@@ -443,7 +443,7 @@ def medical_ticket_record(request, pk,pa):
                     for x in Picture.objects.all():
                         if x.r_id != record.id :
                             continue
-                        if( tmp < len(l) and tmp == int(l[instance_c])):
+                        if( instance_c < len(l) and tmp == int(l[instance_c])):
                             x.Image=instance[int(l[instance_c])].Image
                             instance_c+=1
                             x.save()
